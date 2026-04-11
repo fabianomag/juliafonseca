@@ -1,0 +1,135 @@
+[
+  {
+    "slug": "casa-serra",
+    "title": "Casa Serra",
+    "section": "residencial",
+    "category": "Residencial",
+    "year": "2024",
+    "location": "Montes Claros, MG",
+    "area": "380m\u00b2",
+    "cover": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=80",
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&q=80"
+    ],
+    "description": "Uma resid\u00eancia que dialoga com a topografia natural da serra. O projeto parte da premissa de integra\u00e7\u00e3o total entre interior e paisagem, utilizando grandes v\u00e3os em vidro e materiais naturais que envelhecem com o tempo. A casa se revela aos poucos \u2014 cada ambiente enquadra uma vista diferente, criando uma sequ\u00eancia cinematogr\u00e1fica de espa\u00e7os.",
+    "featured": true
+  },
+  {
+    "slug": "residencia-jardins",
+    "title": "Resid\u00eancia Jardins",
+    "section": "residencial",
+    "category": "Residencial",
+    "year": "2023",
+    "location": "Montes Claros, MG",
+    "area": "520m\u00b2",
+    "cover": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1600&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1600&q=80",
+      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600&q=80",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80"
+    ],
+    "description": "Projetada para uma fam\u00edlia que queria luz em cada canto. Os p\u00e1tios internos funcionam como \u00f3rg\u00e3os vitais da casa \u2014 trazem ventila\u00e7\u00e3o cruzada, luz natural e uma sensa\u00e7\u00e3o de amplitude que faz 520m\u00b2 parecerem infinitos. O concreto aparente conversa com a madeira de demoli\u00e7\u00e3o, criando uma materialidade honesta.",
+    "featured": true
+  },
+  {
+    "slug": "loft-centro",
+    "title": "Loft Centro",
+    "section": "residencial",
+    "category": "Residencial",
+    "year": "2023",
+    "location": "Montes Claros, MG",
+    "area": "95m\u00b2",
+    "cover": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1600&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1600&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1600&q=80"
+    ],
+    "description": "Transformar um apartamento dos anos 70 no centro da cidade em um loft contempor\u00e2neo. Paredes foram removidas, o forro original de gesso foi retirado para revelar a laje nervurada, e uma paleta de cinzas e branco amplifica a entrada de luz pela \u00fanica fachada envidra\u00e7ada.",
+    "featured": false
+  },
+  {
+    "slug": "clinica-viva",
+    "title": "Cl\u00ednica Viva",
+    "section": "comercial",
+    "category": "Comercial",
+    "year": "2024",
+    "location": "Montes Claros, MG",
+    "area": "210m\u00b2",
+    "cover": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80",
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1600&q=80",
+      "https://images.unsplash.com/photo-1497215842964-222b430dc094?w=1600&q=80"
+    ],
+    "description": "Uma cl\u00ednica que n\u00e3o parece cl\u00ednica. O briefing era claro: o paciente precisa esquecer que est\u00e1 num ambiente de sa\u00fade. Madeira, plantas, ilumina\u00e7\u00e3o indireta e uma recep\u00e7\u00e3o que lembra mais um lobby de hotel boutique do que uma sala de espera.",
+    "featured": true
+  },
+  {
+    "slug": "escritorio-criativo",
+    "title": "Escrit\u00f3rio Criativo",
+    "section": "comercial",
+    "category": "Comercial",
+    "year": "2023",
+    "location": "Montes Claros, MG",
+    "area": "150m\u00b2",
+    "cover": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1600&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1600&q=80",
+      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1600&q=80"
+    ],
+    "description": "Um escrit\u00f3rio de ag\u00eancia criativa que funciona como uma grande mesa de trabalho aberta. Sem salas fechadas, sem hierarquia espacial. O p\u00e9-direito duplo e a mezanino criam camadas de uso sem dividir o espa\u00e7o.",
+    "featured": false
+  },
+  {
+    "slug": "apartamento-sabrina",
+    "title": "Apartamento Sabrina",
+    "section": "interiores",
+    "category": "Interiores",
+    "year": "2024",
+    "location": "Montes Claros, MG",
+    "area": "120m\u00b2",
+    "cover": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&q=80",
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1600&q=80",
+      "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=1600&q=80"
+    ],
+    "description": "Sabrina queria um apartamento que refletisse sua personalidade: contempor\u00e2neo, acolhedor, sem excessos. A paleta de tons terrosos com pontos de cor em azul-marinho cria ambientes sofisticados e \u00edntimos ao mesmo tempo.",
+    "featured": true
+  },
+  {
+    "slug": "espaco-gourmet-andrade",
+    "title": "Espa\u00e7o Gourmet Andrade",
+    "section": "interiores",
+    "category": "Interiores",
+    "year": "2023",
+    "location": "Montes Claros, MG",
+    "area": "45m\u00b2",
+    "cover": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1600&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1600&q=80",
+      "https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=1600&q=80"
+    ],
+    "description": "Um espa\u00e7o gourmet que funciona tanto para um jantar \u00edntimo quanto para receber 30 pessoas. O projeto gira em torno da bancada central em m\u00e1rmore, que se torna o palco do chef amador. Ilumina\u00e7\u00e3o c\u00eanica e churrasqueira integrada completam o programa.",
+    "featured": false
+  },
+  {
+    "slug": "suite-master-clemilde",
+    "title": "Su\u00edte Master Clemilde",
+    "section": "interiores",
+    "category": "Interiores",
+    "year": "2022",
+    "location": "Montes Claros, MG",
+    "area": "35m\u00b2",
+    "cover": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1600&q=80",
+    "images": [
+      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1600&q=80",
+      "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=1600&q=80"
+    ],
+    "description": "Uma su\u00edte master que \u00e9 ref\u00fagio. Cortinas de linho, cabeceira estofada at\u00e9 o teto, ilumina\u00e7\u00e3o embutida que muda de temperatura ao longo do dia. O closet aberto integrado ao banheiro cria uma sequ\u00eancia fluida de prepara\u00e7\u00e3o matinal.",
+    "featured": false
+  }
+]
