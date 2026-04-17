@@ -19,6 +19,15 @@ const siteConfig = {
 
 export default siteConfig;
 
+function getMetadataBase(): URL {
+  const vercelUrl = process.env.VERCEL_URL;
+  if (vercelUrl) {
+    return new URL(`https://${vercelUrl}`);
+  }
+
+  return new URL(siteConfig.url);
+}
+
 export function createMetadata(overrides: Partial<Metadata> = {}): Metadata {
   return {
     title: {
@@ -26,7 +35,7 @@ export function createMetadata(overrides: Partial<Metadata> = {}): Metadata {
       template: `%s \u2014 ${siteConfig.name}`,
     },
     description: siteConfig.description,
-    metadataBase: new URL(siteConfig.url),
+    metadataBase: getMetadataBase(),
     icons: {
       icon: "/icon.svg",
       apple: "/apple-icon",
