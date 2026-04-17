@@ -1,12 +1,5 @@
-import { Barlow_Condensed } from "next/font/google";
 import { ImageResponse } from "next/og";
 import siteConfig from "@/lib/metadata";
-
-const display = Barlow_Condensed({
-  subsets: ["latin"],
-  weight: ["900"],
-  display: "swap",
-});
 
 export const size = {
   width: 1200,
@@ -23,7 +16,10 @@ export default function OpenGraphImage() {
           width: "100%",
           height: "100%",
           display: "flex",
-          background: "#071007",
+          alignItems: "center",
+          justifyContent: "center",
+          background:
+            "radial-gradient(circle at 50% 45%, rgba(217,255,79,0.14), transparent 32%), linear-gradient(135deg, #071007 0%, #111111 100%)",
           color: "#d9ff4f",
           position: "relative",
           overflow: "hidden",
@@ -32,89 +28,74 @@ export default function OpenGraphImage() {
         <div
           style={{
             position: "absolute",
-            inset: "40px",
-            border: "2px solid rgba(217, 255, 79, 0.18)",
-            borderRadius: "40px",
+            inset: "44px",
+            borderRadius: "44px",
+            border: "1px solid rgba(217,255,79,0.16)",
           }}
         />
         <div
           style={{
+            position: "absolute",
+            left: 80,
+            top: 72,
             display: "flex",
-            flex: 1,
             alignItems: "center",
-            justifyContent: "space-between",
-            padding: "72px 80px",
+            gap: 14,
+            fontSize: 24,
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
+            opacity: 0.86,
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 12,
-              maxWidth: 670,
-            }}
+          <span style={{ width: 72, height: 2, background: "rgba(217,255,79,0.7)" }} />
+          {siteConfig.name}
+        </div>
+
+        <svg
+          viewBox="0 0 512 512"
+          width="420"
+          height="420"
+          aria-hidden="true"
+          style={{
+            display: "block",
+            filter: "drop-shadow(0 10px 0 rgba(217,255,79,0.08))",
+          }}
+        >
+          <rect width="512" height="512" rx="128" fill="#071007" />
+          <path
+            d="M256 32L266 128L340 68L324 164L420 128L372 214L472 224L384 256L472 288L372 298L420 384L324 348L340 444L266 384L256 480L246 384L172 444L188 348L92 384L140 298L40 288L128 256L40 224L140 214L92 128L188 164L172 68L246 128L256 32Z"
+            fill="#d9ff4f"
+          />
+        </svg>
+
+        <div
+          style={{
+            position: "absolute",
+            right: 90,
+            bottom: 74,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+            gap: 12,
+          }}
           >
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 14,
-                fontSize: 24,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                opacity: 0.82,
-              }}
-            >
-              <span style={{ width: 72, height: 2, background: "rgba(217,255,79,0.72)" }} />
-              {siteConfig.name}
-            </div>
-            <div
-              style={{
-                fontSize: 164,
-                lineHeight: 0.76,
-                letterSpacing: "-0.16em",
-                fontWeight: 900,
-                textTransform: "uppercase",
-                fontFamily: display.style.fontFamily,
-                color: "#d9ff4f",
-                textShadow: "0 2px 0 rgba(255,255,255,0.08)",
-              }}
-            >
-              J
-            </div>
-            <div
-              style={{
-                fontSize: 32,
-                lineHeight: 1.25,
-                maxWidth: 580,
-                opacity: 0.78,
-              }}
-            >
-              Arquitetura residencial, comercial e interiores com presença visual forte.
-            </div>
+                fontSize: 28,
+                letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              opacity: 0.9,
+            }}
+          >
+            Arte & Interiores
           </div>
           <div
             style={{
-              width: 390,
-              height: 390,
-              borderRadius: 108,
-              background: "#d9ff4f",
-              border: "10px solid rgba(217,255,79,0.12)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              boxShadow: "0 26px 0 rgba(217,255,79,0.08)",
-              color: "#071007",
-              fontSize: 264,
-              fontWeight: 900,
-              letterSpacing: "-0.14em",
-              fontFamily: display.style.fontFamily,
-              lineHeight: 1,
-              textShadow: "0 2px 0 rgba(255,255,255,0.08)",
+              width: 96,
+              height: 2,
+              background: "rgba(217,255,79,0.75)",
             }}
-          >
-            J
-          </div>
+          />
         </div>
       </div>
     ),
