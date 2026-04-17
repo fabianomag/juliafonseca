@@ -1,5 +1,7 @@
 import projectsData from "@/../content/projects/projects.json";
 
+export type ProjectStatus = "completed" | "in_progress";
+
 export interface Project {
   slug: string;
   title: string;
@@ -12,9 +14,14 @@ export interface Project {
   images: string[];
   description: string;
   featured: boolean;
+  status: ProjectStatus;
 }
 
-const projects: Project[] = projectsData as Project[];
+const projects: Project[] = (projectsData as any[]).map((p) => ({
+  ...p,
+  cover: p.cover || p.images?.[0] || "",
+  status: p.status || "completed",
+}));
 
 export function getAllProjects(): Project[] {
   return projects;
@@ -22,6 +29,18 @@ export function getAllProjects(): Project[] {
 
 export function getProjectsBySection(section: string): Project[] {
   return projects.filter((p) => p.section === section);
+}
+
+export function getRelatedProjects(section: string, slug: string): Project[] {
+  const currentSection = projects.filter(
+    (p) => p.section === section && !(p.section === section && p.slug === slug)
+  );
+
+  const otherSections = projects.filter(
+    (p) => p.section !== section && !(p.section === section && p.slug === slug)
+  );
+
+  return [...currentSection, ...otherSections];
 }
 
 export function getProjectBySlug(section: string, slug: string): Project | undefined {
@@ -32,10 +51,21 @@ export function getFeaturedProjects(): Project[] {
   return projects.filter((p) => p.featured);
 }
 
+export function getFilteredProjects(
+  section?: string | null,
+  status?: ProjectStatus | null
+): Project[] {
+  return projects.filter((p) => {
+    if (section && p.section !== section) return false;
+    if (status && p.status !== status) return false;
+    return true;
+  });
+}
+
 export function getSections() {
   return [
-    { slug: "residencial", title: "Residencial", description: "Casas e apartamentos que contam hist\u00f3rias." },
-    { slug: "comercial", title: "Comercial", description: "Espa\u00e7os que transformam neg\u00f3cios." },
-    { slug: "interiores", title: "Interiores", description: "Ambientes que refletem quem voc\u00ea \u00e9." },
+    { slug: "residencial", title: "Residencial", description: "Casas e apartamentos que contam historias." },
+    { slug: "comercial", title: "Comercial", description: "Espacos que transformam negocios." },
+    { slug: "interiores", title: "Interiores", description: "Ambientes que refletem quem voce e." },
   ];
 }

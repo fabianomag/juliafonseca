@@ -1,20 +1,45 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Suspense } from "react";
+import { Barlow, Barlow_Condensed, Newsreader, Syncopate, Geist } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/navigation";
-import { Footer } from "@/components/footer";
+import { FooterController } from "@/components/footer-controller";
 import { createMetadata } from "@/lib/metadata";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/json-ld";
+import { SmoothScroll } from "@/components/smooth-scroll";
+import { SiteIntro } from "@/components/site-intro";
+import { cn } from "@/lib/utils";
 
-const inter = Inter({
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+
+const barlow = Barlow({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-barlow",
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const playfair = Playfair_Display({
+const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-barlow-condensed",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-newsreader",
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const syncopate = Syncopate({
+  subsets: ["latin"],
+  variable: "--font-syncopate",
+  weight: ["400", "700"],
   display: "swap",
 });
 
@@ -26,13 +51,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="font-sans">
+    <html
+      lang="pt-BR"
+      className={cn(barlow.variable, barlowCondensed.variable, newsreader.variable, syncopate.variable, "font-sans", geist.variable)}
+    >
+      <body className="font-sans antialiased bg-ambient-micro text-ambient-dark selection:bg-ambient-electric/20">
         <OrganizationJsonLd />
         <WebSiteJsonLd />
-        <Navigation />
-        <main>{children}</main>
-        <Footer />
+        <SiteIntro />
+        <SmoothScroll>
+          <Suspense fallback={null}>
+            <Navigation />
+          </Suspense>
+          <main>{children}</main>
+          <Suspense fallback={null}>
+            <FooterController />
+          </Suspense>
+        </SmoothScroll>
       </body>
     </html>
   );

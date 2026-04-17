@@ -1,113 +1,132 @@
 import type { Metadata } from "next";
-import { Mail, Phone, MapPin } from "lucide-react";
 import { Reveal } from "@/components/reveal";
-import { SectionHeader } from "@/components/section-header";
 import siteConfig from "@/lib/metadata";
+import { resolveLang } from "@/lib/i18n";
+import { ContactActionRows } from "@/components/contact-action-rows";
 
 export const metadata: Metadata = {
   title: "Contato",
   description:
-    "Entre em contato com Julia Fonseca Arquitetura. Projetos residenciais, comerciais e interiores de alto padr\u00e3o.",
+    "Entre em contato com Julia Fonseca Arquitetura. Projetos residenciais, comerciais e interiores de alto padrão.",
 };
 
-export default function ContatoPage() {
+const copy = {
+  pt: {
+    eyebrow: "Contato",
+    titleTop: "Vamos",
+    titleBottom: "conversar.",
+    intro:
+      "Cada projeto começa com uma conversa. Conte o que você imagina, ou mesmo só uma ideia solta, e a gente descobre juntos se faz sentido.",
+    whatsappMessage: "Olá Julia! Vi seu site e gostaria de conversar sobre um projeto.",
+    base: "Base",
+    copyHint: "Clique para copiar",
+    copyEmail: "Copiar e-mail",
+    openEmail: "Abrir mail app",
+    copyPhone: "Copiar número",
+    openWhatsapp: "Abrir WhatsApp",
+    copyInstagram: "Copiar @",
+    openInstagram: "Abrir Instagram",
+  },
+  en: {
+    eyebrow: "Contact",
+    titleTop: "Let's",
+    titleBottom: "talk.",
+    intro:
+      "Every project starts with a conversation. Tell us what you are imagining, or even just a loose idea, and we can see together if it makes sense.",
+    whatsappMessage: "Hello Julia! I saw your website and would like to talk about a project.",
+    base: "Base",
+    copyHint: "Click to copy",
+    copyEmail: "Copy e-mail",
+    openEmail: "Open mail app",
+    copyPhone: "Copy number",
+    openWhatsapp: "Open WhatsApp",
+    copyInstagram: "Copy @",
+    openInstagram: "Open Instagram",
+  },
+} as const;
+
+export default function ContatoPage({
+  searchParams,
+}: {
+  searchParams?: { lang?: string };
+}) {
+  const lang = resolveLang(searchParams?.lang);
+  const t = copy[lang];
+  const rows = [
+    {
+      label: "WhatsApp",
+      value: "+55 (38) 99266-5556",
+      hint: t.copyHint,
+      icon: "whatsapp" as const,
+      copyValue: "+55 38 99266-5556",
+      actions: [
+        { type: "copy" as const, label: t.copyPhone, value: "+55 38 99266-5556" },
+        {
+          type: "link" as const,
+          label: t.openWhatsapp,
+          href: `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(t.whatsappMessage)}`,
+        },
+      ],
+    },
+    {
+      label: "Email",
+      value: siteConfig.email,
+      hint: t.copyHint,
+      icon: "email" as const,
+      copyValue: siteConfig.email,
+      actions: [
+        { type: "copy" as const, label: t.copyEmail, value: siteConfig.email },
+        { type: "link" as const, label: t.openEmail, href: `mailto:${siteConfig.email}` },
+      ],
+    },
+    {
+      label: "Instagram",
+      value: "@juliafonseca.arq",
+      hint: t.copyHint,
+      icon: "instagram" as const,
+      copyValue: "@juliafonseca.arq",
+      actions: [
+        { type: "copy" as const, label: t.copyInstagram, value: "@juliafonseca.arq" },
+        { type: "link" as const, label: t.openInstagram, href: siteConfig.instagram },
+      ],
+    },
+  ];
+
   return (
-    <section className="pt-32 pb-24 md:pb-32 section-padding">
-      <div className="max-w-5xl mx-auto">
-        <Reveal>
-          <SectionHeader
-            eyebrow="Contato"
-            title="Vamos conversar"
-            description="Cada projeto come\u00e7a com uma conversa. Conte o que voc\u00ea imagina e vamos juntos encontrar a melhor solu\u00e7\u00e3o."
-          />
-        </Reveal>
+    <div className="min-h-screen bg-ambient-micro text-ambient-dark">
+      <section className="relative z-10 pb-28 pt-40 section-padding md:pb-36 md:pt-52">
+        <div className="mx-auto max-w-7xl">
+          <Reveal>
+            <p className="mb-6 text-label uppercase text-ambient-canyon/55">{t.eyebrow}</p>
+            <h1 className="font-display text-[22vw] uppercase leading-[0.78] tracking-[-0.08em] text-ambient-dark sm:text-[14vw] lg:text-[9rem]">
+              {t.titleTop}
+              <span className="block italic text-ambient-electric">{t.titleBottom}</span>
+            </h1>
+          </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-          {/* Contact info */}
-          <Reveal delay={200}>
-            <div className="space-y-8">
-              <a
-                href={`https://wa.me/${siteConfig.whatsapp}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-start gap-4 group"
-              >
-                <Phone size={20} className="text-stone-400 mt-0.5 shrink-0" />
-                <div>
-                  <p className="text-xs tracking-widest uppercase text-stone-400 mb-1">
-                    WhatsApp
-                  </p>
-                  <p className="text-stone-800 group-hover:text-stone-600 transition-colors">
-                    +55 (38) 99266-5556
-                  </p>
-                </div>
-              </a>
+          <Reveal delay={0.15}>
+            <p className="mt-10 max-w-2xl border-l border-ambient-stone pl-8 text-xl leading-relaxed text-ambient-canyon/82 sm:text-2xl">
+              {t.intro}
+            </p>
+          </Reveal>
 
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="flex items-start gap-4 group"
-              >
-                <Mail size={20} className="text-stone-400 mt-0.5 shrink-0" />
-                <div>
-                  <p className="text-xs tracking-widest uppercase text-stone-400 mb-1">
-                    Email
-                  </p>
-                  <p className="text-stone-800 group-hover:text-stone-600 transition-colors">
-                    {siteConfig.email}
-                  </p>
-                </div>
-              </a>
+          <Reveal delay={0.2}>
+            <ContactActionRows lang={lang} rows={rows} />
+          </Reveal>
 
-              <div className="flex items-start gap-4">
-                <MapPin size={20} className="text-stone-400 mt-0.5 shrink-0" />
-                <div>
-                  <p className="text-xs tracking-widest uppercase text-stone-400 mb-1">
-                    Localiza&ccedil;&atilde;o
-                  </p>
-                  <p className="text-stone-800">
-                    {siteConfig.location.city}, {siteConfig.location.state}
-                  </p>
-                </div>
-              </div>
-
-              <div className="pt-6 border-t border-stone-200">
-                <a
-                  href={siteConfig.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-stone-500 hover:text-stone-800 transition-colors"
-                >
-                  Instagram &mdash; @juliafonseca.arq
-                </a>
+          <Reveal delay={0.5}>
+            <div className="py-8">
+              <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8">
+                <span className="w-28 text-xs uppercase tracking-[0.3em] text-ambient-canyon/50">{t.base}</span>
+                <span className="font-display text-[2.6rem] uppercase leading-[0.84] tracking-[-0.05em] text-ambient-dark/75 sm:text-[4.5rem]">
+                  {siteConfig.location.city}, {siteConfig.location.state}
+                </span>
               </div>
             </div>
           </Reveal>
 
-          {/* CTA card */}
-          <Reveal delay={300}>
-            <div className="bg-stone-100 p-10 md:p-12">
-              <h3 className="font-display text-2xl text-stone-900 mb-4">
-                Pronta para come&ccedil;ar?
-              </h3>
-              <p className="text-stone-600 leading-relaxed mb-8">
-                Se voc&ecirc; tem um projeto em mente &mdash; ou mesmo s&oacute; uma ideia &mdash;
-                a melhor forma de come&ccedil;ar &eacute; uma conversa sem compromisso.
-                Me conta o que voc&ecirc; imagina e a gente v&ecirc; juntos se faz sentido.
-              </p>
-              <a
-                href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(
-                  "Ol\u00e1 Julia! Vi seu site e gostaria de conversar sobre um projeto."
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-stone-900 text-white px-8 py-4 text-sm tracking-widest uppercase hover:bg-stone-800 transition-colors"
-              >
-                Enviar mensagem
-              </a>
-            </div>
-          </Reveal>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

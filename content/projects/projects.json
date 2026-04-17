@@ -7,6 +7,7 @@
     "year": "2024",
     "location": "Montes Claros, MG",
     "area": "380m\u00b2",
+    "status": "completed",
     "cover": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80",
     "images": [
       "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80",
@@ -25,6 +26,7 @@
     "year": "2023",
     "location": "Montes Claros, MG",
     "area": "520m\u00b2",
+    "status": "completed",
     "cover": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1600&q=80",
     "images": [
       "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1600&q=80",
@@ -42,6 +44,7 @@
     "year": "2023",
     "location": "Montes Claros, MG",
     "area": "95m\u00b2",
+    "status": "in_progress",
     "cover": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1600&q=80",
     "images": [
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1600&q=80",
@@ -58,6 +61,7 @@
     "year": "2024",
     "location": "Montes Claros, MG",
     "area": "210m\u00b2",
+    "status": "completed",
     "cover": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80",
     "images": [
       "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80",
@@ -75,6 +79,7 @@
     "year": "2023",
     "location": "Montes Claros, MG",
     "area": "150m\u00b2",
+    "status": "in_progress",
     "cover": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1600&q=80",
     "images": [
       "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1600&q=80",
@@ -91,6 +96,7 @@
     "year": "2024",
     "location": "Montes Claros, MG",
     "area": "120m\u00b2",
+    "status": "completed",
     "cover": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&q=80",
     "images": [
       "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&q=80",
@@ -108,6 +114,7 @@
     "year": "2023",
     "location": "Montes Claros, MG",
     "area": "45m\u00b2",
+    "status": "completed",
     "cover": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1600&q=80",
     "images": [
       "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1600&q=80",
@@ -124,6 +131,7 @@
     "year": "2022",
     "location": "Montes Claros, MG",
     "area": "35m\u00b2",
+    "status": "completed",
     "cover": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1600&q=80",
     "images": [
       "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1600&q=80",

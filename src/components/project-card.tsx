@@ -1,49 +1,53 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/projects";
+import { withLang, type Lang } from "@/lib/i18n";
 
 interface ProjectCardProps {
   project: Project;
   index?: number;
   size?: "default" | "large";
+  lang?: Lang;
 }
 
-export function ProjectCard({ project, index = 0, size = "default" }: ProjectCardProps) {
-  const isLarge = size === "large";
+export function ProjectCard({ project, index = 0, lang = "pt" }: ProjectCardProps) {
+  const isNew = Number.parseInt(project.year, 10) >= 2024;
+  const sectionLabel =
+    lang === "en"
+      ? {
+          residencial: "Residential",
+          comercial: "Commercial",
+          interiores: "Interiors",
+        }[project.section]
+      : project.category;
 
   return (
-    <Link
-      href={`/${project.section}/${project.slug}`}
-      className="group block"
-    >
-      <div
-        className={`image-hover relative ${isLarge ? "aspect-[4/3]" : "aspect-[3/4]"} bg-stone-200`}
-      >
+    <Link href={withLang(`/${project.section}/${project.slug}`, lang)} className="group block">
+      <div className="relative aspect-[1.86/1] overflow-hidden bg-ambient-linen">
         <Image
           src={project.cover}
           alt={`${project.title} — ${project.category}`}
           fill
-          className="object-cover"
-          sizes={isLarge ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
+          className="object-cover transition-all duration-700 ease-out group-hover:scale-[1.02]"
+          sizes="(max-width: 768px) 100vw, 33vw"
           loading={index < 3 ? "eager" : "lazy"}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-          <p className="text-white/70 text-xs tracking-widest uppercase mb-1">
-            {project.location} &middot; {project.year}
-          </p>
-          <p className="text-white text-sm leading-relaxed line-clamp-2">
-            {project.description}
-          </p>
-        </div>
       </div>
-      <div className="mt-4 flex items-baseline justify-between">
-        <h3 className="font-display text-lg text-stone-900 group-hover:text-stone-600 transition-colors">
+
+      <div className="bg-white px-7 pb-8 pt-6 md:px-8 md:pb-9 md:pt-7">
+        <h3 className="font-display text-[2.25rem] uppercase leading-[0.82] tracking-[0.04em] text-ambient-dark transition-colors group-hover:text-ambient-electric sm:text-[2.55rem]">
           {project.title}
         </h3>
-        <span className="text-xs text-stone-400 tracking-wider uppercase">
-          {project.area}
-        </span>
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-[0.78rem] uppercase tracking-[0.16em] text-ambient-muted">
+          {isNew && (
+            <span className="inline-flex bg-ambient-electric px-2 py-1 text-white">
+              {lang === "pt" ? "Novo" : "New"}
+            </span>
+          )}
+          <span>{sectionLabel}</span>
+          <span>|</span>
+          <span>{project.year}</span>
+        </div>
       </div>
     </Link>
   );

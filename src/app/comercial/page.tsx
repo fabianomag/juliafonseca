@@ -7,30 +7,37 @@ import { Reveal } from "@/components/reveal";
 export const metadata: Metadata = {
   title: "Comercial",
   description:
-    "Projetos comerciais que transformam neg\u00f3cios. Espa\u00e7os que comunicam a identidade da marca.",
+    "Projetos comerciais que transformam negócios. Espaços que comunicam a identidade da marca.",
 };
 
 export default function ComercialPage() {
   const projects = getProjectsBySection("comercial");
 
   return (
-    <section className="pt-32 pb-24 md:pb-32 section-padding">
-      <div className="max-w-7xl mx-auto">
-        <Reveal>
-          <SectionHeader
-            eyebrow="Comercial"
-            title="Espa\u00e7os que transformam neg\u00f3cios"
-            description="Arquitetura comercial que vai al\u00e9m da est\u00e9tica \u2014 cada ambiente \u00e9 projetado para a experi\u00eancia do cliente e a opera\u00e7\u00e3o do neg\u00f3cio."
-          />
-        </Reveal>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-          {projects.map((project, i) => (
-            <Reveal key={project.slug} delay={i * 100}>
-              <ProjectCard project={project} index={i} size="large" />
-            </Reveal>
-          ))}
+    <div className="bg-ambient-micro text-ambient-dark min-h-screen relative overflow-hidden">
+      <div className="ambient-glow" style={{ "--ambient-warm": "#C5A880" } as any} />
+
+      <section className="pt-40 md:pt-56 pb-32 md:pb-48 section-padding relative z-10">
+        <div className="max-w-7xl mx-auto">
+          <Reveal>
+            <SectionHeader
+              eyebrow="Comercial"
+              title="Espaços que transformam negócios"
+              description="Arquitetura comercial que vai além da estética — cada ambiente é projetado para a experiência do cliente e a operação do negócio."
+            />
+          </Reveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-24 md:gap-y-32 gap-x-8 md:gap-x-12">
+            {projects.map((project, i) => (
+              <Reveal key={project.slug} delay={i * 0.08}>
+                <div className={i % 2 === 1 ? "md:mt-24" : ""}>
+                  <ProjectCard project={project} index={i} size="large" />
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

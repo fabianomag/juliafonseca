@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getProjectBySlug, getProjectsBySection } from "@/lib/projects";
+import { getProjectBySlug, getProjectsBySection, getRelatedProjects } from "@/lib/projects";
 import { ProjectPage } from "@/components/project-page";
+import { resolveLang } from "@/lib/i18n";
 
 interface Props {
   params: { slug: string };
@@ -23,13 +24,17 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function Page({ params }: Props) {
+export default function Page({
+  params,
+  searchParams,
+}: Props & {
+  searchParams?: { lang?: string };
+}) {
   const project = getProjectBySlug("interiores", params.slug);
   if (!project) notFound();
 
-  const allInSection = getProjectsBySection("interiores");
-  const currentIndex = allInSection.findIndex((p) => p.slug === project.slug);
-  const nextProject = allInSection[(currentIndex + 1) % allInSection.length];
+  const relatedProjects = getRelatedProjects("interiores", project.slug);
+  const lang = resolveLang(searchParams?.lang);
 
-  return <ProjectPage project={project} nextProject={nextProject} />;
+  return <ProjectPage project={project} relatedProjects={relatedProjects} lang={lang} />;
 }
