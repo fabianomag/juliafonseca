@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Barlow, Barlow_Condensed, Newsreader, Syncopate, Geist } from "next/font/google";
+import { Barlow, Barlow_Condensed, Newsreader, Syncopate } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/navigation";
 import { FooterController } from "@/components/footer-controller";
@@ -9,8 +9,6 @@ import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/json-ld";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { SiteIntro } from "@/components/site-intro";
 import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const barlow = Barlow({
   subsets: ["latin"],
@@ -34,6 +32,7 @@ const newsreader = Newsreader({
   weight: ["400", "500"],
   style: ["normal", "italic"],
   display: "swap",
+  adjustFontFallback: false,
 });
 
 const syncopate = Syncopate({
@@ -53,7 +52,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={cn(barlow.variable, barlowCondensed.variable, newsreader.variable, syncopate.variable, "font-sans", geist.variable)}
+      className={cn(barlow.variable, barlowCondensed.variable, newsreader.variable, syncopate.variable, "font-sans")}
     >
       <body className="font-sans antialiased bg-ambient-micro text-ambient-dark selection:bg-ambient-electric/20">
         <OrganizationJsonLd />

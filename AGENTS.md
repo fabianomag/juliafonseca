@@ -1,159 +1,247 @@
-# Julia Fonseca Arquitetura — Contexto do Projeto
+# Julia Fonseca Arquitetura — Contexto Atual do Projeto
 
-> Leia este arquivo inteiro antes de fazer qualquer coisa neste projeto.
+> Este arquivo substitui o briefing antigo como fonte principal de contexto rápido.
+> Leia este arquivo primeiro. Depois abra apenas os arquivos diretamente ligados à tarefa.
 
-## Quem é a cliente
+## 1. O que este projeto é hoje
 
-**Julia Fonseca** — Arquiteta, residencial e comercial alto padrão e interiores  
-Site atual: https://www.juliafonsecaarq.com/ (Webador — será substituído)  
-Instagram: @juliafonseca.arq  
-Contato: juliafonseca.arquiteta@gmail.com / WhatsApp +55 38 99266-5556  
-Localização: Minas Gerais (Brasil) — atende alto padrão
+- Este projeto **já está implementado** em Next.js e já passou por várias rodadas visuais.
+- A prioridade atual é **ajuste fino**, não reconstrução.
+- Não trate o site como “começar do zero”.
+- Não trate o site como “portfólio editorial serifado minimalista clássico”.
+- O foco é manter a arquitetura atual e mexer com precisão.
 
-**Projetos mapeados (do site atual):**
-- Residencial: 20+ projetos, renderings 3D, fachadas, interiores
-- Comercial: 8+ projetos, fachadas e espaços
-- Interiores: Andrade, Clemilde, Cris e Odair, Sabrina, Rosiris, João e Estela, Angela, Ariane, Livia e Mark, Socorro, Tia Mara, Espaço Gourmet, Quarto Augusto, Angeline, Quarto Sofia
+## 2. Conceito visual atual
 
-## O que é esse site
+### Direção
 
-**NÃO é** um portfolio digital estático com galerias de fotos. Não é Webador com carrossel.
+O site hoje está mais próximo de uma mistura entre:
 
-**É** um showroom online que converte. Visitante entra, sente que é o nível certo para ele, e entra em contato. Cada projeto é uma narrativa visual — não uma série de fotos sem contexto.
+- **Jacobsen Arquitetura** para:
+  - home
+  - página de projetos
+  - menu fullscreen
+  - footer global
+- **Arthur Casas** para:
+  - páginas individuais de projeto
+  - ritmo de galeria
+  - footer/carimbo especial do detalhe
 
-**A ideia central:** arquitetura alto padrão se vende por aspiração e confiança. O site precisa transmitir ambos em 10 segundos. O visitante chegou por indicação ou Google — o site valida que a indicação faz sentido.
+### Linguagem
 
-## Direção de design
+- fundo predominantemente **branco**
+- estrutura em **preto / cinza escuro**
+- acentos em **azul elétrico** e **ciano**
+- gradientes usados de forma **pontual**, não espalhada
+- presença visual bold, limpa, high-profile
+- mais atitude visual do que “elegância clássica”
 
-**Estilo:** minimal artístico, editorial, alto padrão. Muito espaço em branco (ou fundo creme/off-white). Imagens grandes e respirando. Nada de cluttered, nada de bordas coloridas, nada de elementos decorativos genéricos.
+### Tipografia
 
-**Tipografia:** display com caráter — serif elegante (Playfair Display, Cormorant Garamond, ou similar) para títulos, sans-serif refinado para corpo. O contraste tipográfico é parte da identidade.
+O sistema tipográfico atual do código é:
 
-**Cores:** neutros puros — branco, preto, creme. Sem cor de destaque chamativa. A cor vem das fotos dos projetos.
+- `font-sans`: **Barlow**
+- `font-display`: **Barlow Condensed**
+- `font-serif`: **Newsreader**
+- `font-brand`: **Syncopate**
 
-**Layout:** assimétrico e editorial. Imagens que "quebram" o grid. Hero full-bleed. Navegação discreta. Rodapé minimalista.
+Regras práticas:
 
-**Motion:** scroll reveal suave nos projetos. Transições de página elegantes. Nada brusco.
+- `font-display` é a voz principal do site
+- `font-serif` é apoio pontual, não protagonista
+- **não voltar** para uma direção dominada por serif clássica
+- **não usar** sans genérica sem critério
 
-**Referências:** Studio MK27, Triptyque, Bjarke Ingels Group (como apresentam projetos), Archilovers portfolios premium.
+### Branding
 
-## Estrutura de rotas
+- a marca é modular e vive em [`src/components/brand-mark.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/brand-mark.tsx)
+- existe um símbolo chamado `JacobsenStar`
+- a intro do site usa esse símbolo no final da palavra `ARQUITETURA`
 
+## 3. Comportamentos visuais importantes
+
+- existe uma **intro/splash** na abertura do site
+- o menu é **fullscreen** e escuro
+- `/projetos` é uma página **unificada**, com filtros
+- páginas individuais têm:
+  - hero grande
+  - bloco meta
+  - narrativa
+  - galeria variável
+  - carrossel horizontal de projetos relacionados
+  - footer/carimbo especial
+
+## 4. Rotas e arquitetura atual
+
+Rotas principais:
+
+- `/`
+- `/projetos`
+- `/residencial`
+- `/comercial`
+- `/interiores`
+- `/residencial/[slug]`
+- `/comercial/[slug]`
+- `/interiores/[slug]`
+- `/sobre`
+- `/contato`
+- `/publicacoes`
+- `/galeria-trefle`
+- `/produtos`
+
+Observações:
+
+- a vitrine principal de projetos está em **`/projetos`**
+- as rotas de categoria continuam existindo
+- o idioma é controlado por query param: `?lang=pt` ou `?lang=en`
+- o helper disso está em [`src/lib/i18n.ts`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/lib/i18n.ts)
+
+## 5. Fonte da verdade por área
+
+### Shell global
+
+Abra estes arquivos primeiro para qualquer tarefa global:
+
+- [`src/app/layout.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/app/layout.tsx)
+- [`src/app/globals.css`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/app/globals.css)
+- [`tailwind.config.ts`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/tailwind.config.ts)
+
+### Intro de abertura
+
+- [`src/components/site-intro.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/site-intro.tsx)
+- [`src/components/TextType.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/TextType.tsx)
+- [`src/components/TextType.css`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/TextType.css)
+- [`src/components/brand-mark.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/brand-mark.tsx)
+
+### Navegação
+
+- [`src/components/navigation.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/navigation.tsx)
+- [`src/components/brand-mark.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/brand-mark.tsx)
+
+### Footer
+
+- footer global: [`src/components/footer.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/footer.tsx)
+- seleção do footer correto: [`src/components/footer-controller.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/footer-controller.tsx)
+- footer do detalhe: [`src/components/project-detail-footer.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/project-detail-footer.tsx)
+
+### Home
+
+- [`src/app/page.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/app/page.tsx)
+- [`src/components/featured-project-showcase.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/featured-project-showcase.tsx)
+
+### Página de projetos
+
+- rota: [`src/app/projetos/page.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/app/projetos/page.tsx)
+- filtros: [`src/components/projects-filter.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/projects-filter.tsx)
+- cards: [`src/components/project-card.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/project-card.tsx)
+
+### Páginas individuais de projeto
+
+- template principal: [`src/components/project-page.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/project-page.tsx)
+- galeria: [`src/components/parallax-gallery.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/parallax-gallery.tsx)
+- carrossel final: [`src/components/project-strip-carousel.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/project-strip-carousel.tsx)
+- footer especial: [`src/components/project-detail-footer.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/project-detail-footer.tsx)
+
+### Sobre / Contato / Publicações
+
+- escritório: [`src/app/sobre/page.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/app/sobre/page.tsx)
+- contato: [`src/app/contato/page.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/app/contato/page.tsx)
+- ações do contato: [`src/components/contact-action-rows.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/contact-action-rows.tsx)
+- publicações: [`src/app/publicacoes/page.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/app/publicacoes/page.tsx)
+- galeria de publicações: [`src/components/publications-gallery.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/publications-gallery.tsx)
+
+### Dados / SEO / idioma
+
+- projetos carregados: [`src/lib/projects.ts`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/lib/projects.ts)
+- dados atuais: [`content/projects/projects.json`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/content/projects/projects.json)
+- metadados: [`src/lib/metadata.ts`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/lib/metadata.ts)
+- JSON-LD: [`src/components/json-ld.tsx`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/components/json-ld.tsx)
+- idioma: [`src/lib/i18n.ts`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/lib/i18n.ts)
+
+## 6. Verdades importantes para não se confundir
+
+### O que é verdade hoje
+
+- o sistema visual atual é **bold + clean + branco/preto + azul/ciano**
+- `font-display` é central
+- `/projetos` já está unificado e funcional
+- o footer global e o footer do detalhe são **diferentes**
+- a intro já existe
+- o menu fullscreen já existe
+
+### O que NÃO fazer sem pedido explícito
+
+- não refatorar a arquitetura do site
+- não trocar o sistema de fontes inteiro
+- não voltar para um visual dominado por serif clássica
+- não recriar páginas do zero se já existe um componente responsável
+- não duplicar lógica de projetos fora de `src/lib/projects.ts`
+- não mexer em Drive se a tarefa for visual
+
+## 7. Legado / armadilhas / arquivos para ignorar na maioria das tarefas
+
+Esses pontos antigos geram confusão se forem lidos sem contexto:
+
+- briefing antigo falando em:
+  - serif como protagonista
+  - neutros quentes como direção principal
+  - experiência editorial clássica como eixo principal
+- isso **não é mais a direção principal do projeto**
+
+Arquivos legados ou secundários:
+
+- [`content/projects.json`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/content/projects.json)
+  - arquivo legado
+  - **não é a fonte principal de dados**
+- [`scripts/sync-drive.js`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/scripts/sync-drive.js)
+  - script antigo/mock
+  - **não é o fluxo principal**
+
+## 8. Drive: estado atual
+
+Só olhar os arquivos de Drive se a tarefa for sobre conteúdo / sync / integração.
+
+Fluxo principal atual:
+
+- integração: [`src/lib/drive.ts`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/lib/drive.ts)
+- merge com dados locais: [`src/lib/drive-sync.ts`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/lib/drive-sync.ts)
+- script real: [`scripts/sync-drive.ts`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/scripts/sync-drive.ts)
+- arquivo gerado principal: [`content/projects/projects.json`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/content/projects/projects.json)
+
+## 9. Como trabalhar em outra janela sem se perder
+
+Passo mínimo recomendado:
+
+1. ler este arquivo
+2. identificar a área da tarefa
+3. abrir só os arquivos daquela área
+4. editar de forma cirúrgica
+
+Prompt curto recomendado para outra janela:
+
+```text
+Use AGENTS.md como fonte principal de contexto.
+Ignore pressupostos antigos de briefing visual que não batem com o código atual.
+Não refatore arquitetura.
+Leia só os arquivos diretamente ligados à tarefa.
+Preserve a linguagem visual atual do projeto.
 ```
-/                          → Hero full-bleed + 3 verticais (residencial/comercial/interiores) + CTA contato
-/residencial               → Grid de projetos como cards narrativos (foto + nome + ano + tipologia)
-/residencial/[slug]        → Projeto individual: hero + meta (ano, local, área) + texto narrativo + galeria + ficha técnica
-/comercial                 → idem
-/comercial/[slug]          → idem
-/interiores                → idem
-/interiores/[slug]         → idem
-/sobre                     → Julia, filosofia, formação, abordagem
-/contato                   → WhatsApp + email + formulário simples
-```
 
-## Template de projeto individual (IMPORTANTE)
+## 10. Resumo em uma frase
 
-Cada página `/[categoria]/[slug]` segue esta estrutura narrativa:
-1. **Hero** full-bleed com foto principal do projeto
-2. **Meta**: ano, localização (cidade/estado), área m², tipologia
-3. **Narrativa** curta (3 parágrafos): problema do cliente → conceito da Julia → resultado
-4. **Galeria** cronológica com reveal on scroll
-5. **Ficha técnica**: colaboradores, fotógrafo (se houver)
-6. **Navegação**: projeto anterior / próximo projeto
+Este projeto hoje é um site high-profile para Julia Fonseca, com linguagem visual bold e limpa, estrutura já implementada em Next.js, e deve ser mantido por ajustes finos guiados pelos arquivos reais do app — não por briefings antigos.
 
-## Google Drive como banco de dados (CRÍTICO)
 
-**O objetivo final:** quando Frank for à casa da Julia, ela compartilha a pasta do Google Drive e o site atualiza automaticamente. Frank só "pluga" o Drive — não precisa de CMS, não precisa de deploy manual.
-
-**Como funciona:**
-1. Julia organiza o Drive: `/Julia-Fonseca-Site/residencial/casa-serra/`, `/comercial/escritorio-bh/`, etc.
-2. Cada pasta de projeto pode ter um `meta.md` opcional com frontmatter (ano, local, area_m2, texto)
-3. O indexer Next.js lê o Drive via API no build time → gera `content/projects.json`
-4. ISR `revalidate: 3600` — site atualiza em até 1h quando ela mexe no Drive
-
-**Convenção de nomenclatura de arquivos:**
-```
-[projeto]_[ambiente]_[sequencia].jpg
-casa-serra_fachada_01.jpg
-escritorio-bh_recepcao_02.jpg
-quarto-sofia_detalhe_01.jpg
-```
-
-**O que construir:**
-- `src/lib/drive.ts` — módulo que conecta na Drive API e gera o manifest
-- `content/projects.json` — gerado pelo indexer (gitignore em produção, placeholder local)
-- `DRIVE-SETUP.md` — passo-a-passo EXATO e completo para Frank conectar o Drive da Julia
-
-**Para desenvolvimento** (sem credenciais reais): usar `content/projects.json` com dados mock baseados nos projetos já identificados. O módulo `drive.ts` deve ter um flag `DRIVE_ENABLED=true/false` no `.env`.
-
-## SEO e GEO (embutir no código desde o início)
-
-- JSON-LD home: `LocalBusiness` + `Architect` + `ProfessionalService`
-- JSON-LD por projeto: `CreativeWork` com `author`, `dateCreated`, `locationCreated`
-- Meta title/description únicos por rota (gerados do manifest)
-- OG image = foto de capa do projeto
-- `sitemap.ts` dinâmico a partir do manifest
-- Alt text: `{tipologia} {projeto} — {ambiente} por Julia Fonseca Arquitetura`
-- Redirects 301 das URLs do Webador: `/residencial` → `/residencial`, etc.
-- Performance: LCP < 2s, `next/image` com responsive sizes, fetchpriority=high só no hero
-
-## Conteúdo placeholder
-
-Usa imagens de arquitetura do Unsplash (leves, alta qualidade, sem watermark).  
-Projetos seed baseados no scraping:
-- Residencial: usar nomes genéricos (Casa Serra, Casa Jardins, etc.) até Julia nomear
-- Interiores: usar nomes já identificados (Andrade, Sabrina, Quarto Sofia, etc.)
-- Textos narrativos: gerar baseados no estilo dos projetos (residencial = living + fachada; interiores = ambiente + cliente)
-
-## Stack
-
-Next.js 14 (App Router) + Tailwind CSS + TypeScript  
-Deploy: Vercel  
-Imagens: `next/image` + Vercel Image Optimization  
-Conteúdo: Google Drive API → JSON manifest (+ MDX local como fallback)  
-Sem CMS externo
-
-## Contexto operacional
-
-Frank é o responsável pelo projeto. A Julia ainda não viu o novo site.  
-O site atual (Webador) continua no ar até Frank validar o novo com a Julia.  
-Domínio final: `juliafonsecaarq.com` (apontar para Vercel quando pronto).  
-GBP (Google Business Profile): Frank faz manualmente, fora do código.  
-Ticket médio: a confirmar com Julia (influencia tom — premium vs ultra-luxo).
----
-
-## ATUALIZAÇÃO — Diretriz de Design High-Profile Refinada (Experiência Sensorial e Material)
-
-**Esta seção é adicional e não substitui nenhuma parte anterior.**  
-Ela refina e atualiza os conceitos já mencionados nas seções “Direção de design”, “Tipografia”, “Cores” e “Layout”, com base na nova compreensão do posicionamento high-profile da Julia Fonseca.
-
-### Nova Direção de Design
-O site não deve tentar ser elegante ou sofisticado através de tipografia clássica ou elementos decorativos.  
-A sofisticação deve vir da **experiência sensorial e material**, da mesma forma que se constrói uma casa de alto padrão: através de tons, texturas, luz, espaço e delicadeza nos detalhes.
-
-- **Tipografia**: Deve ser neutra, discreta e funcional. Evitar serifs clássicas (como Sun Serif ou similares) que tentam parecer “classy”. A tipografia não é o protagonista — ela serve apenas para informar de forma clara e elegante, sem chamar atenção excessiva. Pode haver uso pontual de uma palavra ou título em bold forte quando for necessário dar visibilidade (ex: nome do projeto em grande escala na abertura da página), mas sempre de forma pontual e impactante, nunca como elemento central.
-
-- **Cores e Paleta**: Abandonar o minimalismo branco/preto puro. Usar uma paleta inspirada na arquitetura contemporânea de alto padrão:
-  - Terra cotta suave
-  - Verde cânion (canyon green)
-  - Cinza claro de microcimento
-  - Tons quentes e naturais de madeira
-  - Transições sutis entre tons terrosos e neutros quentes
-
-  O site deve transmitir calor, ambient light e sensação de materiais nobres (madeira como elemento premium, concreto leve, amplitude).
-
-- **Layout e Espaço**: Muito respiro, amplitude generosa e thoughtfulness nos detalhes. O layout deve evocar a sensação de uma casa bem projetada: espaço entre elementos, hierarquia silenciosa, transições suaves entre páginas e seções.  
-  Animações e movimentos devem ser sutis, elegantes e nunca chamativos — priorizando sensação de luz, calor e fluidez.
-
-- **Elementos Visuais**: 
-  - Abertura de projetos com nome da casa/projeto em destaque bold (grande escala) combinado com belas transições de cor e ambient light.
-  - Uso cuidadoso de cor e luz para criar profundidade e calor.
-  - O design deve fazer o visitante sentir que está “passeando” por um espaço refinado, não navegando em um site comum.
-
-### Objetivo da Experiência
-O site deve ser tão bem resolvido em sua sutileza, materialidade e delicadeza que o próprio cliente high-profile tenha orgulho de compartilhar o link do projeto (“olha como ficou o site deste projeto”).  
-Ele funciona como uma extensão natural da identidade da Julia — discreto, sofisticado e com a mesma qualidade dos projetos que ela entrega.
-
-Esta atualização reforça que a elegância vem dos ingredientes (cores, luz, espaço, transições) e não da tipografia ou de elementos decorativos. O foco é criar uma experiência sensorial silenciosa e memorável, alinhada ao estilo de vida e ao círculo social da Julia.
-
----
+<TextType 
+  text={["Text typing effect", "for your websites", "Happy coding!"]}
+  typingSpeed={75}
+  pauseDuration={1500}
+  showCursor
+  cursorCharacter="_"
+  texts={["Welcome to React Bits! Good to see you!","Build some amazing experiences!"]}
+  deletingSpeed={50}
+  variableSpeedEnabled={false}
+  variableSpeedMin={60}
+  variableSpeedMax={120}
+  cursorBlinkDuration={0.5}
+/>

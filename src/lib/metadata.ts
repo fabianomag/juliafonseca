@@ -27,10 +27,23 @@ export function createMetadata(overrides: Partial<Metadata> = {}): Metadata {
     },
     description: siteConfig.description,
     metadataBase: new URL(siteConfig.url),
+    icons: {
+      icon: "/icon",
+      apple: "/apple-icon",
+    },
     openGraph: {
       type: "website",
       locale: siteConfig.locale,
       siteName: siteConfig.name,
+      title: siteConfig.name,
+      description: siteConfig.description,
+      images: ["/opengraph-image"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: siteConfig.name,
+      description: siteConfig.description,
+      images: ["/opengraph-image"],
     },
     robots: {
       index: true,

@@ -1,189 +1,107 @@
-# Google Drive Integration — Setup Guide
+# Google Drive — Setup Atual
 
-Este guia te leva do zero até o site puxando imagens do Drive da Julia automaticamente.
-Tempo estimado: 15-20 minutos.
+> Leia este arquivo **somente** para tarefas de Drive.
+> Para tarefas visuais, ignore este arquivo e use [`AGENTS.md`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/AGENTS.md).
 
----
+## O que é fonte da verdade no fluxo de Drive
 
-## Pré-requisito
+Arquivos reais do fluxo atual:
 
-Julia precisa compartilhar a pasta de fotos com você (ou com o service account).
+- integração: [`src/lib/drive.ts`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/lib/drive.ts)
+- merge e escrita: [`src/lib/drive-sync.ts`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/src/lib/drive-sync.ts)
+- comando real: [`scripts/sync-drive.ts`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/scripts/sync-drive.ts)
+- saída principal: [`content/projects/projects.json`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/content/projects/projects.json)
 
----
+Ignorar no fluxo normal:
 
-## Passo 1 — Criar projeto no Google Cloud Console
+- [`scripts/sync-drive.js`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/scripts/sync-drive.js)
+  - script antigo/mock
+- [`content/projects.json`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/content/projects.json)
+  - arquivo legado
 
-1. Abrir https://console.cloud.google.com
-2. Criar novo projeto: `julia-fonseca-site` (ou usar um existente)
-3. No menu lateral: **APIs & Services → Library**
-4. Buscar **Google Drive API** → clicar **Enable**
+## Estrutura esperada no Drive
 
-## Passo 2 — Criar Service Account
-
-1. No menu lateral: **IAM & Admin → Service Accounts**
-2. Clicar **Create Service Account**
-   - Nome: `julia-site-drive`
-   - ID: `julia-site-drive` (auto-gerado)
-   - Descrição: "Lê imagens do Drive da Julia para o site"
-3. Pular permissões de projeto (não precisa)
-4. Clicar **Done**
-5. Na lista, clicar no service account recém-criado
-6. Aba **Keys → Add Key → Create new key → JSON**
-7. Vai baixar um arquivo `.json` — **guardar com segurança, não commitar**
-
-## Passo 3 — Preparar a pasta do Drive da Julia
-
-Estrutura esperada na pasta compartilhada:
-
-```
-📁 Julia Fonseca Site (pasta raiz)
-├── 📁 residencial
-│   ├── 📁 casa-serra
-│   │   ├── fachada_01.jpg
-│   │   ├── sala_02.jpg
-│   │   └── meta.md (opcional)
-│   └── 📁 residencia-jardins
-│       ├── patio_01.jpg
-│       └── ...
-├── 📁 comercial
-│   └── 📁 clinica-viva
-│       └── ...
-└── 📁 interiores
-    └── 📁 apartamento-sabrina
-        └── ...
+```text
+Julia Fonseca Site/
+  residencial/
+    casa-serra/
+      fachada_01.jpg
+      sala_02.jpg
+      meta.md
+  comercial/
+    clinica-viva/
+      fachada_01.jpg
+  interiores/
+    apartamento-sabrina/
+      living_01.jpg
 ```
 
-**Regras de nomenclatura:**
-- Nomes de pasta = slug do projeto (minúsculo, hífen)
-- Nomes de imagem = `ambiente_numero.jpg` (a ordem vem do número)
-- Imagens fora do padrão vão pro final da galeria (sem erro)
+## Regras importantes
 
-**meta.md opcional** — se Julia quiser controlar título, ano, etc:
+- a pasta de primeiro nível define a seção:
+  - `residencial`
+  - `comercial`
+  - `interiores`
+- a pasta do projeto vira o `slug`
+- imagens são ordenadas por nome
+- `meta.md` é opcional
 
-```markdown
+## meta.md opcional
+
+```md
 ---
 title: Casa Serra
 year: 2024
 location: Montes Claros, MG
 area: 380m²
-description: Uma residência que dialoga com a topografia natural...
+description: Texto do projeto
 featured: true
-photographer: Studio Fotos
+photographer: Nome
 ---
 ```
 
-Se não existir meta.md, o site usa o nome da pasta como título e valores padrão.
+## Variáveis de ambiente
 
-## Passo 4 — Compartilhar a pasta com o Service Account
-
-1. No Google Drive, ir até a pasta raiz (`Julia Fonseca Site`)
-2. Clicar com botão direito → **Compartilhar**
-3. Adicionar o email do service account (algo como `julia-site-drive@julia-fonseca-site.iam.gserviceaccount.com`)
-4. Permissão: **Leitor** (read-only é suficiente)
-5. Anotar o **Folder ID** — está na URL:
-   ```
-   https://drive.google.com/drive/folders/1AbCdEfGhIjKlMnOpQrStUvWxYz
-                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-                                          ESSE é o Folder ID
-   ```
-
-## Passo 5 — Configurar .env.local
-
-Na pasta do projeto (`Desktop/Projetos/Julia Fonseca/`):
-
-```bash
-cp .env.example .env.local
-```
-
-Editar `.env.local`:
+Usar `.env.local` com:
 
 ```env
-# Colar o conteúdo INTEIRO do JSON da service account em UMA LINHA
-GOOGLE_SERVICE_ACCOUNT_JSON='{"type":"service_account","project_id":"julia-fonseca-site",...TODO CONTEÚDO DO JSON AQUI...}'
-
-# Folder ID da pasta raiz do Drive
-GOOGLE_DRIVE_FOLDER_ID=1AbCdEfGhIjKlMnOpQrStUvWxYz
+GOOGLE_SERVICE_ACCOUNT_JSON='{"type":"service_account",...}'
+GOOGLE_DRIVE_FOLDER_ID=xxxxxxxxxxxxxxxxx
 ```
 
-**Dica:** para colocar o JSON em uma linha:
-```bash
-cat chave-baixada.json | tr -d '\n' | pbcopy
-```
+O `.env.example` mostra o formato esperado.
 
-## Passo 6 — Rodar o sync
+## Passo a passo curto
+
+1. criar projeto no Google Cloud
+2. ativar Google Drive API
+3. criar service account com acesso somente leitura
+4. compartilhar a pasta raiz do Drive com o email da service account
+5. copiar o JSON da chave para `GOOGLE_SERVICE_ACCOUNT_JSON`
+6. copiar o folder id da pasta raiz para `GOOGLE_DRIVE_FOLDER_ID`
+7. rodar:
 
 ```bash
-cd "Desktop/Projetos/Julia Fonseca"
-npm install
 npm run sync-drive
 ```
 
-Se tudo estiver certo, vai mostrar:
-```
-=== Julia Fonseca — Drive Sync ===
+## Resultado esperado
 
-[sync] Building Drive manifest...
-[sync] Found 8 projects in Drive.
-[sync] Results:
-  Added: 0
-  Updated: 8
-  Preserved: 0
-[sync] Written to content/projects/projects.json
+O comando atualiza:
 
-✅ Sync complete!
-```
+- [`content/projects/projects.json`](/Users/fabianofrank/Desktop/Projetos/Julia%20Fonseca/content/projects/projects.json)
+- `content/projects/drive-manifest.json`
 
-O `projects.json` agora tem URLs de imagem apontando para o Drive.
-
-## Passo 7 — Verificar no dev
+## Verificação local
 
 ```bash
+npm run sync-drive
 npm run dev
 ```
 
-Abrir http://localhost:3000 — as imagens devem carregar do Drive via proxy.
+## Troubleshooting rápido
 
-## Passo 8 — Deploy (Vercel)
-
-No Vercel dashboard do projeto:
-1. **Settings → Environment Variables**
-2. Adicionar `GOOGLE_SERVICE_ACCOUNT_JSON` (valor = JSON inteiro)
-3. Adicionar `GOOGLE_DRIVE_FOLDER_ID` (valor = folder ID)
-4. **Redeploy**
-
-O `prebuild` script roda automaticamente antes de cada build, atualizando as imagens.
-
----
-
-## Fluxo no dia a dia
-
-Julia adiciona fotos no Drive → Vercel rebuild (manual ou webhook) → site atualizado.
-
-**Para forçar atualização:**
-```bash
-npm run sync-drive && npm run build
-```
-
-**Para adicionar projeto novo:** Julia cria uma pasta nova dentro de `residencial/`, `comercial/` ou `interiores/` com fotos dentro. Na próxima sync, o projeto aparece automaticamente no site.
-
----
-
-## Troubleshooting
-
-| Problema | Solução |
-|---|---|
-| "GOOGLE_SERVICE_ACCOUNT_JSON not found" | Checar se `.env.local` existe e tem a variável |
-| "Image not found or not shared" | Verificar se a pasta está compartilhada com o service account |
-| Imagens não carregam no site | Verificar se `drive.google.com` está no `next.config.mjs` remotePatterns |
-| "Permission denied" | Service account precisa de acesso de Leitor na pasta |
-| Projeto não aparece | Verificar se a pasta está dentro de `residencial/`, `comercial/` ou `interiores/` |
-| meta.md não funciona | Verificar formato: YAML entre `---` delimiters, chaves em minúsculo |
-
----
-
-## Segurança
-
-- `.env.local` está no `.gitignore` — NUNCA commitar
-- Service account tem acesso READ-ONLY — não pode modificar o Drive
-- O proxy endpoint (`/api/drive-image/`) só serve imagens, com cache immutable de 1 ano
-- Nenhuma credencial é exposta ao client
+- erro de credencial: checar `GOOGLE_SERVICE_ACCOUNT_JSON`
+- erro de pasta: checar `GOOGLE_DRIVE_FOLDER_ID`
+- projeto não aparece: checar se a pasta está dentro de `residencial`, `comercial` ou `interiores`
+- imagens fora de ordem: corrigir nomes dos arquivos
