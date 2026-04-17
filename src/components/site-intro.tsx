@@ -14,13 +14,35 @@ const lockupClassName =
 const starClassName =
   "h-[18vw] w-[18vw] min-h-[5rem] min-w-[5rem] max-h-[9.5rem] max-w-[9.5rem] md:h-[7rem] md:w-[7rem] lg:h-[8.25rem] lg:w-[8.25rem]";
 
+const TYPING_SPEED = 125;
+const DELETING_SPEED = 18;
+const PAUSE_DURATION = 740;
+const INITIAL_DELAY = 10;
+
+// suavidade melhor que ease-in-out padrão
+const STAR_EASING = "cubic-bezier(0.22, 1, 0.36, 1)";
+
+// quanto a estrela gira enquanto digita
+const STAR_ROTATION_DEG = 72;
+
+// duração da ida e da volta
+const STAR_FORWARD_MS = 1850;
+const STAR_BACK_MS = 900;
+
 export function SiteIntro() {
   const [phase, setPhase] = useState<IntroPhase>("typing");
+  const [starRotated, setStarRotated] = useState(false);
   const timeoutsRef = useRef<number[]>([]);
 
   const schedule = (callback: () => void, delay: number) => {
     const id = window.setTimeout(callback, delay);
     timeoutsRef.current.push(id);
+    return id;
+  };
+
+  const clearAllScheduled = () => {
+    timeoutsRef.current.forEach((timeout) => window.clearTimeout(timeout));
+    timeoutsRef.current = [];
   };
 
   useEffect(() => {
@@ -33,9 +55,15 @@ export function SiteIntro() {
 
   useEffect(() => {
     return () => {
-      timeoutsRef.current.forEach((timeout) => window.clearTimeout(timeout));
-      timeoutsRef.current = [];
+      clearAllScheduled();
     };
+  }, []);
+
+  useEffect(() => {
+    // inicia a rotação quase junto com o começo da digitação
+    schedule(() => {
+      setStarRotated(true);
+    }, 80);
   }, []);
 
   if (phase === "hidden") {
@@ -53,9 +81,7 @@ export function SiteIntro() {
           backgroundHidden ? "opacity-0" : "opacity-100",
         ].join(" ")}
       >
-        <div className="absolute inset-0 bg-[#08090d]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_34%_18%,rgba(0,255,255,0.18),transparent_22%),radial-gradient(circle_at_68%_62%,rgba(185,122,89,0.22),transparent_28%),linear-gradient(145deg,#b97a59_0%,#111111_52%,#6d7f71_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),transparent_18%,transparent_82%,rgba(255,255,255,0.04))]" />
+        <div className="absolute inset-0 bg-black" />
       </div>
 
       <div className="relative z-10 flex min-h-screen w-full items-center justify-center px-3 md:px-6">
@@ -69,10 +95,14 @@ export function SiteIntro() {
             <TextType
               as="div"
               text={[introText, ""]}
-              typingSpeed={125}
-              deletingSpeed={18}
-              pauseDuration={740}
-              initialDelay={90}
+              typingSpeed={TYPING_SPEED}
+              deletingSpeed={DELETING_SPEED}
+              pauseDuration={PAUSE_DURATION}
+              initialDelay={INITIAL_DELAY}
+              variableSpeedEnabled
+              variableSpeedMin={60}
+              variableSpeedMax={120}
+              cursorBlinkDuration={0.5}
               loop={false}
               className={`whitespace-nowrap text-center ${lockupClassName}`}
               showCursor
@@ -80,13 +110,32 @@ export function SiteIntro() {
               onSentenceComplete={(typedText) => {
                 if (typedText !== introText) return;
 
-                setPhase("background-out");
-                schedule(() => setPhase("star-out"), 130);
-                schedule(() => setPhase("hidden"), 240);
+                // volta suavemente quando começa a apagar
+                schedule(() => {
+                  setStarRotated(false);
+                }, PAUSE_DURATION - 40);
+
+                // estimativa do tempo total para apagar tudo
+                const deleteDuration = introText.length * DELETING_SPEED;
+
+                // espera pausa + delete, e só então some com a intro
+                schedule(() => {
+                  setPhase("background-out");
+                  schedule(() => setPhase("star-out"), 130);
+                  schedule(() => setPhase("hidden"), 260);
+                }, PAUSE_DURATION + deleteDuration);
               }}
             />
 
-            <span className="inline-flex items-center self-center pl-[0.12em] text-white">
+            <span
+              className="inline-flex items-center self-center pl-[0.12em] text-white transform-gpu origin-center will-change-transform"
+              style={{
+                transform: `rotate(${starRotated ? STAR_ROTATION_DEG : 0}deg)`,
+                transitionProperty: "transform",
+                transitionDuration: `${starRotated ? STAR_FORWARD_MS : STAR_BACK_MS}ms`,
+                transitionTimingFunction: STAR_EASING,
+              }}
+            >
               <JacobsenStar className={starClassName} />
             </span>
           </span>

@@ -12,6 +12,7 @@ const config: Config = {
         ambient: {
           micro: "#FFFFFF",
           linen: "#F6F6F6",
+          limao: "#D9FF4F",
           stone: "#D9D9D9",
           charcoal: "#252021",
           dark: "#111111",

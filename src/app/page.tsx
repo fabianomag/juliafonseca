@@ -124,7 +124,7 @@ export default function Home({
                   </div>
                   <div className="grid gap-2 text-sm uppercase tracking-[0.18em] text-white/80">
                     <span>Edição 01</span>
-                    <span>2025</span>
+                    <span>2026</span>
                   </div>
                 </div>
               </div>
@@ -133,7 +133,7 @@ export default function Home({
             <div className="max-w-md lg:pl-10">
               <h3 className="font-display text-[3rem] uppercase font-bold leading-[0.82] tracking-[0.04em] text-ambient-dark">
                 {latestPublication.title}
-                <span className="text-ambient-electric">*</span>
+                <span className="text-ambient-cyan">*</span>
               </h3>
               <p className="mt-6 text-2xl text-ambient-dark/72">{latestPublication.date}</p>
               <Link
@@ -191,15 +191,15 @@ export default function Home({
                   <div>
                     <p className="font-display text-[5rem] uppercase font-bold leading-[0.82] tracking-[-0.05em]">
                       Galeria
-                      <span className="block text-white">Tréfle<span className="text-ambient-cyan">*</span></span>
+                      <span className="block text-white">Tréfle<span className="text-ambient-limao">*</span></span>
                     </p>
                     <p className="mt-3 text-sm uppercase tracking-[0.16em] text-white/75">
-                      Arquitetura & Interiores
+                      Arte & Interiores
                     </p>
                   </div>
                   <div className="grid gap-2 text-sm uppercase tracking-[0.18em] text-white/80">
                     <span>Coleção</span>
-                    <span>2025</span>
+                    <span>2026</span>
                   </div>
                 </div>
               </div>

@@ -28,7 +28,7 @@ export function createMetadata(overrides: Partial<Metadata> = {}): Metadata {
     description: siteConfig.description,
     metadataBase: new URL(siteConfig.url),
     icons: {
-      icon: "/icon",
+      icon: "/icon.svg",
       apple: "/apple-icon",
     },
     openGraph: {

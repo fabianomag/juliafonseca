@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { clsx } from "clsx";
-import { useEffect, useId, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { withLang, type Lang } from "@/lib/i18n";
 
@@ -66,7 +66,6 @@ function BrandSymbol({ compact = false }: { compact?: boolean }) {
 }
 
 export function JacobsenStar({ className }: { className?: string }) {
-  const id = useId();
   return (
     <svg
       viewBox="0 0 100 100"
@@ -76,31 +75,27 @@ export function JacobsenStar({ className }: { className?: string }) {
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
     >
+      {/*
       <defs>
-        {/* Gradiente principal */}
-        <linearGradient id={`${id}-gradient`} x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="jacobsen-star-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="100%" stopColor="#6d7f71" />
           <stop offset="55%" stopColor="#b97a59" />
           <stop offset="0%" stopColor="#1a1a1a" />
         </linearGradient>
 
-        {/* Glow sutil */}
-        <radialGradient id={`${id}-glow`} cx="35%" cy="20%" r="85%">
+        <radialGradient id="jacobsen-star-glow" cx="35%" cy="20%" r="85%">
           <stop offset="10%" stopColor="rgba(0,255,255,0.35)" />
           <stop offset="100%" stopColor="transparent" />
         </radialGradient>
       </defs>
-
-      {/* Base */}
+      */}
       <path
         d="M50 0 L52 20 L68 7 L65 27 L85 20 L75 38 L96 40 L80 50 L96 60 L75 62 L85 80 L65 73 L68 93 L52 80 L50 100 L48 80 L32 93 L35 73 L15 80 L25 62 L4 60 L20 50 L4 40 L25 38 L15 20 L35 27 L32 7 L48 20 Z"
-        fill={`url(#${id}-gradient)`}
+        fill="#d9ff4f"
       />
-
-      {/* Glow por cima */}
       <path
         d="M50 0 L52 20 L68 7 L65 27 L85 20 L75 38 L96 40 L80 50 L96 60 L75 62 L85 80 L65 73 L68 93 L52 80 L50 100 L48 80 L32 93 L35 73 L15 80 L25 62 L4 60 L20 50 L4 40 L25 38 L15 20 L35 27 L32 7 L48 20 Z"
-        fill={`url(#${id}-glow)`}
+        fill="#d9ff4f"
       />
     </svg>
   );
@@ -187,8 +182,8 @@ function BrandWordmark({
           <span className="flex justify-between gap-[0.2em]"><span>J</span><span>U</span><span>F</span></span>
           <span className="flex justify-between gap-[0.2em]"><span>A</span><span>R</span><span>Q</span></span>
           <span className="flex items-center gap-[0.2em]">
-            <span className="text-[#EAB308] flex justify-between gap-[0.2em]"><span>T</span><span>A</span></span>
-            <span className={clsx("mt-[0.1em] text-[#EAB308]")}>
+            <span className="text-ambient-limao flex justify-between gap-[0.2em]"><span>T</span><span>A</span></span>
+            <span className={clsx("mt-[0.1em] text-ambient-limao")}>
               <JacobsenStar />
             </span>
           </span>
@@ -205,7 +200,7 @@ function BrandWordmark({
           <span className="flex justify-between gap-[0.2em]"><span>F</span><span>O</span><span>N</span><span>S</span><span>E</span></span>
           <span className="flex items-center gap-[0.2em]">
             <span>C</span><span>A</span>
-            <span className={clsx("ml-[0.16em] mt-[0.05em] text-[#EAB308]")}>
+            <span className={clsx("ml-[0.16em] mt-[0.05em] text-ambient-limao")}>
               <JacobsenStar />
             </span>
           </span>

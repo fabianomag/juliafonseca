@@ -1,5 +1,12 @@
+import { Barlow_Condensed } from "next/font/google";
 import { ImageResponse } from "next/og";
 import siteConfig from "@/lib/metadata";
+
+const display = Barlow_Condensed({
+  subsets: ["latin"],
+  weight: ["900"],
+  display: "swap",
+});
 
 export const size = {
   width: 1200,
@@ -16,9 +23,8 @@ export default function OpenGraphImage() {
           width: "100%",
           height: "100%",
           display: "flex",
-          background:
-            "radial-gradient(circle at 18% 18%, rgba(217, 255, 79, 0.42), transparent 28%), radial-gradient(circle at 82% 24%, rgba(109, 127, 113, 0.56), transparent 30%), linear-gradient(135deg, #0f170f 0%, #8fb05d 48%, #d9ff4f 100%)",
-          color: "#ffffff",
+          background: "#071007",
+          color: "#d9ff4f",
           position: "relative",
           overflow: "hidden",
         }}
@@ -27,7 +33,7 @@ export default function OpenGraphImage() {
           style={{
             position: "absolute",
             inset: "40px",
-            border: "1px solid rgba(255, 255, 255, 0.16)",
+            border: "2px solid rgba(217, 255, 79, 0.18)",
             borderRadius: "40px",
           }}
         />
@@ -44,7 +50,7 @@ export default function OpenGraphImage() {
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: 14,
+              gap: 12,
               maxWidth: 670,
             }}
           >
@@ -56,32 +62,32 @@ export default function OpenGraphImage() {
                 fontSize: 24,
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                opacity: 0.86,
+                opacity: 0.82,
               }}
             >
-              <span style={{ width: 72, height: 2, background: "rgba(255,255,255,0.72)" }} />
+              <span style={{ width: 72, height: 2, background: "rgba(217,255,79,0.72)" }} />
               {siteConfig.name}
             </div>
             <div
               style={{
-                fontSize: 116,
-                lineHeight: 0.82,
-                letterSpacing: "-0.08em",
+                fontSize: 164,
+                lineHeight: 0.76,
+                letterSpacing: "-0.16em",
                 fontWeight: 900,
                 textTransform: "uppercase",
-                fontFamily: '"Arial Black", Arial, Helvetica, sans-serif',
-                color: "#162114",
-                textShadow: "0 8px 0 rgba(255,255,255,0.26)",
+                fontFamily: display.style.fontFamily,
+                color: "#d9ff4f",
+                textShadow: "0 2px 0 rgba(255,255,255,0.08)",
               }}
             >
-              JF
+              J
             </div>
             <div
               style={{
                 fontSize: 32,
                 lineHeight: 1.25,
                 maxWidth: 580,
-                opacity: 0.92,
+                opacity: 0.78,
               }}
             >
               Arquitetura residencial, comercial e interiores com presença visual forte.
@@ -89,25 +95,25 @@ export default function OpenGraphImage() {
           </div>
           <div
             style={{
-              width: 360,
-              height: 360,
-              borderRadius: 96,
-              background: "rgba(255,255,255,0.12)",
-              border: "1px solid rgba(255,255,255,0.2)",
+              width: 390,
+              height: 390,
+              borderRadius: 108,
+              background: "#d9ff4f",
+              border: "10px solid rgba(217,255,79,0.12)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              boxShadow: "0 24px 100px rgba(0,0,0,0.28)",
-              color: "#162114",
-              fontSize: 170,
+              boxShadow: "0 26px 0 rgba(217,255,79,0.08)",
+              color: "#071007",
+              fontSize: 264,
               fontWeight: 900,
-              letterSpacing: "-0.1em",
-              fontFamily: '"Arial Black", Arial, Helvetica, sans-serif',
+              letterSpacing: "-0.14em",
+              fontFamily: display.style.fontFamily,
               lineHeight: 1,
-              textShadow: "0 10px 0 rgba(255,255,255,0.25)",
+              textShadow: "0 2px 0 rgba(255,255,255,0.08)",
             }}
           >
-            JF
+            J
           </div>
         </div>
       </div>
