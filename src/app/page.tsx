@@ -111,7 +111,7 @@ export default function Home({
                 </span>
               </div>
               <div className="relative flex-1 overflow-hidden bg-white">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(0,0,255,0.98),transparent_28%),linear-gradient(180deg,#050A30_0%,#0000FF_54%,#00FFFF_100%)]" />
+                <div className="absolute inset-0 bg-caderno-azul-cover" />
                 <div className="relative flex h-full flex-col justify-between p-8 text-white">
                   <div>
                     <p className="font-display text-[5rem] uppercase font-bold leading-[0.82] tracking-[-0.05em]">
@@ -153,7 +153,7 @@ export default function Home({
           <div className="grid gap-12 xl:grid-cols-[0.42fr_0.58fr] xl:items-center">
             <div className="max-w-[33rem] xl:pr-10">
               <div className="mb-8 flex items-center gap-5">
-                <span className="block h-14 w-[2px] bg-[#6C7B8B]" />
+                <span className="block h-14 w-[2px] bg-ambient-galeria-trefle-line" />
                 <div className="space-y-1">
                   <p className="text-label text-ambient-muted">{t.galleryEyebrow}</p>
                   <p className="text-label text-ambient-dark">GALERIA TRÉFLE</p>
@@ -170,7 +170,7 @@ export default function Home({
                 href={withLang("/galeria-trefle", lang)}
                 className="mt-12 inline-flex items-center gap-5 text-xl uppercase tracking-[0.12em] text-ambient-muted transition-colors hover:text-ambient-electric"
               >
-                <span className="block h-[2px] w-14 bg-[#6C7B8B]" />
+                <span className="block h-[2px] w-14 bg-ambient-galeria-trefle-line" />
                 {t.galleryCta}
               </Link>
             </div>
@@ -185,8 +185,7 @@ export default function Home({
                 </span>
               </div>
               <div className="relative flex-1 overflow-hidden bg-white">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_34%_18%,rgba(0,255,255,0.22),transparent_22%),linear-gradient(145deg,#b97a59_0%,#111111_52%,#6d7f71_100%)]" />
-                {/* <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(0,0,255,0.98),transparent_28%),linear-gradient(180deg,#050A30_0%,#0000FF_54%,#00FFFF_100%)]" /> */}
+                <div className="absolute inset-0 bg-galeria-trefle-cover" />
                 <div className="relative flex h-full flex-col justify-between p-8 text-white">
                   <div>
                     <p className="font-display text-[5rem] uppercase font-bold leading-[0.82] tracking-[-0.05em]">

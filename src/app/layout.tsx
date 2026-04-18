@@ -7,7 +7,6 @@ import { FooterController } from "@/components/footer-controller";
 import { createMetadata } from "@/lib/metadata";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/json-ld";
 import { SmoothScroll } from "@/components/smooth-scroll";
-import { SiteIntro } from "@/components/site-intro";
 import { cn } from "@/lib/utils";
 
 const barlow = Barlow({
@@ -57,7 +56,6 @@ export default function RootLayout({
       <body className="font-sans antialiased bg-ambient-micro text-ambient-dark selection:bg-ambient-electric/20">
         <OrganizationJsonLd />
         <WebSiteJsonLd />
-        <SiteIntro />
         <SmoothScroll>
           <Suspense fallback={null}>
             <Navigation />

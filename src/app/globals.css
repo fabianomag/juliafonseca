@@ -154,3 +154,60 @@
     @apply font-serif text-[1.15rem] leading-[1.8] text-ambient-dark/75 md:text-[1.35rem];
   }
 }
+
+@keyframes hero-triangle-scrim-fade {
+  0% {
+    opacity: 1;
+  }
+
+  74% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes hero-triangle-scrim-reveal {
+  0% {
+    opacity: 0.98;
+    transform: scaleX(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.hero-triangle-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  overflow: hidden;
+  background: #ffffff;
+  animation: hero-triangle-scrim-fade 640ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  pointer-events: none;
+}
+
+.hero-triangle-scrim__image {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.98;
+  transform: scaleX(0);
+  transform-origin: right center;
+  animation: hero-triangle-scrim-reveal 460ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 42'%3E%3Cpath fill='black' d='M0 42L12 21L24 42ZM24 0L36 21L48 0ZM24 42L36 21L48 42Z'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: repeat;
+  -webkit-mask-position: right center;
+  -webkit-mask-size: 48px 42px;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 42'%3E%3Cpath fill='black' d='M0 42L12 21L24 42ZM24 0L36 21L48 0ZM24 42L36 21L48 42Z'/%3E%3C/svg%3E");
+  mask-repeat: repeat;
+  mask-position: right center;
+  mask-size: 48px 42px;
+}
