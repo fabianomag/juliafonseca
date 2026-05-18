@@ -159,7 +159,7 @@ export function ProjectsFilter({
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-px bg-white/8 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-x-0 gap-y-5 bg-black py-3 sm:grid-cols-2 sm:gap-y-6 sm:py-4 lg:grid-cols-3 xl:grid-cols-4 xl:gap-y-7 xl:py-5">
         {filtered.map((project, i) => (
           <div key={project.slug} className="bg-black">
             <ProjectCard project={project} index={i} lang={lang} />

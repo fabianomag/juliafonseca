@@ -59,7 +59,7 @@ export function ProjectStripCarousel({
           className="overflow-x-auto overscroll-x-contain scroll-smooth px-3 md:px-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           <div
-            className="flex w-max pb-4"
+            className="flex w-max gap-3 pb-4 md:gap-4"
             style={{ width: "max-content" }}
           >
             {projects.map((item, index) => {

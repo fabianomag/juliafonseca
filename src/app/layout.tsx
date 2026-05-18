@@ -9,6 +9,8 @@ import { createMetadata } from "@/lib/metadata";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/json-ld";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { cn } from "@/lib/utils";
+import { StringTuneCursor } from "@/components/string-tune-cursor";
+import { SiteIntro } from "@/components/site-intro";
 
 const barlow = Barlow({
   subsets: ["latin"],
@@ -57,11 +59,13 @@ export default function RootLayout({
       <body className="font-sans antialiased bg-black text-white selection:bg-ambient-electric/20">
         <OrganizationJsonLd />
         <WebSiteJsonLd />
+        <SiteIntro />
         <SmoothScroll>
           <Suspense fallback={null}>
             <Navigation />
           </Suspense>
-<main>{children}</main>
+          <StringTuneCursor />
+          <main>{children}</main>
           <Suspense fallback={null}>
             <FooterController />
           </Suspense>

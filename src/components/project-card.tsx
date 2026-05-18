@@ -24,7 +24,7 @@ export function ProjectCard({ project, index = 0, lang = "pt" }: ProjectCardProp
 
   return (
     <Link href={withLang(`/${project.section}/${project.slug}`, lang)} className="group block">
-      <div className="relative aspect-[4/3] overflow-hidden bg-black">
+      <div className="relative aspect-[16/9] overflow-hidden bg-black">
         <Image
           src={project.cover}
           alt={`${project.title} — ${project.category}`}
@@ -38,11 +38,11 @@ export function ProjectCard({ project, index = 0, lang = "pt" }: ProjectCardProp
 
         {/* Gradiente + título sempre visível */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-7">
+        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-white/60">
             {sectionLabel}{isNew && <span className="ml-3 text-ambient-cyan">{lang === "pt" ? "Novo" : "New"}</span>}
           </p>
-          <h3 className="mt-1 font-display text-[1.9rem] uppercase leading-[0.88] tracking-[-0.02em] text-white transition-colors duration-500 group-hover:text-ambient-cyan sm:text-[2.1rem]">
+          <h3 className="mt-1 font-display text-[1.6rem] uppercase leading-[0.88] tracking-[-0.02em] text-white transition-colors duration-500 group-hover:text-ambient-cyan sm:text-[1.82rem]">
             {project.title}
           </h3>
           <p className="mt-1.5 text-[0.72rem] uppercase tracking-[0.18em] text-white/45">

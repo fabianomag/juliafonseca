@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { clsx } from "clsx";
 
 interface FlipLinkProps {
@@ -10,6 +11,7 @@ interface FlipLinkProps {
   textClassName?: string;
   hoverTextClassName?: string;
   staggerMs?: number;
+  style?: CSSProperties;
   onClick?: () => void;
 }
 
@@ -20,6 +22,7 @@ export function FlipLink({
   textClassName,
   hoverTextClassName,
   staggerMs = 24,
+  style,
   onClick,
 }: FlipLinkProps) {
   const letters = Array.from(label);
@@ -30,6 +33,7 @@ export function FlipLink({
       onClick={onClick}
       aria-label={label}
       className={clsx("group relative inline-flex w-fit overflow-hidden whitespace-nowrap", className)}
+      style={style}
     >
       <span className="sr-only">{label}</span>
 

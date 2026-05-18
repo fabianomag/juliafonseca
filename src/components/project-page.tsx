@@ -1,13 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { useEffect, useRef } from "react";
 import type { Project } from "@/lib/projects";
 import { Reveal } from "./reveal";
 import { ParallaxGallery } from "./parallax-gallery";
-import { withLang, type Lang } from "@/lib/i18n";
-import { typographyTokenMap } from "@/lib/typography-system";
+import type { Lang } from "@/lib/i18n";
 import { ProjectStripCarousel } from "./project-strip-carousel";
 import { getImageBlurDataURL } from "@/lib/image-placeholder";
 
@@ -19,30 +17,63 @@ interface ProjectPageProps {
 
 const copy = {
   pt: {
-    allProjects: "Todos os projetos",
-    info: "Informações",
+    scroll: "Desça para explorar",
     year: "Ano",
     location: "Localização",
     area: "Área",
     type: "Tipologia",
-    narrativeTitleTop: "Matéria, luz",
-    narrativeTitleBottom: "e permanência.",
   },
   en: {
-    allProjects: "All projects",
-    info: "Information",
+    scroll: "Scroll to explore",
     year: "Year",
     location: "Location",
     area: "Area",
     type: "Type",
-    narrativeTitleTop: "Matter, light",
-    narrativeTitleBottom: "and permanence.",
   },
 } as const;
 
-const displaySplitAccentVariants = typographyTokenMap.displaySplitAccent.variants ?? {};
+const brazilianStates: Record<string, string> = {
+  AC: "Acre",
+  AL: "Alagoas",
+  AP: "Amapá",
+  AM: "Amazonas",
+  BA: "Bahia",
+  CE: "Ceará",
+  DF: "Distrito Federal",
+  ES: "Espírito Santo",
+  GO: "Goiás",
+  MA: "Maranhão",
+  MT: "Mato Grosso",
+  MS: "Mato Grosso do Sul",
+  MG: "Minas Gerais",
+  PA: "Pará",
+  PB: "Paraíba",
+  PR: "Paraná",
+  PE: "Pernambuco",
+  PI: "Piauí",
+  RJ: "Rio de Janeiro",
+  RN: "Rio Grande do Norte",
+  RS: "Rio Grande do Sul",
+  RO: "Rondônia",
+  RR: "Roraima",
+  SC: "Santa Catarina",
+  SP: "São Paulo",
+  SE: "Sergipe",
+  TO: "Tocantins",
+};
+
+function getLocationParts(location: string) {
+  const [city = location, state = ""] = location.split(",").map((part) => part.trim());
+  return {
+    city,
+    state: brazilianStates[state.toUpperCase()] ?? state,
+  };
+}
 
 export function ProjectPage({ project, relatedProjects = [], lang = "pt" }: ProjectPageProps) {
+  const heroRef = useRef<HTMLElement>(null);
+  const heroImageRef = useRef<HTMLDivElement>(null);
+  const heroOverlayRef = useRef<HTMLDivElement>(null);
   const t = copy[lang];
   const categoryLabel =
     lang === "en"
@@ -52,83 +83,118 @@ export function ProjectPage({ project, relatedProjects = [], lang = "pt" }: Proj
         Interiores: "Interiors",
       }[project.category] ?? project.category
       : project.category;
+  const projectMeta = [
+    { label: t.year, value: project.year },
+    { label: t.type, value: categoryLabel },
+    { label: t.area, value: project.area },
+    { label: t.location, value: project.location },
+  ].filter((item) => item.value);
+  const locationParts = getLocationParts(project.location);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    const image = heroImageRef.current;
+    const overlay = heroOverlayRef.current;
+
+    if (!hero || !image || !overlay) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let frame = 0;
+
+    const updateHero = () => {
+      const rect = hero.getBoundingClientRect();
+      const scrollable = Math.max(rect.height - window.innerHeight, 1);
+      const progress = Math.min(Math.max(-rect.top / scrollable, 0), 1);
+      const shift = -6 + progress * 16;
+
+      image.style.transform = `translate3d(0, ${shift}svh, 0) scale(1.025)`;
+      overlay.style.opacity = `${0.28 + progress * 0.34}`;
+    };
+
+    const requestUpdate = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(updateHero);
+    };
+
+    updateHero();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
+  }, []);
 
   return (
-    <div className="project-blueprint-surface project-blueprint-grid min-h-screen text-white selection:bg-ambient-electric/18">
-      <section className="relative flex min-h-[84vh] w-full items-end overflow-hidden border-b border-white/10 pb-12 section-padding md:min-h-[94vh]">
-        <Image
-          src={project.cover}
-          alt={project.title}
-          fill
-          className="object-cover"
-          priority
-          sizes="100vw"
-          placeholder="blur"
-          blurDataURL={getImageBlurDataURL()}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+    <div className="project-blueprint-surface min-h-screen bg-black text-white selection:bg-ambient-electric/18">
+      <section ref={heroRef} className="relative min-h-[180svh] overflow-hidden bg-black text-white">
+        <div
+          ref={heroImageRef}
+          className="absolute inset-x-0 top-[-5svh] h-[110%] origin-center will-change-transform"
+        >
+          <Image
+            src={project.cover}
+            alt={project.title}
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+            placeholder="blur"
+            blurDataURL={getImageBlurDataURL()}
+          />
+        </div>
+        <div ref={heroOverlayRef} className="absolute inset-0 bg-[#080807] opacity-[0.28]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/6 via-transparent to-black/62" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/28 via-transparent to-black/10" />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col justify-end">
-          <Reveal>
-            <Link
-              href={withLang("/projetos", lang)}
-              className="group mb-10 inline-flex items-center gap-4 text-detail uppercase text-white/60 transition-colors hover:text-white"
-            >
-              <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-2" /> {t.allProjects}
-            </Link>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <div className="max-w-5xl">
-              <p className="mb-4 text-label uppercase text-white/60">{categoryLabel}</p>
-              <h1 className="font-display text-[18vw] uppercase leading-[0.8] tracking-[-0.06em] text-white sm:text-[13vw] lg:text-[9rem]">
+        <div className="relative z-10 mx-auto flex min-h-[180svh] w-full max-w-none flex-col px-5 md:px-8">
+          <div className="flex min-h-screen flex-col justify-end pb-7 pt-28 md:pb-8 lg:pt-32">
+            <Reveal delay={0.08}>
+              <h1 className="max-w-[10ch] font-display text-[clamp(5.6rem,19vw,9rem)] font-[530] uppercase leading-[0.86] tracking-normal text-white md:text-[clamp(7rem,8.8vw,9rem)]">
                 {project.title}
               </h1>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+            </Reveal>
 
-      <section className="bg-transparent py-24 section-padding md:py-32">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
-          <div className="project-blueprint-panel self-start rounded-[1.8rem] p-7 lg:sticky lg:top-32 lg:p-8">
-            <Reveal>
-              <h3 className="mb-6 text-label uppercase text-white/40">{t.info}</h3>
-              <dl className="grid grid-cols-2 gap-y-8 gap-x-6 lg:grid-cols-1">
-                {[
-                  { label: t.year, value: project.year },
-                  { label: t.location, value: project.location },
-                  { label: t.area, value: project.area },
-                  { label: t.type, value: categoryLabel },
-                ].map((item) => (
-                  <div key={item.label}>
-                    <dt className="mb-2 text-[0.74rem] uppercase tracking-[0.18em] text-white/38">
-                      {item.label}
-                    </dt>
-                    <dd className="text-lg text-white">{item.value}</dd>
-                  </div>
-                ))}
-              </dl>
+            <Reveal delay={0.14}>
+              <div className="mt-10 grid w-full gap-4 font-display text-[0.76rem] font-[650] uppercase tracking-normal text-white sm:grid-cols-3 md:mt-12 lg:text-[0.9rem]">
+                <p className="justify-self-start">{locationParts.city}</p>
+                <p className="justify-self-start sm:justify-self-center">{locationParts.state}</p>
+                <p className="justify-self-start sm:justify-self-end">({t.scroll})</p>
+              </div>
             </Reveal>
           </div>
 
-          <div className="max-w-3xl">
-            <Reveal delay={0.2}>
-              <div className="mb-10 h-[1px] w-16 bg-white/20" />
-              <h2 className={displaySplitAccentVariants.projectNarrative ?? "mb-8 font-display text-4xl uppercase leading-[0.88] tracking-[-0.05em] text-white sm:text-[4.8rem]"}>
-                {t.narrativeTitleTop}
-                <span className={displaySplitAccentVariants.accentWord ?? "block italic text-ambient-electric"}>{t.narrativeTitleBottom}</span>
-              </h2>
-              <div className="space-y-6 text-lg leading-relaxed text-white/70 md:text-xl">
-                <p>{project.description}</p>
-                <p>
-                  A narrativa do projeto se constrói por proporção, materialidade e sequência de
-                  espaços, valorizando o que a arquitetura tem de mais silencioso e marcante.
-                </p>
-                <p>
-                  Cada imagem reforça a passagem entre presença, atmosfera e detalhe, preservando
-                  a leitura do conjunto antes do ornamento.
-                </p>
+          <div className="relative min-h-[80svh] pb-12 pt-0 lg:absolute lg:inset-x-0 lg:top-[100svh] lg:h-[80svh] lg:min-h-0 lg:px-8">
+            <Reveal delay={0.16}>
+              <div className="relative h-full">
+                <div className="max-w-[40rem] text-[1.25rem] font-[500] leading-[1.18] text-white sm:text-[1.45rem] lg:absolute lg:left-[50.2%] lg:top-[34svh] lg:text-[1.58rem]">
+                  <div className="space-y-6 lg:space-y-7">
+                    {project.description && <p>{project.description}</p>}
+                    <p>
+                      A narrativa do projeto se constrói por proporção, materialidade e sequência
+                      de espaços, valorizando o que a arquitetura tem de mais silencioso e marcante.
+                    </p>
+                    <p>
+                      Cada imagem reforça a passagem entre presença, atmosfera e detalhe,
+                      preservando a leitura do conjunto antes do ornamento.
+                    </p>
+                  </div>
+                </div>
+
+                <dl className="mt-12 grid max-w-[44rem] gap-x-20 gap-y-9 text-white sm:grid-cols-2 lg:absolute lg:bottom-[5.5svh] lg:left-[50.2%] lg:mt-0 lg:w-[42rem]">
+                  {projectMeta.map((item) => (
+                    <div key={item.label}>
+                      <dt className="font-display text-[0.74rem] font-[530] uppercase tracking-normal text-white/76 lg:text-[0.86rem]">
+                        {item.label}
+                      </dt>
+                      <dd className="mt-3 font-display text-[0.82rem] font-[650] uppercase leading-tight text-white lg:text-[0.96rem]">
+                        {item.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
             </Reveal>
           </div>

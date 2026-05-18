@@ -68,7 +68,7 @@ export function Footer({
                 {copy.office}
               </h3>
               <div className="flex flex-col gap-5 text-2xl uppercase tracking-[0.08em] text-white/70">
-                <Link href={withLang("/sobre", lang)} className="hover:text-ambient-cyan transition-colors">{copy.office}</Link>
+                <Link href={withLang("/escritorio", lang)} className="hover:text-ambient-cyan transition-colors">{copy.office}</Link>
                 <Link href={withLang("/publicacoes", lang)} className="hover:text-ambient-cyan transition-colors">{copy.publications}</Link>
                 <Link href={withLang("/contato", lang)} className="hover:text-ambient-cyan transition-colors">{copy.contact}</Link>
               </div>

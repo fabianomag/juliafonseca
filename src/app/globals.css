@@ -251,6 +251,266 @@
     border-top: 1px solid rgba(255, 255, 255, 0.72);
     pointer-events: none;
   }
+
+  .contact-send-dock {
+    position: relative;
+    min-height: 8.8rem;
+    overflow: hidden;
+    border-top: 1px solid #000000;
+    background: #000000;
+  }
+
+  .contact-send-primer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.35rem 1.25rem 1.2rem;
+    color: rgba(255, 255, 255, 0.96);
+    @apply font-display text-[2.75rem] font-[500] uppercase leading-none tracking-[-0.05em] sm:px-8 sm:text-[3.6rem] lg:px-12 lg:text-[4rem];
+  }
+
+  .contact-send-fill {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: #ffffff;
+    pointer-events: none;
+    transform: translateY(102%);
+    transition:
+      transform 760ms cubic-bezier(0.76, 0, 0.24, 1);
+    will-change: transform;
+  }
+
+  .contact-send-options {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 1fr;
+    color: rgba(0, 0, 0, 0.96);
+    pointer-events: none;
+    padding: 0.24rem 0;
+  }
+
+  .contact-send-option {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(5.6rem, 31%);
+    align-items: stretch;
+    gap: 0;
+    min-height: 2.55rem;
+    padding: 0 0.9rem;
+    color: inherit;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(0.9rem);
+    transition:
+      opacity 220ms ease 260ms,
+      transform 620ms cubic-bezier(0.22, 1, 0.36, 1) 250ms;
+    @apply font-display text-[1.02rem] font-bold uppercase tracking-[0.08em] sm:px-6 sm:text-[1.12rem] lg:px-10 lg:text-[1.28rem];
+  }
+
+  .contact-send-option__send,
+  .contact-send-option__copy {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    border: 0;
+    background: transparent;
+    color: inherit;
+  }
+
+  .contact-send-option__send {
+    justify-content: flex-start;
+    gap: 0.45rem;
+    padding: 0.34rem 0.65rem;
+    text-align: left;
+  }
+
+  .contact-send-option__copy {
+    justify-content: center;
+    margin-left: 0;
+    width: 100%;
+    padding: 0.34rem 0.85rem;
+    outline: none;
+  }
+
+  .contact-send-option__arrow {
+    display: inline-flex;
+    flex: 0 0 auto;
+    color: rgba(0, 0, 0, 0.72);
+  }
+
+  .contact-send-option__icon {
+    display: inline-flex;
+    width: 1.9rem;
+    justify-content: flex-end;
+    color: currentColor;
+  }
+
+  .contact-send-option__copyIcon {
+    display: inline-flex;
+    color: rgba(0, 0, 0, 0.62);
+  }
+
+  .contact-send-option__label {
+    display: inline-block;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(0.5rem);
+    clip-path: inset(0 100% 0 0);
+    transition:
+      clip-path 460ms cubic-bezier(0.22, 1, 0.36, 1) 210ms,
+      opacity 180ms ease 180ms,
+      transform 340ms cubic-bezier(0.2, 0.9, 0.2, 1) 180ms;
+    white-space: nowrap;
+  }
+
+  .contact-send-dock:hover .contact-send-fill,
+  .contact-send-dock:focus-within .contact-send-fill {
+    transform: translateY(0);
+  }
+
+  .contact-send-dock:hover .contact-send-options,
+  .contact-send-dock:focus-within .contact-send-options {
+    pointer-events: auto;
+  }
+
+  .contact-send-dock:hover .contact-send-option,
+  .contact-send-dock:focus-within .contact-send-option {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .contact-send-dock:hover .contact-send-option__label,
+  .contact-send-dock:focus-within .contact-send-option__label {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .contact-send-option:hover,
+  .contact-send-option:focus-visible {
+    outline: none;
+    transform: translateY(0);
+  }
+
+  @media (min-width: 640px) {
+    .contact-send-dock {
+      min-height: 8.8rem;
+    }
+  }
+
+  @media (hover: none) {
+    .contact-send-dock {
+      min-height: auto;
+    }
+
+    .contact-send-primer {
+      position: relative;
+      min-height: 5.8rem;
+    }
+
+    .contact-send-fill {
+      display: none;
+    }
+
+    .contact-send-options {
+      position: relative;
+      grid-template-columns: 1fr;
+      background: #ffffff;
+      pointer-events: auto;
+      padding: 0.2rem 0 0.28rem;
+    }
+
+    .contact-send-option {
+      grid-template-columns: minmax(0, 1fr) minmax(5rem, 30%);
+      opacity: 1;
+      transform: none;
+    }
+
+    .contact-send-option__label {
+      clip-path: inset(0 0 0 0);
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .jf-string-cursor,
+  .jf-string-cursor-echo {
+    display: none;
+  }
+
+  @media (min-width: 768px) and (pointer: fine) {
+    .jf-string-cursor {
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 220;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 6.4rem;
+      border: 0;
+      border-radius: 999px;
+      background: #11548f;
+      color: #ffffff;
+      opacity: 0;
+      padding: 0.62rem 1.08rem 0.56rem;
+      pointer-events: none;
+      transform: translate3d(calc(var(--x) * 1px + 1rem), calc(var(--y) * 1px + 1rem), 0);
+      transition: opacity 180ms ease;
+      white-space: nowrap;
+      will-change: transform, opacity;
+      @apply font-display text-[0.76rem] uppercase leading-none tracking-[0.14em];
+    }
+
+    .jf-string-cursor.jf-copy-target {
+      opacity: 1;
+    }
+
+    .jf-string-cursor.jf-copy-target--copied {
+      background: #11548f;
+      color: #ffffff;
+    }
+
+    .jf-string-cursor__copied,
+    .jf-string-cursor.jf-copy-target--copied .jf-string-cursor__copy {
+      display: none;
+    }
+
+    .jf-string-cursor.jf-copy-target--copied .jf-string-cursor__copied {
+      display: inline;
+    }
+
+    .jf-string-cursor-echo {
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 219;
+      display: block;
+      width: 0.34rem;
+      height: 0.34rem;
+      border-radius: 999px;
+      background: rgba(17, 84, 143, 0.74);
+      opacity: 0;
+      pointer-events: none;
+      transform: translate3d(calc(var(--x) * 1px + 0.6rem), calc(var(--y) * 1px + 0.75rem), 0);
+      transition: opacity 180ms ease;
+      will-change: transform, opacity;
+    }
+
+    .jf-string-cursor-echo.jf-copy-target {
+      opacity: 1;
+    }
+
+    .jf-string-cursor-echo--slow {
+      background: rgba(17, 84, 143, 0.34);
+    }
+  }
 }
 
 @keyframes hero-triangle-scrim-fade {

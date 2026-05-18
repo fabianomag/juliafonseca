@@ -15,7 +15,7 @@ export function ProjectDetailFooter({ lang = "pt" }: { lang?: Lang }) {
             <Link href={withLang("/publicacoes", lang)} className="transition-colors hover:text-ambient-electric">
               {lang === "pt" ? "Publicações" : "Publications"}
             </Link>
-            <Link href={withLang("/sobre", lang)} className="transition-colors hover:text-ambient-electric">
+            <Link href={withLang("/escritorio", lang)} className="transition-colors hover:text-ambient-electric">
               {lang === "pt" ? "Escritório" : "Studio"}
             </Link>
             <Link href={withLang("/contato", lang)} className="transition-colors hover:text-ambient-electric">
@@ -48,7 +48,7 @@ export function ProjectDetailFooter({ lang = "pt" }: { lang?: Lang }) {
         </div>
       </div>
 
-      <div className="pointer-events-none overflow-hidden border-t border-white/8">
+      <div className="pointer-events-none overflow-hidden">
         <div className="relative mx-auto h-[9rem] w-[92vw] max-w-[96rem] opacity-20 md:h-[13rem]">
           <Image
             src="/images/brand/jf-arquitetura-original.png"

@@ -45,7 +45,7 @@ export function ParallaxGallery({ images }: { images: string[] }) {
   }
 
   return (
-    <div className="space-y-0">
+    <div className="space-y-2 bg-black sm:space-y-3">
       {rows.map((row, rowIndex) => {
         if (row.layout === "full") {
           const item = row.images[0];
@@ -74,7 +74,7 @@ export function ParallaxGallery({ images }: { images: string[] }) {
         return (
           <div
             key={`${row.layout}-${rowIndex}`}
-            className={`grid gap-px ${splitClass}`}
+            className={`grid gap-2 sm:gap-3 ${splitClass}`}
             style={{ gridAutoRows: "clamp(14rem, 28vw, 26rem)" }}
           >
             {row.images.map((item) => (

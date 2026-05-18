@@ -7,8 +7,9 @@ const siteConfig = {
   url: "https://www.juliafonsecaarq.com",
   email: "juliafonseca.arquiteta@gmail.com",
   phone: "+553899266-5556",
-  whatsapp: "553899266-5556",
+  whatsapp: "5538992665556",
   instagram: "https://www.instagram.com/juliafonseca.arq",
+  instagramDm: "https://ig.me/m/juliafonseca.arq",
   locale: "pt_BR",
   location: {
     city: "Montes Claros",
