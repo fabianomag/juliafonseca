@@ -76,7 +76,7 @@ export function ProjectsFilter({
       const el = controlsRef.current;
       if (!el) return;
       const top = el.getBoundingClientRect().top + window.scrollY - 100;
-      window.scrollTo({ top, behavior: "smooth" });
+      window.scrollTo({ top, behavior: "auto" });
     }, 180);
     return () => clearTimeout(timer);
   }, [urlCategory, urlStatus]);
@@ -159,9 +159,9 @@ export function ProjectsFilter({
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-x-0 gap-y-5 bg-black py-3 sm:grid-cols-2 sm:gap-y-6 sm:py-4 lg:grid-cols-3 xl:grid-cols-4 xl:gap-y-7 xl:py-5">
+      <div className="grid grid-cols-1 gap-x-0 gap-y-5 py-3 sm:grid-cols-2 sm:gap-y-6 sm:py-4 lg:grid-cols-3 xl:grid-cols-4 xl:gap-y-7 xl:py-5">
         {filtered.map((project, i) => (
-          <div key={project.slug} className="bg-black">
+          <div key={project.slug}>
             <ProjectCard project={project} index={i} lang={lang} />
           </div>
         ))}

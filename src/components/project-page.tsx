@@ -18,56 +18,42 @@ interface ProjectPageProps {
 const copy = {
   pt: {
     scroll: "Desça para explorar",
+    country: "Brasil",
     year: "Ano",
-    location: "Localização",
-    area: "Área",
     type: "Tipologia",
+    collaborators: "Colaboradores",
+    photography: "Fotografia",
   },
   en: {
     scroll: "Scroll to explore",
+    country: "Brazil",
     year: "Year",
-    location: "Location",
-    area: "Area",
-    type: "Type",
+    type: "Project Type",
+    collaborators: "Collaborators",
+    photography: "Photography",
   },
 } as const;
 
-const brazilianStates: Record<string, string> = {
-  AC: "Acre",
-  AL: "Alagoas",
-  AP: "Amapá",
-  AM: "Amazonas",
-  BA: "Bahia",
-  CE: "Ceará",
-  DF: "Distrito Federal",
-  ES: "Espírito Santo",
-  GO: "Goiás",
-  MA: "Maranhão",
-  MT: "Mato Grosso",
-  MS: "Mato Grosso do Sul",
-  MG: "Minas Gerais",
-  PA: "Pará",
-  PB: "Paraíba",
-  PR: "Paraná",
-  PE: "Pernambuco",
-  PI: "Piauí",
-  RJ: "Rio de Janeiro",
-  RN: "Rio Grande do Norte",
-  RS: "Rio Grande do Sul",
-  RO: "Rondônia",
-  RR: "Roraima",
-  SC: "Santa Catarina",
-  SP: "São Paulo",
-  SE: "Sergipe",
-  TO: "Tocantins",
-};
+function getDescriptionParagraphs(
+  project: Project,
+  categoryLabel: string,
+  location: string,
+  lang: Lang,
+) {
+  const paragraphs = project.description
+    .split(/\n+/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
 
-function getLocationParts(location: string) {
-  const [city = location, state = ""] = location.split(",").map((part) => part.trim());
-  return {
-    city,
-    state: brazilianStates[state.toUpperCase()] ?? state,
-  };
+  if (paragraphs.length > 0) {
+    return paragraphs;
+  }
+
+  return [
+    lang === "en"
+      ? `${categoryLabel} project in ${location}.`
+      : `${categoryLabel} em ${location}.`,
+  ];
 }
 
 export function ProjectPage({ project, relatedProjects = [], lang = "pt" }: ProjectPageProps) {
@@ -83,13 +69,16 @@ export function ProjectPage({ project, relatedProjects = [], lang = "pt" }: Proj
         Interiores: "Interiors",
       }[project.category] ?? project.category
       : project.category;
-  const projectMeta = [
+
+  const descriptionParagraphs = getDescriptionParagraphs(project, categoryLabel, project.location, lang);
+  const galleryImages = Array.from(new Set(project.images.filter((image) => image && image !== project.cover)));
+
+  const detailMeta = [
     { label: t.year, value: project.year },
     { label: t.type, value: categoryLabel },
-    { label: t.area, value: project.area },
-    { label: t.location, value: project.location },
+    { label: t.collaborators, value: "Julia Fonseca Arquitetura" },
+    { label: t.photography, value: "Julia Fonseca Arquitetura" },
   ].filter((item) => item.value);
-  const locationParts = getLocationParts(project.location);
 
   useEffect(() => {
     const hero = heroRef.current;
@@ -105,10 +94,10 @@ export function ProjectPage({ project, relatedProjects = [], lang = "pt" }: Proj
       const rect = hero.getBoundingClientRect();
       const scrollable = Math.max(rect.height - window.innerHeight, 1);
       const progress = Math.min(Math.max(-rect.top / scrollable, 0), 1);
-      const shift = -6 + progress * 16;
+      const shift = -4 + progress * 12;
 
-      image.style.transform = `translate3d(0, ${shift}svh, 0) scale(1.025)`;
-      overlay.style.opacity = `${0.28 + progress * 0.34}`;
+      image.style.transform = `translate3d(0, ${shift}svh, 0) scale(1.018)`;
+      overlay.style.opacity = `${0.16 + progress * 0.24}`;
     };
 
     const requestUpdate = () => {
@@ -128,11 +117,12 @@ export function ProjectPage({ project, relatedProjects = [], lang = "pt" }: Proj
   }, []);
 
   return (
-    <div className="project-blueprint-surface min-h-screen bg-black text-white selection:bg-ambient-electric/18">
-      <section ref={heroRef} className="relative min-h-[180svh] overflow-hidden bg-black text-white">
+    <div className="relative min-h-screen bg-[#1a1d21] text-white selection:bg-ambient-electric/18">
+      {/* ══════ HERO ══════ */}
+      <section ref={heroRef} className="relative h-[175svh] overflow-hidden text-white">
         <div
           ref={heroImageRef}
-          className="absolute inset-x-0 top-[-5svh] h-[110%] origin-center will-change-transform"
+          className="absolute inset-x-0 top-[-4svh] h-[108%] origin-center will-change-transform"
         >
           <Image
             src={project.cover}
@@ -145,70 +135,73 @@ export function ProjectPage({ project, relatedProjects = [], lang = "pt" }: Proj
             blurDataURL={getImageBlurDataURL()}
           />
         </div>
-        <div ref={heroOverlayRef} className="absolute inset-0 bg-[#080807] opacity-[0.28]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/6 via-transparent to-black/62" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/28 via-transparent to-black/10" />
+        <div ref={heroOverlayRef} className="absolute inset-0 bg-[#090909] opacity-[0.2]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/3 via-transparent to-black/48" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/6" />
 
-        <div className="relative z-10 mx-auto flex min-h-[180svh] w-full max-w-none flex-col px-5 md:px-8">
-          <div className="flex min-h-screen flex-col justify-end pb-7 pt-28 md:pb-8 lg:pt-32">
-            <Reveal delay={0.08}>
-              <h1 className="max-w-[10ch] font-display text-[clamp(5.6rem,19vw,9rem)] font-[530] uppercase leading-[0.86] tracking-normal text-white md:text-[clamp(7rem,8.8vw,9rem)]">
+        {/* Content wrapper — same side padding as global site */}
+        <div className="site-shell-padding relative z-10 flex h-[175svh] w-full flex-col">
+
+          {/* ── VIEWPORT 1: Title + Footer bar ── */}
+          <div className="flex h-[100svh] flex-col justify-end">
+            {/* Title */}
+            <Reveal delay={0.08} clip={false}>
+              <h1 className="mb-[clamp(2.8rem,2rem+3vw,5.5rem)] max-w-[12ch] font-display text-[clamp(4rem,9vw,12rem)] font-[500] uppercase leading-[0.92] tracking-[-0.04em] text-white [text-box-trim:trim-both]">
                 {project.title}
               </h1>
             </Reveal>
 
-            <Reveal delay={0.14}>
-              <div className="mt-10 grid w-full gap-4 font-display text-[0.76rem] font-[650] uppercase tracking-normal text-white sm:grid-cols-3 md:mt-12 lg:text-[0.9rem]">
-                <p className="justify-self-start">{locationParts.city}</p>
-                <p className="justify-self-start sm:justify-self-center">{locationParts.state}</p>
-                <p className="justify-self-start sm:justify-self-end">({t.scroll})</p>
-              </div>
-            </Reveal>
+            <div className="site-chrome-grid site-chrome-grid--end pb-8 font-display text-[0.92rem] font-[530] uppercase leading-none tracking-[0.02em] text-white md:pb-10 md:text-[0.98rem] lg:pb-12 lg:text-[1.03rem]">
+              <p className="min-w-0 justify-self-start">{project.location}</p>
+              <p className="site-chrome-main justify-self-start">{t.country}</p>
+              <p className="justify-self-end text-right whitespace-nowrap">({t.scroll})</p>
+            </div>
           </div>
 
-          <div className="relative min-h-[80svh] pb-12 pt-0 lg:absolute lg:inset-x-0 lg:top-[100svh] lg:h-[80svh] lg:min-h-0 lg:px-8">
+          {/* ── VIEWPORT 2: description + metadata — shared center column with country ── */}
+          <div className="flex h-[75svh] flex-col">
             <Reveal delay={0.16}>
-              <div className="relative h-full">
-                <div className="max-w-[40rem] text-[1.25rem] font-[500] leading-[1.18] text-white sm:text-[1.45rem] lg:absolute lg:left-[50.2%] lg:top-[34svh] lg:text-[1.58rem]">
-                  <div className="space-y-6 lg:space-y-7">
-                    {project.description && <p>{project.description}</p>}
-                    <p>
-                      A narrativa do projeto se constrói por proporção, materialidade e sequência
-                      de espaços, valorizando o que a arquitetura tem de mais silencioso e marcante.
-                    </p>
-                    <p>
-                      Cada imagem reforça a passagem entre presença, atmosfera e detalhe,
-                      preservando a leitura do conjunto antes do ornamento.
-                    </p>
-                  </div>
-                </div>
-
-                <dl className="mt-12 grid max-w-[44rem] gap-x-20 gap-y-9 text-white sm:grid-cols-2 lg:absolute lg:bottom-[5.5svh] lg:left-[50.2%] lg:mt-0 lg:w-[42rem]">
-                  {projectMeta.map((item) => (
-                    <div key={item.label}>
-                      <dt className="font-display text-[0.74rem] font-[530] uppercase tracking-normal text-white/76 lg:text-[0.86rem]">
-                        {item.label}
-                      </dt>
-                      <dd className="mt-3 font-display text-[0.82rem] font-[650] uppercase leading-tight text-white lg:text-[0.96rem]">
-                        {item.value}
-                      </dd>
+              <div className="site-chrome-grid site-chrome-grid--end h-full content-start pt-[5svh] max-lg:grid-cols-1 lg:pt-[7svh]">
+                <div aria-hidden className="hidden lg:block" />
+                <div className="site-chrome-main">
+                  <div className="max-w-[32ch] text-[1.32rem] font-[400] leading-[1.34] tracking-[-0.01em] text-white sm:text-[1.38rem] lg:text-[1.48rem] lg:leading-[1.32] xl:max-w-[34ch]">
+                    <div className="space-y-6 lg:space-y-7">
+                      {descriptionParagraphs.map((paragraph) => (
+                        <p key={paragraph}>{paragraph}</p>
+                      ))}
                     </div>
-                  ))}
-                </dl>
+                  </div>
+
+                  <div className="my-11 h-px w-full bg-white/28 lg:my-14" />
+
+                  <dl className="grid max-w-[34rem] gap-x-16 gap-y-9 sm:grid-cols-2 lg:gap-y-11">
+                    {detailMeta.map((item) => (
+                      <div key={item.label} className="flex flex-col gap-2">
+                        <dt className="font-display text-[0.98rem] font-[400] capitalize tracking-[-0.005em] text-white/62 lg:text-[1.05rem]">
+                          {item.label}
+                        </dt>
+                        <dd className="font-display text-[1.02rem] font-[700] uppercase leading-[1.22] tracking-[0.02em] text-white lg:text-[1.08rem]">
+                          {item.value}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+                <div aria-hidden className="hidden lg:block" />
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {project.images.length > 1 && (
-        <section className="bg-transparent pb-20">
-          <Reveal>
-            <ParallaxGallery images={project.images.slice(1)} />
-          </Reveal>
+      {/* ══════ GALLERY ══════ */}
+      {galleryImages.length > 0 && (
+        <section>
+          <ParallaxGallery images={galleryImages} />
         </section>
       )}
 
+      {/* ══════ RELATED PROJECTS ══════ */}
       {relatedProjects.length > 0 && (
         <ProjectStripCarousel projects={relatedProjects} lang={lang} />
       )}

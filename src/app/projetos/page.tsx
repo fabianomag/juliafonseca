@@ -40,7 +40,7 @@ export default function ProjetosPage({
         projects={projects}
       />
 
-      <section className="pb-32 bg-black pt-44 md:pb-40 md:pt-48">
+      <section className="bg-[#1a1d21] pb-32 pt-44 md:pb-40 md:pt-48">
         <ProjectsFilter
           projects={projects}
           lang={lang}

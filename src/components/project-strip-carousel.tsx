@@ -30,14 +30,14 @@ export function ProjectStripCarousel({
 
     const card = viewport.querySelector<HTMLElement>("[data-project-strip-card]");
     const distance = card ? card.offsetWidth + 16 : viewport.clientWidth * 0.72;
-    viewport.scrollBy({ left: distance * direction, behavior: "smooth" });
+    viewport.scrollBy({ left: distance * direction, behavior: "auto" });
   }, []);
 
   if (projects.length === 0) return null;
 
   return (
     <section
-      className="project-blueprint-surface project-blueprint-grid border-t project-blueprint-rule py-10 md:py-12"
+      className="border-t project-blueprint-rule pb-10 pt-0 md:pb-12"
       onMouseLeave={() => {
         setHoveredIndex(null);
       }}
@@ -48,15 +48,14 @@ export function ProjectStripCarousel({
           type="button"
           aria-label={lang === "pt" ? "Anterior" : "Previous"}
           onClick={() => scrollByCard(-1)}
-          className="absolute left-0 top-0 z-20 flex h-full w-14 items-center justify-center bg-gradient-to-r from-black via-black/80 to-transparent text-white/40 transition-colors hover:text-ambient-electric"
+          className="absolute left-0 top-0 z-20 flex h-full w-14 items-center justify-center bg-gradient-to-r from-black/42 via-black/16 to-transparent text-white/34 transition-colors hover:text-ambient-electric"
         >
           <ChevronLeft size={26} strokeWidth={1.7} />
         </button>
 
         <div
           ref={viewportRef}
-          data-lenis-prevent
-          className="overflow-x-auto overscroll-x-contain scroll-smooth px-3 md:px-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="overflow-x-auto px-0 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           <div
             className="flex w-max gap-3 pb-4 md:gap-4"
@@ -124,7 +123,7 @@ export function ProjectStripCarousel({
           type="button"
           aria-label={lang === "pt" ? "Próximo" : "Next"}
           onClick={() => scrollByCard(1)}
-          className="absolute right-0 top-0 z-20 flex h-full w-14 items-center justify-center bg-gradient-to-l from-black via-black/80 to-transparent text-white/40 transition-colors hover:text-ambient-electric"
+          className="absolute right-0 top-0 z-20 flex h-full w-14 items-center justify-center bg-gradient-to-l from-black/42 via-black/16 to-transparent text-white/34 transition-colors hover:text-ambient-electric"
         >
           <ChevronRight size={26} strokeWidth={1.7} />
         </button>

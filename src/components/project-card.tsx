@@ -21,6 +21,7 @@ export function ProjectCard({ project, index = 0, lang = "pt" }: ProjectCardProp
           interiores: "Interiors",
         }[project.section]
       : project.category;
+  const viewLabel = lang === "pt" ? "Ver projeto" : "View project";
 
   return (
     <Link href={withLang(`/${project.section}/${project.slug}`, lang)} className="group block">
@@ -36,18 +37,22 @@ export function ProjectCard({ project, index = 0, lang = "pt" }: ProjectCardProp
           blurDataURL={getImageBlurDataURL()}
         />
 
-        {/* Gradiente + título sempre visível */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-white/60">
-            {sectionLabel}{isNew && <span className="ml-3 text-ambient-cyan">{lang === "pt" ? "Novo" : "New"}</span>}
-          </p>
-          <h3 className="mt-1 font-display text-[1.6rem] uppercase leading-[0.88] tracking-[-0.02em] text-white transition-colors duration-500 group-hover:text-ambient-cyan sm:text-[1.82rem]">
-            {project.title}
-          </h3>
-          <p className="mt-1.5 text-[0.72rem] uppercase tracking-[0.18em] text-white/45">
-            {project.year}
-          </p>
+        <div className="absolute inset-0 bg-gradient-to-t from-ambient-dark/70 via-ambient-dark/18 to-transparent opacity-70 transition-opacity duration-500 ease-out group-hover:opacity-100" />
+
+        <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-7">
+          <div className="relative z-10">
+            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-ambient-micro/80 opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+              {sectionLabel}
+              {isNew && <span className="ml-3 text-ambient-cyan">{lang === "pt" ? "Novo" : "New"}</span>}
+            </p>
+            <h3 className="mt-1.5 font-display text-[1.45rem] uppercase leading-[1.1] tracking-[-0.03em] text-ambient-micro md:text-[1.55rem]">
+              {project.title}
+            </h3>
+            <span className="mt-4 inline-flex translate-y-2 items-center gap-3 text-[0.72rem] uppercase tracking-[0.18em] text-ambient-micro opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+              <span className="block h-[1px] w-8 bg-white/60" />
+              {viewLabel}
+            </span>
+          </div>
         </div>
       </div>
     </Link>
