@@ -1,6 +1,6 @@
 import { getAllProjects, getFeaturedProjects } from "@/lib/projects";
 import { resolveLang } from "@/lib/i18n";
-import { HomePanel } from "@/components/home-panel";
+import { HomeMaskTransition } from "@/components/home-mask-transition";
 
 export default function Home({
   searchParams,
@@ -14,5 +14,5 @@ export default function Home({
   ].slice(0, 16);
   const lang = resolveLang(searchParams?.lang);
 
-  return <HomePanel projects={projects} lang={lang} />;
+  return <HomeMaskTransition projects={projects} lang={lang} />;
 }

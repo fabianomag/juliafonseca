@@ -10,11 +10,9 @@ import { withLang, type Lang } from "@/lib/i18n";
 import { typographyTokenMap } from "@/lib/typography-system";
 import { ContactShowcase } from "@/components/contact-showcase";
 import { setPendingRouteShellTransition } from "@/lib/route-shell-transition";
-import { getStudioContent } from "@/lib/studio-content";
 
-type Section = "projetos" | "publicacao" | "galeria" | "escritorio" | "contato";
+type Section = "projetos" | "publicacao" | "galeria" | "contato";
 type Copy = typeof copy[keyof typeof copy];
-const displaySplitAccentVariants = typographyTokenMap.displaySplitAccent.variants ?? {};
 const editorialAccentTitleVariants = typographyTokenMap.editorialAccentTitle.variants ?? {};
 const editorialAccentSubtitleVariants = typographyTokenMap.editorialAccentSubtitle.variants ?? {};
 const pageLeadVariants = typographyTokenMap.pageLead.variants ?? {};
@@ -28,14 +26,6 @@ const latestPublication = {
   href: "/publicacoes",
 };
 
-const studioHomePhotos = [
-  "/images/julia escritorio.webp",
-  "/images/julia-office.webp",
-  "/images/projetos/escritorio-comercial/01.webp",
-  "/images/projetos/escritorio-comercial/02.webp",
-  "/images/projetos/escritorio-comercial/04.webp",
-] as const;
-
 const copy = {
   pt: {
     intro: "Julia Fonseca Arquitetura desenvolve projetos residenciais, comerciais e de interiores com leitura contemporânea, presença visual forte e um senso de permanência que aproxima arquitetura, matéria e atmosfera.",
@@ -43,7 +33,6 @@ const copy = {
       { id: "projetos" as Section, label: "Projetos" },
       { id: "publicacao" as Section, label: "Publicação" },
       { id: "galeria" as Section, label: "Galeria Tréfle" },
-      { id: "escritorio" as Section, label: "Escritório" },
       { id: "contato" as Section, label: "Contato" },
     ],
     viewProject: "Ver projeto",
@@ -61,7 +50,6 @@ const copy = {
       { id: "projetos" as Section, label: "Projects" },
       { id: "publicacao" as Section, label: "Publication" },
       { id: "galeria" as Section, label: "Galeria Tréfle" },
-      { id: "escritorio" as Section, label: "Studio" },
       { id: "contato" as Section, label: "Contact" },
     ],
     viewProject: "View project",
@@ -237,67 +225,6 @@ function PanelGaleria({
   );
 }
 
-// ── Painel: Escritório ────────────────────────────────────────────
-function PanelEscritorio({
-  lang,
-  onRouteClick,
-}: {
-  lang: Lang;
-  onRouteClick: (event: ReactMouseEvent<HTMLAnchorElement>, href: string) => void;
-}) {
-  const studio = getStudioContent(lang);
-  const studioHref = withLang("/escritorio", lang);
-  const photoLoop = [...studioHomePhotos, ...studioHomePhotos];
-
-  return (
-    <div className="grid h-full overflow-hidden bg-white text-black lg:grid-cols-[0.55fr_0.45fr]">
-      <div className="relative min-h-[48vh] overflow-hidden bg-black lg:min-h-0">
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.35),transparent_32%,rgba(0,0,0,0.2))]" />
-        <motion.div
-          className="grid grid-cols-2 gap-3 px-4 py-4 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3"
-          animate={{ y: ["0%", "-50%"] }}
-          transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
-        >
-          {photoLoop.map((src, index) => (
-            <div
-              key={`${src}-${index}`}
-              className="relative aspect-[0.72/1] overflow-hidden bg-white/5 even:translate-y-10"
-            >
-              <Image
-                src={src}
-                alt=""
-                fill
-                sizes="(max-width: 1024px) 33vw, 18vw"
-                className="object-cover grayscale"
-              />
-            </div>
-          ))}
-        </motion.div>
-      </div>
-
-      <div className="flex flex-col justify-center px-8 py-12 lg:px-14 xl:px-16">
-        <p className={pageEyebrowClass}>{studio.homeTitle}</p>
-        <h2 className="font-display text-[4.2rem] uppercase leading-[0.82] tracking-normal text-black sm:text-[5rem] xl:text-[6rem]">
-          Equipe
-          <span className={displaySplitAccentVariants.accentWord ?? "block italic text-ambient-electric"}>autoral.</span>
-        </h2>
-        <p className={pageLeadVariants.homeStudioPanel ?? "mt-7 max-w-[48rem] border-l border-ambient-stone pl-6 text-[1rem] leading-relaxed text-ambient-canyon/82 sm:text-[1.12rem] xl:text-[1.2rem]"}>
-          {studio.homeIntro}
-        </p>
-
-        <Link
-          href={studioHref}
-          onClick={(event) => onRouteClick(event, studioHref)}
-          className="group mt-12 inline-flex h-[8.8rem] w-[8.8rem] flex-col justify-between border border-black/35 bg-black p-5 font-display text-[1.05rem] uppercase leading-[0.92] tracking-[0.07em] text-white transition-colors hover:border-ambient-cyan hover:text-ambient-cyan lg:h-[10rem] lg:w-[10rem] lg:text-[1.22rem]"
-        >
-          <span>{studio.homeCta}</span>
-          <span className="h-px w-14 bg-current transition-transform group-hover:translate-x-1" />
-        </Link>
-      </div>
-    </div>
-  );
-}
-
 // ── Painel: Contato ───────────────────────────────────────────────
 function PanelContato({ lang }: { lang: Lang }) {
   return <ContactShowcase lang={lang} variant="panel" animated={false} />;
@@ -305,7 +232,7 @@ function PanelContato({ lang }: { lang: Lang }) {
 
 // ── HomePanel principal ───────────────────────────────────────────
 export function HomePanel({ projects, lang }: { projects: Project[]; lang: Lang }) {
-  const active: Section = "projetos";
+  const active = "projetos" as Section;
   const t = copy[lang];
 
   const handleRouteClick = useCallback((event: ReactMouseEvent<HTMLAnchorElement>, href: string) => {
@@ -329,7 +256,6 @@ export function HomePanel({ projects, lang }: { projects: Project[]; lang: Lang 
       case "projetos":    return <PanelProjetos projects={projects} lang={lang} t={t} onRouteClick={handleRouteClick} />;
       case "publicacao":  return <PanelPublicacao lang={lang} t={t} onRouteClick={handleRouteClick} />;
       case "galeria":     return <PanelGaleria lang={lang} t={t} onRouteClick={handleRouteClick} />;
-      case "escritorio":  return <PanelEscritorio lang={lang} onRouteClick={handleRouteClick} />;
       case "contato":     return <PanelContato lang={lang} />;
     }
   };
