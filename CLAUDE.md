@@ -82,7 +82,7 @@ Ignore direções antigas que falavam em:
 
 ## Fluxo de imagens
 
-Julia manda fotos → Frank joga em `_originals/[slug]/` → roda o script → imagens WebP caem em `public/images/projetos/[slug]/` → atualiza `projects.json`.
+Julia manda fotos → Fabiano coloca em `_originals/[slug]/` → roda o script → imagens WebP caem em `public/images/projetos/[slug]/` → atualiza `projects.json`.
 
 ```bash
 npm run optimize _originals/[slug] [slug]
