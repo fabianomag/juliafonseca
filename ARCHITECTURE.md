@@ -125,7 +125,7 @@ npm run optimize _originals/[slug] [slug]
 Fluxo esperado:
 
 1. Julia manda fotos
-2. Frank coloca em `_originals/[slug]/`
+2. Fabiano coloca em `_originals/[slug]/`
 3. o script gera imagens otimizadas em `public/images/projetos/[slug]/`
 4. atualizar `content/projects/projects.json`
 
