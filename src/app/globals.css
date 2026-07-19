@@ -171,6 +171,40 @@
     background: linear-gradient(90deg, #0b1e25 0%, #1d4f5f 50%, #73bdd5 100%);
   }
 
+  .footer-reveal {
+    --footer-reveal-progress: 0;
+    --footer-reveal-hidden: 0px;
+    --footer-reveal-height: auto;
+    position: relative;
+    min-height: var(--footer-reveal-height);
+    background: #1a1d21;
+  }
+
+  .footer-reveal__sticky {
+    position: sticky;
+    bottom: 0;
+    height: var(--footer-reveal-height);
+    overflow: clip;
+  }
+
+  .footer-reveal__panel {
+    transform: translate3d(0, calc((var(--footer-reveal-progress) - 1) * var(--footer-reveal-hidden)), 0);
+    will-change: transform;
+  }
+
+  .footer-reveal__top {
+    position: relative;
+  }
+
+  .footer-reveal__top::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(26, 29, 33, 0.96) 0%, rgba(26, 29, 33, 0.52) 48%, rgba(26, 29, 33, 0) 100%);
+    opacity: calc(1 - var(--footer-reveal-progress));
+    pointer-events: none;
+  }
+
   .brand-wordmark-gradient-mask {
     aspect-ratio: 878 / 280;
     width: auto;
