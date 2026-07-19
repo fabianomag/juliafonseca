@@ -58,7 +58,7 @@ below.
 
 ## Local development
 
-Requirements: Node.js 20.x and npm 10.8.2.
+Requirements: Node.js 24.x and npm 10.8.2.
 
 ```bash
 npm ci
