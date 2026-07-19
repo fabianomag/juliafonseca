@@ -11,7 +11,11 @@ Public access is provided only for portfolio review, technical evaluation and di
 Third-party components remain governed by their respective licenses. Their notices are available at:
 https://github.com/fabianomag/studio-flamboyant/blob/main/THIRD_PARTY_NOTICES.md
 
-Commercial licensing may be available only through a separate written agreement.
+Standard commercial licensing is available only through a separate signed agreement:
+- Brazil: R$ 1,000 one-time fee
+- International: USD 1,000 one-time fee
+
+Each standard license is non-exclusive, perpetual for the lawfully obtained version, and limited to one final product. Access to released updates is included under the signed terms. Exclusive licensing is negotiated separately.
 
 Contact: https://www.linkedin.com/in/fabianomag/
 Full repository terms: https://github.com/fabianomag/studio-flamboyant/blob/main/LICENSE.md

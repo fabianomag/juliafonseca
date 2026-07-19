@@ -38,9 +38,16 @@ repositories. No additional permission is granted by this file.
 
 ## 3. Commercial licensing
 
-Commercial licensing may be available through a separate written agreement.
-Any commercial license must define its permitted use, exclusivity, restrictions,
-delivery, support and portfolio reservation expressly.
+Standard commercial licensing is available only through a separate written
+agreement: R$ 1,000 for a Brazilian license or USD 1,000 for an international
+license, each covering one final product under the signed terms. The public
+templates are [available in Portuguese](./COMMERCIAL-LICENSE-TEMPLATE.pt-BR.md)
+and [English](./COMMERCIAL-LICENSE-TEMPLATE.en.md); they are not offers and grant
+no rights until privately completed, signed and paid in full.
+
+An exclusive license is a separate negotiation and is not included in either
+standard price. Its [Portuguese draft](./EXCLUSIVE-COMMERCIAL-LICENSE-TEMPLATE.pt-BR.md)
+exists only as a negotiation starting point.
 
 Enquiries: [@fabianomag on LinkedIn](https://www.linkedin.com/in/fabianomag/)
 

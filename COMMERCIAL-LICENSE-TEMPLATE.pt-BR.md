@@ -1,221 +1,238 @@
-# Modelo — Licença Comercial Exclusiva do Studio Flamboyant
+# Modelo — Licença Comercial Padrão do Studio Flamboyant (Brasil)
 
-> **Minuta para negociação e revisão jurídica.** Este documento não é uma
-> oferta, não concede direitos por si só e deve ser adaptado e revisado por um
-> profissional jurídico antes da assinatura.
+> **Minuta pública para negociação e revisão jurídica.** Este documento não é
+> uma oferta, não concede direitos por si só e deve ser preenchido em uma cópia
+> privada, assinado pelas Partes e revisado por profissional jurídico antes do
+> primeiro uso comercial. Não inclua CPF, endereço ou documento pessoal na
+> versão pública deste arquivo.
 
 ## 1. Partes
 
-**Licenciante:** Fabiano Magalhães, [qualificação e documento], com endereço em
-[endereço], doravante denominado **Licenciante**.
+**Licenciante:** Fabiano Frank Novais Magalhães, [nacionalidade], [estado
+civil], [profissão], inscrito no CPF sob o nº [PREENCHER SOMENTE NA CÓPIA
+PRIVADA], com endereço em [PREENCHER SOMENTE NA CÓPIA PRIVADA] e e-mail
+[e-mail], doravante denominado **Licenciante**.
 
-**Licenciado:** [nome ou razão social], [qualificação, CPF ou CNPJ], com endereço
-em [endereço], doravante denominado **Licenciado**.
+**Licenciado:** [nome ou razão social], [qualificação], inscrito no CPF ou CNPJ
+sob o nº [documento], com endereço em [endereço] e e-mail [e-mail], doravante
+denominado **Licenciado**.
 
 Licenciante e Licenciado são denominados em conjunto **Partes**.
+
+O Licenciado declara adquirir a licença no âmbito de sua atividade profissional
+ou empresarial. As normas legais obrigatórias prevalecerão quando a relação for
+juridicamente caracterizada como relação de consumo.
 
 ## 2. Definições
 
 ### 2.1 Software Licenciado
 
-O conjunto original de código-fonte, componentes, layouts, documentação,
-identidade visual e interações do Studio Flamboyant entregue no commit, tag ou
-arquivo identificado como **[identificador da versão]**, incluindo apenas os
-materiais de titularidade do Licenciante.
+O código-fonte, componentes, layouts, documentação, identidade visual e
+interações originais do template Studio Flamboyant entregues na versão
+**[commit, tag ou arquivo]**, limitados aos materiais de titularidade do
+Licenciante.
 
-### 2.2 Escopo Exclusivo
+### 2.2 Projeto Final
 
-A exclusividade prevista neste contrato fica limitada a:
+Um único website ou produto digital publicado sob o domínio principal
+**[domínio]**, para **[nome do projeto ou cliente final]**. Ambientes de
+desenvolvimento, homologação e contingência do mesmo Projeto Final não contam
+como projetos adicionais.
 
-- projeto ou produto: **[nome do projeto do Licenciado]**;
-- domínio ou aplicação: **[domínio ou identificador]**;
-- setor de atuação: **[setor ou "sem limitação setorial"]**;
-- território: **[território ou "mundial"]**;
-- versão licenciada: **[identificador da versão]**.
+### 2.3 Atualizações Elegíveis
 
-### 2.3 Materiais de Terceiros
+Versões, correções e melhorias gerais que o Licenciante, a seu critério, vier a
+publicar oficialmente para esta edição comercial do Studio Flamboyant. Não
+incluem customização, implantação, suporte individual, novos produtos ou
+serviços vendidos separadamente.
 
-Bibliotecas, fontes, imagens, dados e trechos regidos por MIT, OFL, BSD, ODbL ou
-outras licenças independentes, conforme os avisos de terceiros entregues com o
+### 2.4 Materiais de Terceiros
+
+Bibliotecas, fontes, imagens, dados e outros materiais regidos por MIT, OFL,
+BSD, ODbL ou licenças independentes, conforme os avisos entregues com o
 Software Licenciado.
-
-### 2.4 Materiais Reservados
-
-Conhecimentos gerais, métodos, padrões, ideias, técnicas, componentes genéricos,
-ferramentas internas e materiais preexistentes do Licenciante que não tenham
-sido criados exclusivamente para o Licenciado.
 
 ## 3. Concessão da licença
 
-Mediante o pagamento integral previsto neste contrato, o Licenciante concede ao
-Licenciado uma licença comercial:
+Após o pagamento integral, o Licenciante concede ao Licenciado uma licença:
 
-- exclusiva dentro do Escopo Exclusivo;
-- por prazo **[perpétuo ou determinado]**;
-- não transferível;
-- não sublicenciável;
-- válida em **[território]**;
-- destinada ao uso, modificação e publicação do Software Licenciado no projeto
-  identificado neste contrato.
+- comercial, não exclusiva, não transferível e não sublicenciável;
+- perpétua para a versão entregue e para as Atualizações Elegíveis obtidas
+  regularmente;
+- válida mundialmente, exclusivamente para operar um Projeto Final;
+- destinada a usar, modificar, hospedar e publicar o Software Licenciado como
+  parte inseparável do Projeto Final.
 
-A licença não transfere a titularidade ou os direitos autorais do Software
-Licenciado ao Licenciado.
+A licença não transfere titularidade, autoria ou direitos autorais. Outro
+Projeto Final, outro domínio principal ou a exploração do código como produto
+autônomo exige nova licença escrita.
 
-## 4. Efeito da exclusividade
+## 4. Atualizações e acesso contínuo
 
-A partir da vigência e do pagamento integral, o Licenciante não concederá novas
-licenças comerciais do Software Licenciado a terceiros dentro do Escopo
-Exclusivo.
+O Licenciado terá acesso, sem nova taxa de licença, às Atualizações Elegíveis
+que o Licenciante efetivamente disponibilizar enquanto mantiver esta edição do
+produto e seu canal oficial de distribuição.
 
-A exclusividade não alcança:
+O acesso às atualizações não obriga o Licenciante a:
 
-- a publicação original do Studio Flamboyant como case study do Licenciante;
-- os Materiais Reservados;
-- trabalhos criados independentemente sem reprodução substancial do Software
-  Licenciado;
-- Materiais de Terceiros disponíveis sob suas licenças próprias;
-- serviços de manutenção, consultoria ou desenvolvimento prestados ao próprio
-  Licenciado.
+- criar ou publicar novas versões;
+- manter o produto ou o canal de distribuição por prazo mínimo;
+- preservar compatibilidade com tecnologias, navegadores ou dependências
+  futuras;
+- prestar suporte, implantação ou customização sem contratação separada.
 
-## 5. Reserva irrevogável de portfólio
+A descontinuação do produto ou do canal de distribuição não extingue a licença
+perpétua sobre a última versão regularmente obtida pelo Licenciado. O
+Licenciado é responsável por manter cópia própria das versões recebidas.
 
-O Licenciado reconhece e autoriza, de forma irrevogável e sem remuneração
-adicional, que o Licenciante:
+## 5. Titularidade e portfólio
 
-- mantenha publicada a versão original do Studio Flamboyant como case study;
-- mantenha o respectivo repositório ou uma versão de demonstração acessível para
-  avaliação profissional;
-- exiba imagens, vídeos, descrições, decisões técnicas e métricas da versão
-  original em seu portfólio, currículo, apresentações e redes profissionais;
-- identifique-se como autor do conceito, design e implementação da versão
-  original.
+O Licenciante mantém a titularidade do Software Licenciado, de sua versão
+original, dos componentes genéricos e das melhorias gerais.
 
-Essa reserva não autoriza o Licenciante a divulgar marca, conteúdo, dados,
-segredos comerciais ou modificações confidenciais do Licenciado.
+O Licenciado mantém a titularidade de sua marca, dados, conteúdo e materiais
+originais que fornecer. Salvo acordo específico, modificações do Software
+Licenciado continuam sujeitas a esta licença e não podem ser revendidas ou
+distribuídas isoladamente.
 
-## 6. Titularidade e modificações
+O Licenciante poderá manter e exibir a versão original do Studio Flamboyant
+como case study, inclusive código público, imagens, vídeos, decisões técnicas e
+métricas próprias. Essa reserva não autoriza a divulgação de dados,
+customizações confidenciais, marca ou conteúdo do Licenciado.
 
-O Licenciante mantém a titularidade do Software Licenciado, dos Materiais
-Reservados e das melhorias genéricas que desenvolver independentemente.
-
-O Licenciado mantém a titularidade de sua marca, seus dados, seu conteúdo e dos
-materiais originais que fornecer ou criar sem reproduzir materiais do
-Licenciante.
-
-A titularidade de customizações específicas produzidas durante a implantação
-será definida no respectivo escopo de trabalho. Na ausência de definição
-expressa, tais customizações integrarão o Software Licenciado e permanecerão
-sujeitas a esta licença, sem direito de revenda ou sublicenciamento isolado.
-
-## 7. Restrições
+## 6. Restrições
 
 O Licenciado não poderá:
 
-- revender, sublicenciar, alugar ou distribuir o Software Licenciado;
-- oferecer o Software Licenciado como template, boilerplate, tema, biblioteca ou
-  produto concorrente;
+- revender, sublicenciar, alugar ou redistribuir o Software Licenciado;
+- oferecer o Software Licenciado, no todo ou em parte, como template,
+  boilerplate, tema, biblioteca, curso com código distribuído ou produto
+  concorrente;
+- usar a licença em mais de um Projeto Final;
 - disponibilizar o código-fonte a terceiros, salvo empregados e prestadores que
-  precisem acessá-lo e estejam vinculados a obrigações equivalentes;
-- remover avisos de terceiros ou violar as licenças aplicáveis;
+  precisem acessá-lo e estejam vinculados a deveres equivalentes;
+- remover avisos obrigatórios de terceiros;
 - atribuir a si ou a terceiros a autoria da versão original;
-- usar a identidade Studio Flamboyant ou @fabianomag sem autorização específica;
-- utilizar o Software Licenciado fora do Escopo Exclusivo.
+- usar a marca Studio Flamboyant, o wordmark original ou @fabianomag como marca
+  do Projeto Final sem autorização específica.
 
-## 8. Materiais de terceiros
+## 7. Materiais de terceiros
 
-Os Materiais de Terceiros não são objeto de exclusividade nem de reivindicação
-de titularidade pelo Licenciante. Eles permanecem sujeitos às licenças e avisos
-que os acompanham.
+Os Materiais de Terceiros permanecem sujeitos às respectivas licenças. Eles não
+são vendidos, relicenciados como proprietários nem garantidos pelo Licenciante
+além do permitido por seus titulares.
 
-O Licenciado deverá preservar os avisos obrigatórios e verificar se sua forma de
-distribuição ou modificação atende às respectivas licenças.
+O Licenciado deverá preservar os avisos obrigatórios e verificar a adequação de
+seu uso, especialmente antes de substituir conteúdo, imagens, fontes ou
+dependências.
 
-## 9. Entrega e aceite
+## 8. Entrega, aceite e validade técnica
 
-O Licenciante entregará:
+O Licenciante entregará a versão **[identificador]**, a documentação existente e
+os avisos de terceiros por meio de **[repositório, release ou arquivo]**.
 
-- o código-fonte da versão **[identificador]**;
-- a documentação existente;
-- os avisos e licenças de terceiros;
-- **[outros itens expressamente contratados]**.
+O Licenciado terá 7 (sete) dias úteis para apontar divergências objetivas em
+relação à versão contratada. Ausente manifestação nesse prazo, a entrega será
+considerada aceita, sem prejuízo de direitos legais obrigatórios.
 
-O Licenciado terá **[número] dias úteis** para apontar, por escrito, divergências
-objetivas em relação aos itens contratados. Ausente manifestação nesse prazo, a
-entrega será considerada aceita.
+Para os fins da legislação brasileira de software, a validade técnica da versão
+entregue será de 90 (noventa) dias contados da entrega, em relação ao ambiente e
+às especificações documentados nessa data. Durante esse prazo, o canal
+**[e-mail]** receberá relatos reproduzíveis de defeitos que impeçam o
+funcionamento conforme a documentação. Essa obrigação não inclui alterações de
+escopo, conteúdo, implantação, integrações, dependências modificadas pelo
+Licenciado ou mudanças posteriores de plataforma.
+
+## 9. Preço e pagamento
+
+Pela licença, o Licenciado pagará uma única vez o valor de **R$ 1.000,00 (mil
+reais)**, por **[meio de pagamento]**, até **[data]**.
+
+A licença somente entra em vigor após a confirmação do pagamento integral.
+Tributos, documento fiscal, retenções e tarifas serão tratados conforme a
+legislação aplicável. Reembolsos observarão as normas obrigatórias e, fora
+delas, dependerão de acordo escrito entre as Partes.
 
 ## 10. Serviços e suporte
 
-Esta licença não inclui implantação, adaptação, suporte, manutenção, atualização,
-hospedagem ou garantia de compatibilidade futura, salvo quando tais serviços
-forem contratados separadamente por escrito.
+O preço cobre somente a licença e o acesso às Atualizações Elegíveis. Não inclui
+implantação, adaptação, migração, treinamento, hospedagem, suporte contínuo ou
+garantia de compatibilidade futura. Esses serviços poderão ser contratados em
+instrumento separado.
 
-## 11. Preço e pagamento
-
-Pela licença, o Licenciado pagará ao Licenciante o valor de **R$ [valor]**, nas
-seguintes condições: **[condições]**.
-
-Tributos, retenções, despesas bancárias e obrigações fiscais serão tratados
-conforme a legislação aplicável e o documento fiscal correspondente.
-
-## 12. Garantias e responsabilidade
+## 11. Garantias e responsabilidade
 
 O Licenciante declara, no limite de seu conhecimento, possuir legitimidade para
-licenciar os materiais originais abrangidos por este contrato.
+licenciar seus materiais originais. O Software Licenciado é fornecido no estado
+em que se encontra, ressalvadas a validade técnica expressa e as garantias
+obrigatórias.
 
-Salvo disposição obrigatória de lei ou garantia expressamente contratada, o
-Software Licenciado é fornecido no estado em que se encontra. As Partes deverão
-definir por escrito eventuais limites de responsabilidade, correções, prazos e
-níveis de serviço.
+Na máxima extensão permitida por lei, nenhuma Parte responderá por danos
+indiretos, lucros cessantes ou perda de dados, e a responsabilidade total do
+Licenciante ficará limitada ao valor efetivamente pago pela licença. Essa
+limitação não se aplica a dolo, violação deliberada de propriedade intelectual
+ou hipótese em que a lei proíba a limitação.
 
-## 13. Confidencialidade
+## 12. Confidencialidade e dados pessoais
 
 Informações marcadas como confidenciais ou que razoavelmente devam ser tratadas
-como tal não poderão ser divulgadas sem autorização, exceto por obrigação legal.
+como tal não poderão ser divulgadas sem autorização, exceto por obrigação
+legal. Código e materiais já publicados no case original não são
+confidenciais.
 
-O código e os materiais já publicados no case original não serão considerados
-confidenciais. Customizações, dados e informações internas do Licenciado poderão
-ser protegidos em instrumento próprio.
+Cada Parte tratará dados pessoais recebidos para contratação, pagamento e
+execução apenas na medida necessária e conforme a legislação aplicável.
 
-## 14. Vigência e término
+## 13. Vigência e término
 
-Este contrato entra em vigor na data de sua assinatura. O inadimplemento
-material não sanado em **[número] dias** após notificação escrita poderá resultar
-na rescisão da licença, sem prejuízo das obrigações vencidas e medidas cabíveis.
+O contrato entra em vigor na assinatura e a licença, após o pagamento integral.
+Violação material não sanada em 15 (quinze) dias após notificação escrita
+poderá resultar na resolução do contrato e extinção dos direitos de uso.
 
-A reserva de portfólio, os direitos de titularidade, as restrições de
-redistribuição, os avisos de terceiros e as obrigações de confidencialidade
-continuarão válidos após o término, conforme sua natureza.
+Titularidade, restrições de redistribuição, materiais de terceiros,
+confidencialidade, pagamentos vencidos e obrigações que por sua natureza devam
+subsistir continuarão válidos após o término.
 
-## 15. Disposições gerais
+## 14. Disposições gerais
 
-Alterações deste contrato somente serão válidas por escrito e assinadas pelas
-Partes. A eventual tolerância não implicará renúncia de direito. A invalidade de
-uma disposição não afetará as demais.
+Este contrato constitui o entendimento integral entre as Partes. Alterações,
+cessões ou renúncias somente serão válidas por escrito. A invalidade de uma
+disposição não afetará as demais. Comunicações formais serão enviadas aos
+e-mails indicados na qualificação das Partes.
 
-Este contrato constitui o entendimento integral entre as Partes sobre seu
-objeto e substitui comunicações anteriores relativas à licença.
+## 15. Lei aplicável e foro
 
-## 16. Lei aplicável e foro
+Aplica-se a legislação brasileira. Fica eleito o foro da comarca de Montes
+Claros, Minas Gerais, salvo competência legal obrigatória diversa.
 
-Aplica-se a legislação brasileira. Fica eleito o foro da comarca de **[cidade e
-estado]**, com renúncia a qualquer outro, salvo regra legal obrigatória.
+## 16. Assinaturas
 
-## 17. Assinaturas
+As Partes admitem assinatura física ou eletrônica. Quando a integridade não for
+atestada por provedor de assinatura eletrônica, recomenda-se a assinatura de
+duas testemunhas.
 
 **Local e data:** [local], [data].
 
-**LICENCIANTE**  
-Fabiano Magalhães  
+**LICENCIANTE**
+
+Fabiano Frank Novais Magalhães
+
 Assinatura: ____________________________________
 
-**LICENCIADO**  
-[nome ou razão social]  
+**LICENCIADO**
+
+[nome ou razão social]
+
 Assinatura: ____________________________________
 
-**TESTEMUNHA 1**  
-Nome: _________________________________________  
+**TESTEMUNHA 1, quando aplicável**
+
+Nome: _________________________________________
+
 Documento: ____________________________________
 
-**TESTEMUNHA 2**  
-Nome: _________________________________________  
+**TESTEMUNHA 2, quando aplicável**
+
+Nome: _________________________________________
+
 Documento: ____________________________________
