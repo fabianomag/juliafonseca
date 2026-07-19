@@ -107,9 +107,11 @@ como `noindex`.
 ## Captação de leads
 
 `ContactView` restaura a composição full-bleed com mapa viário de Montes Claros,
-card de formulário e dock animado. Leaflet renderiza localmente um recorte
-GeoJSON do OpenStreetMap; a página exibe atribuição ODbL e não envia posição,
-endereço ou dado cartográfico do visitante.
+card único de até `50rem` e dock animado. O formulário expõe apenas nome,
+e-mail, mensagem e consentimento; tipo de projeto segue como valor técnico
+genérico para manter o contrato do endpoint. Leaflet renderiza localmente um
+recorte GeoJSON do OpenStreetMap; a página exibe atribuição ODbL e não envia
+posição, endereço ou dado cartográfico do visitante.
 
 `POST /api/leads` é um Route Handler Node.js. O fluxo é:
 
@@ -123,8 +125,8 @@ endereço ou dado cartográfico do visitante.
 O cliente valida os campos nativos antes da requisição e registra
 `lead_submitted` somente após sucesso, com idioma e tipo de projeto. Não existe
 banco de leads. Os logs do servidor contêm apenas resultado técnico,
-`submissionId`, duração e eventual status do provedor; nome, e-mail, empresa e
-mensagem não entram no log.
+`submissionId`, duração e eventual status do provedor; nome, e-mail e mensagem
+não entram no log.
 
 As credenciais são carregadas apenas durante a requisição. Em produção, o
 endpoint retorna erro de serviço indisponível quando `NEXT_PUBLIC_SITE_URL`,
@@ -141,8 +143,10 @@ configuradas corretamente. Rate limiting no edge permanece requisito de deploy.
   metadata em múltiplos root layouts;
 - `sitemap.xml` lista as contrapartes EN/PT de home, índice, estúdio e projetos;
 - `robots.txt` libera páginas, bloqueia `/api/` e aponta para o sitemap;
-- JSON-LD usa apenas tipos verdadeiros: `WebSite`, `CollectionPage` e
-  `CreativeWork`.
+- JSON-LD usa apenas tipos verdadeiros: `WebSite`, `Person` criador,
+  `CollectionPage` e `CreativeWork`. LinkedIn e GitHub verificados aparecem no
+  `sameAs` do criador, nunca como identidade do Studio;
+- o rodapé credita `@fabianomag` com links contextuais para esses perfis.
 
 Não há schema de `Architect`, `LocalBusiness`, endereço, telefone ou equipe
 fictícia.

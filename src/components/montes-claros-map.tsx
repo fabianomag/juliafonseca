@@ -116,7 +116,10 @@ export function MontesClarosMap() {
       window.requestAnimationFrame(() => map.invalidateSize(false));
     }
 
-    void initializeMap();
+    void initializeMap().catch((error: unknown) => {
+      if (error instanceof DOMException && error.name === "AbortError") return;
+      console.error("Could not initialize the Montes Claros map.", error);
+    });
 
     return () => {
       disposed = true;

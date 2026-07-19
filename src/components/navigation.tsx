@@ -147,7 +147,7 @@ export function Navigation({ locale }: { locale: Locale }) {
               className="nav-contact"
               href={routeMaps[locale].contact}
               aria-current={isCurrent(pathname, routeMaps[locale].contact) ? "page" : undefined}
-              tabIndex={open ? -1 : undefined}
+              tabIndex={compact ? -1 : undefined}
             >
               <span>{locale === "pt" ? "Contato" : "Contact"}</span>
               <i aria-hidden="true" />
@@ -158,9 +158,12 @@ export function Navigation({ locale }: { locale: Locale }) {
               type="button"
               aria-expanded={open}
               aria-controls="site-menu"
+              aria-label={open ? content.global.closeMenu : content.global.openMenu}
               onClick={() => setOpen((value) => !value)}
             >
-              {open ? content.global.closeMenu : content.global.openMenu}
+              <span aria-hidden="true">
+                {open ? content.global.closeMenuLabel : content.global.menuLabel}
+              </span>
             </button>
           </div>
         </nav>

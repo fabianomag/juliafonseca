@@ -77,6 +77,7 @@ test("home opens on the first project and navigation follows the viewport", asyn
 
   if (viewport && viewport.width <= 960) {
     await expect(menuButton).toBeVisible();
+    await expect(menuButton).toHaveText("Menu");
     await expect(page.locator(".nav-inline")).toBeHidden();
     await page.evaluate(() => window.scrollTo(0, 120));
     await expect(page.locator(".wordmark")).toBeHidden();
@@ -87,6 +88,8 @@ test("home opens on the first project and navigation follows the viewport", asyn
 
     await page.evaluate(() => window.scrollTo(0, 120));
     await expect(menuButton).toBeVisible();
+    await expect(menuButton).toHaveText("Menu");
+    await expect(page.locator(".nav-contact")).toBeHidden();
     await expect(page.locator(".wordmark")).toBeHidden();
   }
 

@@ -2,11 +2,11 @@
   position: relative;
   isolation: isolate;
   display: grid;
-  min-height: max(100svh, 52rem);
+  min-height: max(100svh, 44rem);
   overflow: hidden;
   align-items: center;
-  padding: calc(var(--header-height) + clamp(2rem, 5vh, 4.5rem)) var(--page-gutter)
-    clamp(4rem, 8vh, 7rem);
+  padding: calc(var(--header-height) + clamp(1.5rem, 3vh, 2.75rem)) var(--page-gutter)
+    clamp(5rem, 8vh, 6rem);
   background: #050505;
   color: var(--paper);
 }
@@ -147,83 +147,16 @@
 .content {
   position: relative;
   z-index: 1;
-  width: min(100%, 76rem);
+  width: min(100%, 50rem);
   margin-inline: auto;
 }
 
 .card {
-  display: grid;
   overflow: hidden;
-  grid-template-columns: minmax(22rem, 0.8fr) minmax(0, 1.2fr);
   background: #fff;
   color: var(--ink);
   box-shadow: 0 2rem 7.5rem rgba(0, 0, 0, 0.48);
   transform: translateZ(0);
-}
-
-.intro {
-  position: relative;
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  border-right: 1px solid rgba(23, 23, 19, 0.14);
-  padding: clamp(2rem, 4.5vw, 4.8rem) clamp(1.5rem, 3.5vw, 3.8rem);
-  background: var(--paper);
-}
-
-.intro::after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: min(14rem, 72%);
-  height: 0.35rem;
-  background: linear-gradient(90deg, var(--flame), var(--flame-dark));
-  content: "";
-}
-
-.eyebrow {
-  color: rgba(23, 23, 19, 0.68);
-}
-
-.intro h1 {
-  max-width: 8ch;
-  margin: clamp(2rem, 7vh, 5.5rem) 0 0;
-  font-size: clamp(3rem, 4.8vw, 5.6rem);
-  font-weight: 490;
-  letter-spacing: -0.075em;
-  line-height: 0.8;
-}
-
-.intro h1 em {
-  display: block;
-  color: var(--flame);
-  font-family: var(--font-serif), Georgia, serif;
-  font-weight: 400;
-}
-
-.introCopy {
-  max-width: 32ch;
-  margin: auto 0 0;
-  padding-top: 3rem;
-  font-family: var(--font-serif), Georgia, serif;
-  font-size: clamp(1rem, 1.35vw, 1.25rem);
-  line-height: 1.28;
-}
-
-.responseNote {
-  max-width: 34ch;
-  margin: 1.3rem 0 0;
-  color: rgba(23, 23, 19, 0.68);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  line-height: 1.5;
-  text-transform: uppercase;
-}
-
-.formPanel {
-  min-width: 0;
-  background: #fff;
 }
 
 .form {
@@ -238,14 +171,10 @@
 .formBody {
   display: grid;
   align-content: center;
-  gap: clamp(1.15rem, 2.2vh, 1.75rem);
+  gap: clamp(1.2rem, 2.2vh, 1.55rem);
   min-width: 0;
-  padding: clamp(1.7rem, 3.2vw, 3.2rem) clamp(1.4rem, 3.2vw, 3.4rem);
-}
-
-.requiredHint {
-  margin: 0;
-  color: rgba(23, 23, 19, 0.64);
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 5vw, 3.5rem)
+    clamp(1.8rem, 3vw, 2.5rem);
 }
 
 .formRow {
@@ -275,7 +204,6 @@
 }
 
 .field input,
-.field select,
 .field textarea {
   width: 100%;
   min-width: 0;
@@ -296,20 +224,20 @@
 }
 
 .field textarea {
-  min-height: 6.2rem;
+  min-height: 7.5rem;
   resize: vertical;
 }
 
 .field input:focus,
-.field select:focus,
 .field textarea:focus {
   border-color: var(--flame);
   box-shadow: 0 1px 0 var(--flame);
 }
 
-.field option {
-  background: white;
-  color: var(--ink);
+.field input:focus-visible,
+.field textarea:focus-visible {
+  outline: 2px solid var(--flame);
+  outline-offset: 3px;
 }
 
 .honeypot {
@@ -346,7 +274,7 @@
   position: relative;
   display: grid;
   width: 100%;
-  min-height: 7.7rem;
+  min-height: 7.2rem;
   overflow: hidden;
   border: 0;
   border-top: 1px solid var(--ink);
@@ -377,7 +305,7 @@
   justify-content: space-between;
   gap: 1.5rem;
   padding: 1.2rem clamp(1.4rem, 3.2vw, 3.4rem);
-  font-size: clamp(2rem, 4vw, 4rem);
+  font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: 520;
   letter-spacing: -0.055em;
   line-height: 0.92;
@@ -455,29 +383,9 @@
 
 @media (max-width: 960px) {
   .showcase {
-    min-height: 100svh;
-    align-items: start;
-    padding-top: calc(var(--header-height) + 3rem);
-    padding-bottom: 7rem;
-  }
-
-  .card {
-    grid-template-columns: 1fr;
-  }
-
-  .intro {
-    min-height: 23rem;
-    border-right: 0;
-    border-bottom: 1px solid rgba(23, 23, 19, 0.14);
-  }
-
-  .intro h1 {
-    max-width: 10ch;
-    margin-top: 2.5rem;
-  }
-
-  .introCopy {
-    margin-top: 2.5rem;
+    min-height: max(100svh, 42rem);
+    padding-top: calc(var(--header-height) + 2.5rem);
+    padding-bottom: 7.5rem;
   }
 }
 
@@ -486,23 +394,8 @@
     padding: calc(var(--header-height) + 1.75rem) 1rem 7.75rem;
   }
 
-  .intro {
-    min-height: auto;
-    padding: 2rem 1.35rem 2.5rem;
-  }
-
-  .intro h1 {
-    margin-top: 2rem;
-    font-size: clamp(3rem, 16vw, 5rem);
-  }
-
-  .introCopy {
-    margin-top: 2.5rem;
-    padding-top: 0;
-  }
-
   .formBody {
-    padding: 1.6rem 1.25rem;
+    padding: 1.6rem 1.25rem 1.45rem;
   }
 
   .formRow {
@@ -554,7 +447,6 @@
   .dockAction,
   .dockArrow,
   .field input,
-  .field select,
   .field textarea {
     transition-duration: 0.01ms !important;
   }

@@ -142,6 +142,8 @@ export type LocalizedSiteContent = Readonly<{
     skipToContent: string;
     openMenu: string;
     closeMenu: string;
+    menuLabel: string;
+    closeMenuLabel: string;
     changeLanguage: string;
     previousProject: string;
     nextProject: string;
@@ -184,30 +186,11 @@ export type LocalizedSiteContent = Readonly<{
   }>;
   contact: Readonly<{
     seo: Readonly<{ title: string; description: string }>;
-    eyebrow: string;
     title: string;
-    intro: string;
-    responseNote: string;
     form: Readonly<{
-      requiredHint: string;
       fields: Readonly<{
         name: Readonly<{ label: string; placeholder: string }>;
         email: Readonly<{ label: string; placeholder: string }>;
-        company: Readonly<{
-          label: string;
-          optional: string;
-          placeholder: string;
-        }>;
-        projectType: Readonly<{
-          label: string;
-          placeholder: string;
-          options: readonly Readonly<{ value: string; label: string }>[];
-        }>;
-        budget: Readonly<{
-          label: string;
-          optional: string;
-          placeholder: string;
-        }>;
         message: Readonly<{ label: string; placeholder: string }>;
         consent: Readonly<{
           label: string;
@@ -581,6 +564,8 @@ export const siteContent = {
       skipToContent: "Skip to content",
       openMenu: "Open menu",
       closeMenu: "Close menu",
+      menuLabel: "Menu",
+      closeMenuLabel: "Close",
       changeLanguage: "Change language",
       previousProject: "Previous project",
       nextProject: "Next project",
@@ -681,37 +666,11 @@ export const siteContent = {
         description:
           "Contact Fabiano Frank about a design-led website, frontend experience or digital product—not an architecture commission.",
       },
-      eyebrow: "A real conversation",
       title: "Want a site with this level of care?",
-      intro:
-        "Studio Flamboyant is a conceptual case, not an architecture practice accepting commissions. This form reaches Fabiano Frank for websites, frontend systems and digital products.",
-      responseNote:
-        "Share the context, the constraint and what success should feel like. You will receive a direct reply from Fabiano.",
       form: {
-        requiredHint: "Fields marked with an asterisk are required.",
         fields: {
           name: { label: "Name *", placeholder: "Your name" },
           email: { label: "Email *", placeholder: "you@company.com" },
-          company: {
-            label: "Company",
-            optional: "Optional",
-            placeholder: "Company or studio",
-          },
-          projectType: {
-            label: "Project type *",
-            placeholder: "Choose one",
-            options: [
-              { value: "editorial-site", label: "Editorial or portfolio site" },
-              { value: "product-frontend", label: "Product frontend" },
-              { value: "frontend-review", label: "Frontend review or rescue" },
-              { value: "other", label: "Something else" },
-            ],
-          },
-          budget: {
-            label: "Budget",
-            optional: "Optional",
-            placeholder: "A range is enough",
-          },
           message: {
             label: "Project context *",
             placeholder:
@@ -724,7 +683,7 @@ export const siteContent = {
             privacyHref: routeMaps.en.privacy,
           },
         },
-        submit: "Send enquiry",
+        submit: "Send message",
         submitting: "Sending…",
         successTitle: "Message sent.",
         successBody: "Thanks for the context. Fabiano will reply directly.",
@@ -741,14 +700,14 @@ export const siteContent = {
       },
       eyebrow: "Plain-language notice",
       title: "Privacy",
-      updated: "Last updated 18 July 2026",
+      updated: "Last updated 19 July 2026",
       intro:
         "Fabiano Frank is responsible for the information processed through this portfolio case. The site collects only what is needed to reply to a project enquiry, understand aggregate performance and remember a language choice.",
       sections: [
         {
           title: "Information you submit",
           paragraphs: [
-            "The contact form asks for your name, email, project type, message and consent. Company and budget are optional. Locale and non-content anti-abuse fields are also sent so the request can be validated safely.",
+            "The contact form asks for your name, email, message and consent. Locale and non-content anti-abuse fields are also sent so the request can be validated safely.",
             "Do not include passwords, financial records or other sensitive personal information in the message.",
           ],
         },
@@ -776,7 +735,7 @@ export const siteContent = {
         {
           title: "Your request",
           paragraphs: [
-            "Fabiano Frank is the contact for privacy requests. To ask about access, correction, withdrawal of consent or deletion of information sent through the form, open the contact page and choose ‘Something else’. Include enough context to identify the original enquiry without resending sensitive data.",
+            "Fabiano Frank is the contact for privacy requests. To ask about access, correction, withdrawal of consent or deletion of information sent through the form, use the contact page and include enough context to identify the original enquiry without resending sensitive data.",
           ],
         },
       ],
@@ -789,7 +748,7 @@ export const siteContent = {
       href: routeMaps.en.projects,
     },
     footer: {
-      caseCredit: "Concept, design and frontend by Fabiano Frank.",
+      caseCredit: "Concept, design and frontend by",
       privacyLabel: "Privacy",
       privacyHref: routeMaps.en.privacy,
     },
@@ -805,6 +764,8 @@ export const siteContent = {
       skipToContent: "Ir para o conteúdo",
       openMenu: "Abrir menu",
       closeMenu: "Fechar menu",
+      menuLabel: "Menu",
+      closeMenuLabel: "Fechar",
       changeLanguage: "Mudar idioma",
       previousProject: "Projeto anterior",
       nextProject: "Próximo projeto",
@@ -909,37 +870,11 @@ export const siteContent = {
         description:
           "Fale com Fabiano Frank sobre um site de direção autoral, uma experiência frontend ou um produto digital — não sobre um projeto de arquitetura.",
       },
-      eyebrow: "Uma conversa real",
       title: "Quer um site com este nível de cuidado?",
-      intro:
-        "Studio Flamboyant é um case conceitual, não um escritório que recebe projetos de arquitetura. Este formulário chega a Fabiano Frank para sites, sistemas frontend e produtos digitais.",
-      responseNote:
-        "Conte o contexto, a restrição e como o sucesso deve ser percebido. Você receberá uma resposta direta do Fabiano.",
       form: {
-        requiredHint: "Campos marcados com asterisco são obrigatórios.",
         fields: {
           name: { label: "Nome *", placeholder: "Seu nome" },
           email: { label: "E-mail *", placeholder: "voce@empresa.com" },
-          company: {
-            label: "Empresa",
-            optional: "Opcional",
-            placeholder: "Empresa ou estúdio",
-          },
-          projectType: {
-            label: "Tipo de projeto *",
-            placeholder: "Escolha uma opção",
-            options: [
-              { value: "editorial-site", label: "Site editorial ou portfólio" },
-              { value: "product-frontend", label: "Frontend de produto" },
-              { value: "frontend-review", label: "Revisão ou resgate frontend" },
-              { value: "other", label: "Outro contexto" },
-            ],
-          },
-          budget: {
-            label: "Orçamento",
-            optional: "Opcional",
-            placeholder: "Uma faixa já ajuda",
-          },
           message: {
             label: "Contexto do projeto *",
             placeholder:
@@ -952,7 +887,7 @@ export const siteContent = {
             privacyHref: routeMaps.pt.privacy,
           },
         },
-        submit: "Enviar solicitação",
+        submit: "Enviar mensagem",
         submitting: "Enviando…",
         successTitle: "Mensagem enviada.",
         successBody: "Obrigado pelo contexto. Fabiano responderá diretamente.",
@@ -969,14 +904,14 @@ export const siteContent = {
       },
       eyebrow: "Aviso em linguagem direta",
       title: "Privacidade",
-      updated: "Última atualização em 18 de julho de 2026",
+      updated: "Última atualização em 19 de julho de 2026",
       intro:
         "Fabiano Frank é o responsável pelas informações processadas por este case de portfólio. O site coleta apenas o necessário para responder a uma solicitação de projeto, entender a performance agregada e lembrar uma escolha de idioma.",
       sections: [
         {
           title: "Dados enviados por você",
           paragraphs: [
-            "O formulário solicita nome, e-mail, tipo de projeto, mensagem e consentimento. Empresa e orçamento são opcionais. O idioma e campos técnicos sem conteúdo pessoal também são enviados para validar a solicitação com segurança.",
+            "O formulário solicita nome, e-mail, mensagem e consentimento. O idioma e campos técnicos sem conteúdo pessoal também são enviados para validar a solicitação com segurança.",
             "Não inclua senhas, dados financeiros ou outras informações pessoais sensíveis na mensagem.",
           ],
         },
@@ -1004,7 +939,7 @@ export const siteContent = {
         {
           title: "Sua solicitação",
           paragraphs: [
-            "Fabiano Frank é o contato para assuntos de privacidade. Para pedir acesso, correção, retirada do consentimento ou exclusão de informações enviadas pelo formulário, abra a página de contato e escolha ‘Outro contexto’. Inclua informação suficiente para identificar a solicitação original, sem reenviar dados sensíveis.",
+            "Fabiano Frank é o contato para assuntos de privacidade. Para pedir acesso, correção, retirada do consentimento ou exclusão de informações enviadas pelo formulário, use a página de contato e inclua informação suficiente para identificar a solicitação original, sem reenviar dados sensíveis.",
           ],
         },
       ],
@@ -1017,7 +952,7 @@ export const siteContent = {
       href: routeMaps.pt.projects,
     },
     footer: {
-      caseCredit: "Conceito, design e frontend por Fabiano Frank.",
+      caseCredit: "Conceito, design e frontend por",
       privacyLabel: "Privacidade",
       privacyHref: routeMaps.pt.privacy,
     },

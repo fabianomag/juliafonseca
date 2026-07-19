@@ -29,11 +29,13 @@ and frontend enquiries to Fabiano, not for architectural commissions.
   media field with an inset 50svh copy card on mobile. Its image loop can be
   paused and every internal scroll region remains keyboard-operable.
 - Metadata includes canonical URLs, `hreflang`, Open Graph, Twitter cards,
-  sitemap, robots and truthful `WebSite`, `CollectionPage` and `CreativeWork`
-  structured data.
+  sitemap, robots and truthful `WebSite`, creator `Person`, `CollectionPage`
+  and `CreativeWork` structured data. Verified LinkedIn and GitHub profiles are
+  attached to the creator rather than to the fictional studio.
 - The contact page restores the Montes Claros road-map/card/dock interaction;
-  its form sends digital-project enquiries through a validated, abuse-aware
-  Resend endpoint and does not write leads to an application database.
+  its minimal name/email/message form sends digital-project enquiries through
+  a validated, abuse-aware Resend endpoint and does not write leads to an
+  application database.
 - Vercel Analytics records the non-PII `lead_submitted` conversion event;
   Speed Insights is mounted at the locale root.
 - Playwright covers the public route contract, responsive shells, locale

@@ -8,6 +8,7 @@ import {
   type StaticRouteKey,
 } from "@/content/site";
 import { absoluteUrl, getSiteUrl } from "@/lib/site-url";
+import { creator } from "@/content/creator";
 
 const socialImages: Record<Locale, string> = {
   en: absoluteUrl("/social-card.png"),
@@ -24,9 +25,9 @@ export function createRootMetadata(locale: Locale): Metadata {
     title: content.home.seo.title,
     description: content.home.seo.description,
     applicationName: content.brand.name,
-    authors: [{ name: "Fabiano Frank" }],
-    creator: "Fabiano Frank",
-    publisher: "Fabiano Frank",
+    authors: [{ name: creator.name, url: creator.linkedin }],
+    creator: creator.name,
+    publisher: content.brand.name,
     category: "Design and frontend engineering",
     alternates,
     openGraph: {

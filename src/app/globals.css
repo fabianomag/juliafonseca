@@ -291,7 +291,9 @@ svg {
   background: currentColor;
 }
 
+.site-header[data-scrolled="true"] .nav-contact,
 .site-header[data-open="true"] .nav-contact {
+  visibility: hidden;
   pointer-events: none;
   opacity: 0;
   transform: translateX(0.75rem);
@@ -828,7 +830,7 @@ svg {
 
 .project-hero__secondary {
   display: grid;
-  grid-template-columns: minmax(10rem, 0.42fr) minmax(0, 1fr);
+  grid-template-columns: minmax(10rem, 2fr) minmax(0, 3fr);
   gap: clamp(2rem, 7vw, 8rem);
   height: 75svh;
   align-content: start;
@@ -1310,13 +1312,13 @@ svg {
 }
 
 .site-footer__wordmark {
-  align-self: center;
+  align-self: end;
   min-width: 0;
   color: var(--flame);
 }
 
 .site-footer__wordmark .brand-wordmark {
-  width: min(100%, 80rem);
+  width: min(100%, 52rem);
   max-width: 100%;
 }
 
@@ -1327,7 +1329,24 @@ svg {
   font-size: 0.75rem;
   font-weight: 650;
   letter-spacing: 0.1em;
+  line-height: 1.45;
   text-transform: uppercase;
+}
+
+.site-footer__meta p {
+  margin: 0;
+  text-align: right;
+}
+
+.site-footer__meta a {
+  text-decoration: underline;
+  text-decoration-color: rgba(242, 240, 233, 0.38);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+.site-footer__meta a:hover {
+  text-decoration-color: currentColor;
 }
 
 @media (max-width: 960px) {
@@ -1436,6 +1455,19 @@ svg {
 
   .studio-manifesto {
     grid-template-columns: 1fr;
+  }
+
+  .site-footer {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .site-footer__meta {
+    justify-items: start;
+  }
+
+  .site-footer__meta p {
+    text-align: left;
   }
 }
 

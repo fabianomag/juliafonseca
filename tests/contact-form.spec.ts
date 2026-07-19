@@ -5,7 +5,7 @@ test.beforeEach(async ({ page }) => {
   await expect(page.locator("form")).toBeVisible();
 });
 
-test("restored showcase renders the Montes Claros map and complete lead form", async ({
+test("minimal showcase keeps the Montes Claros map and secure lead form", async ({
   page,
 }) => {
   await expect(page.getByText("Montes Claros · Minas Gerais · Brazil")).toBeVisible();
@@ -15,13 +15,14 @@ test("restored showcase renders the Montes Claros map and complete lead form", a
   const form = page.locator("form");
   await expect(form.locator('[name="name"]')).toBeVisible();
   await expect(form.locator('[name="email"]')).toBeVisible();
-  await expect(form.locator('[name="company"]')).toBeVisible();
-  await expect(form.locator('[name="projectType"]')).toBeVisible();
-  await expect(form.locator('[name="budget"]')).toBeVisible();
   await expect(form.locator('[name="message"]')).toBeVisible();
+  await expect(form.locator('[name="company"]')).toHaveCount(0);
+  await expect(form.locator('[name="budget"]')).toHaveCount(0);
+  await expect(form.locator('[name="projectType"]')).toBeAttached();
+  await expect(form.locator('[name="projectType"]')).toHaveValue("other");
   await expect(form.locator('[name="website"]')).toBeAttached();
   await expect(form.locator('[name="consent"]')).toBeVisible();
-  await expect(form.getByRole("button", { name: "Send enquiry" })).toBeVisible();
+  await expect(form.getByRole("button", { name: "Send message" })).toBeVisible();
 });
 
 test("complete form posts to the secure lead endpoint and announces success", async ({
@@ -41,14 +42,11 @@ test("complete form posts to the secure lead endpoint and announces success", as
   const form = page.locator("form");
   await form.locator('[name="name"]').fill("Test User");
   await form.locator('[name="email"]').fill("test@example.com");
-  await form.locator('[name="company"]').fill("Test Studio");
-  await form.locator('[name="projectType"]').selectOption("product-frontend");
-  await form.locator('[name="budget"]').fill("Defined after discovery");
   await form.locator('[name="message"]').fill(
-    "This is a complete project context submitted through the restored contact showcase.",
+    "This is a focused project context submitted through the minimal contact showcase.",
   );
   await form.locator('[name="consent"]').check();
-  await form.getByRole("button", { name: "Send enquiry" }).click();
+  await form.getByRole("button", { name: "Send message" }).click();
 
   await expect(form.getByText("Accepted safely.")).toBeVisible();
   expect(submittedPayloads).toHaveLength(1);
@@ -56,9 +54,9 @@ test("complete form posts to the secure lead endpoint and announces success", as
   expect(submittedPayload).toMatchObject({
     name: "Test User",
     email: "test@example.com",
-    company: "Test Studio",
-    projectType: "product-frontend",
-    budget: "Defined after discovery",
+    company: "",
+    projectType: "other",
+    budget: "",
     consent: true,
     locale: "en",
     website: "",

@@ -11,6 +11,7 @@ import { Navigation } from "@/components/navigation";
 import { RouteFooter } from "@/components/route-footer";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { StructuredData } from "@/components/structured-data";
+import { creator } from "@/content/creator";
 import { absoluteUrl } from "@/lib/site-url";
 
 const isVercelDeployment = process.env.VERCEL === "1";
@@ -37,6 +38,12 @@ export function LocaleRoot({
             description: content.brand.disclosure,
             inLanguage: localeDetails[locale].htmlLang,
             url: siteUrl,
+            creator: {
+              "@type": "Person",
+              name: creator.name,
+              alternateName: [creator.alternateName, creator.handle],
+              sameAs: [creator.linkedin, creator.github],
+            },
           }}
         />
         <a className="skip-link" href="#main-content">

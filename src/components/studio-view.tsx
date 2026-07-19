@@ -79,25 +79,25 @@ export function StudioView({
         tabIndex={0}
       >
         <div className="studio-media__track">
-        {loopedMedia.map((media, index) => {
-          const duplicate = index >= copy.media.length;
-          return (
-          <figure key={`${media.src}-${index}`} aria-hidden={duplicate || undefined}>
-            <Image
-              src={media.src}
-              alt={duplicate ? "" : media.alt}
-              fill
-              priority={index === 0}
-              loading={index === 0 ? "eager" : undefined}
-              fetchPriority={index === 0 ? "high" : undefined}
-              sizes="(max-width: 960px) 100vw, 50vw"
-            />
-            <figcaption className="eyebrow">
-              {media.caption}
-            </figcaption>
-          </figure>
-          );
-        })}
+          {loopedMedia.map((media, index) => {
+            const duplicate = index >= copy.media.length;
+            const leadImage = index % copy.media.length === 0;
+
+            return (
+              <figure key={`${media.src}-${index}`} aria-hidden={duplicate || undefined}>
+                <Image
+                  src={media.src}
+                  alt={duplicate ? "" : media.alt}
+                  fill
+                  priority={index === 0}
+                  loading={leadImage ? "eager" : undefined}
+                  fetchPriority={index === 0 ? "high" : undefined}
+                  sizes="(max-width: 960px) 100vw, 50vw"
+                />
+                <figcaption className="eyebrow">{media.caption}</figcaption>
+              </figure>
+            );
+          })}
         </div>
       </aside>
 

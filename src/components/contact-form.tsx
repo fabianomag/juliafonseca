@@ -39,7 +39,7 @@ export function ContactForm({
     if (!form.reportValidity()) return;
 
     const formData = new FormData(form);
-    const projectType = String(formData.get("projectType") ?? "");
+    const projectType = String(formData.get("projectType") ?? "other");
     const payload = {
       name: String(formData.get("name") ?? ""),
       email: String(formData.get("email") ?? ""),
@@ -90,10 +90,12 @@ export function ContactForm({
         : "Send securely";
 
   return (
-    <form className={styles.form} onSubmit={submit}>
+    <form
+      className={styles.form}
+      aria-label={locale === "pt" ? "Formulário de contato" : "Contact form"}
+      onSubmit={submit}
+    >
       <div className={styles.formBody}>
-        <p className={`eyebrow ${styles.requiredHint}`}>{copy.requiredHint}</p>
-
         <div className={styles.formRow}>
           <div className={styles.field}>
             <label htmlFor="lead-name">{fields.name.label}</label>
@@ -105,31 +107,12 @@ export function ContactForm({
           </div>
         </div>
 
-        <div className={styles.formRow}>
-          <div className={styles.field}>
-            <label htmlFor="lead-company">{fields.company.label} <span>({fields.company.optional})</span></label>
-            <input id="lead-company" name="company" type="text" autoComplete="organization" maxLength={120} placeholder={fields.company.placeholder} />
-          </div>
-          <div className={styles.field}>
-            <label htmlFor="lead-project-type">{fields.projectType.label}</label>
-            <select id="lead-project-type" name="projectType" defaultValue="" required>
-              <option value="" disabled>{fields.projectType.placeholder}</option>
-              {fields.projectType.options.map((option) => (
-                <option key={option.value} value={option.value}>{option.label}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <div className={styles.field}>
-          <label htmlFor="lead-budget">{fields.budget.label} <span>({fields.budget.optional})</span></label>
-          <input id="lead-budget" name="budget" type="text" maxLength={80} placeholder={fields.budget.placeholder} />
-        </div>
-
         <div className={styles.field}>
           <label htmlFor="lead-message">{fields.message.label}</label>
           <textarea id="lead-message" name="message" minLength={20} maxLength={5000} placeholder={fields.message.placeholder} required />
         </div>
+
+        <input name="projectType" type="hidden" defaultValue="other" />
 
         <div className={styles.honeypot} aria-hidden="true">
           <label htmlFor="lead-website">Website</label>
