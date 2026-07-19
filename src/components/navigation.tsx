@@ -9,6 +9,7 @@ import {
   routeMaps,
   type Locale,
 } from "@/content/site";
+import { BrandWordmark } from "@/components/brand-wordmark";
 
 const localePreferenceKey = "studio-flamboyant-locale";
 
@@ -28,9 +29,12 @@ function isDarkSurface(pathname: string, locale: Locale) {
 
 export function Wordmark({ locale }: { locale: Locale }) {
   return (
-    <Link className="wordmark" href={routeMaps[locale].home} aria-label="Studio Flamboyant">
-      <span>Studio</span>
-      <em>Flamboyant</em>
+    <Link
+      className="wordmark"
+      href={routeMaps[locale].home}
+      aria-label="Studio Flamboyant"
+    >
+      <BrandWordmark />
     </Link>
   );
 }
@@ -44,9 +48,11 @@ export function Navigation({ locale }: { locale: Locale }) {
   const panelRef = useRef<HTMLDivElement>(null);
   const targetLocale: Locale = locale === "en" ? "pt" : "en";
   const alternatePath = getLocalizedPath(pathname, targetLocale);
+  const compact = scrolled || open;
+  const inlineItems = content.navigation.primary.filter((item) => item.key !== "contact");
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 48);
+    const handleScroll = () => setScrolled(window.scrollY > 64);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -57,10 +63,13 @@ export function Navigation({ locale }: { locale: Locale }) {
     if (!open) return;
 
     const panel = panelRef.current;
-    const focusable = panel?.querySelectorAll<HTMLElement>(
+    const panelFocusable = Array.from(panel?.querySelectorAll<HTMLElement>(
       'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    ) ?? []);
+    const focusable = [triggerRef.current, ...panelFocusable].filter(
+      (element): element is HTMLElement => element !== null,
     );
-    focusable?.[0]?.focus();
+    panelFocusable[0]?.focus();
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -69,7 +78,7 @@ export function Navigation({ locale }: { locale: Locale }) {
         return;
       }
 
-      if (event.key !== "Tab" || !focusable?.length) return;
+      if (event.key !== "Tab" || !focusable.length) return;
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
 
@@ -89,6 +98,11 @@ export function Navigation({ locale }: { locale: Locale }) {
     };
   }, [open]);
 
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => setOpen(false));
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname]);
+
   const rememberLocale = () => {
     window.localStorage.setItem(localePreferenceKey, targetLocale);
     setOpen(false);
@@ -105,11 +119,12 @@ export function Navigation({ locale }: { locale: Locale }) {
         <nav className="site-nav" aria-label={locale === "pt" ? "Principal" : "Primary"}>
           <Wordmark locale={locale} />
 
-          <div className="nav-inline">
-            {content.navigation.primary.map((item) => (
+          <div className="nav-inline" aria-hidden={compact}>
+            {inlineItems.map((item) => (
               <Link
                 key={item.key}
                 href={item.href}
+                tabIndex={compact ? -1 : undefined}
                 aria-current={isCurrent(pathname, item.href) ? "page" : undefined}
               >
                 {item.label}
@@ -123,9 +138,19 @@ export function Navigation({ locale }: { locale: Locale }) {
               href={alternatePath}
               hrefLang={targetLocale === "pt" ? "pt-BR" : "en"}
               onClick={rememberLocale}
+              tabIndex={compact ? -1 : undefined}
               aria-label={content.global.changeLanguage}
             >
               {targetLocale.toUpperCase()}
+            </Link>
+            <Link
+              className="nav-contact"
+              href={routeMaps[locale].contact}
+              aria-current={isCurrent(pathname, routeMaps[locale].contact) ? "page" : undefined}
+              tabIndex={open ? -1 : undefined}
+            >
+              <span>{locale === "pt" ? "Contato" : "Contact"}</span>
+              <i aria-hidden="true" />
             </Link>
             <button
               ref={triggerRef}

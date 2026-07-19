@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Random-grid SVG mask transition adapted from Hiroki/Codrops' MIT-licensed
+ * Column-grid SVG mask transition adapted from Hiroki/Codrops' MIT-licensed
  * Scroll-Transition demo. Full notice: /THIRD_PARTY_NOTICES.md.
  */
 import Link from "next/link";
@@ -53,6 +53,7 @@ export function HomeExperience({
   const maskPrefix = useId().replace(/[^a-zA-Z0-9_-]/g, "");
   const [grid, setGrid] = useState<Grid>(initialGrid);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -93,6 +94,12 @@ export function HomeExperience({
         clipPath: "inset(100% 0% 0% 0%)",
         y: 40,
       });
+      if (texts[0]) {
+        gsap.set(texts[0], {
+          clipPath: "inset(0% 0% 0% 0%)",
+          y: 0,
+        });
+      }
       gsap.set(fills, { width: "0%" });
 
       const master = gsap.timeline({
@@ -106,15 +113,32 @@ export function HomeExperience({
         },
       });
 
+      master.to({}, { duration: 1.2 });
+
+      if (texts[0]) {
+        master.to(texts[0], {
+          clipPath: "inset(0% 0% 100% 0%)",
+          y: 0,
+          duration: 1.6,
+          ease: "power2.inOut",
+        });
+      }
+
       projects.forEach((_, index) => {
         const cells = Array.from(
           root.querySelectorAll<SVGRectElement>(`[data-grid-cells="${index}"] [data-grid-cell]`),
         );
-        const shuffled = gsap.utils.shuffle(cells);
+        const columnSequence = Array.from({ length: grid.cols }, (_, column) =>
+          gsap.utils.shuffle(
+            cells.filter((_, cellIndex) => cellIndex % grid.cols === column),
+          ),
+        ).flat();
 
-        gsap.set(cells, { opacity: 0 });
+        gsap.set(cells, { opacity: index === 0 ? 1 : 0 });
+        if (index === 0) return;
+
         master.add(
-          gsap.timeline().to(shuffled, {
+          gsap.timeline().to(columnSequence, {
             opacity: 1,
             duration: 1,
             ease: "power3.out",
@@ -128,23 +152,27 @@ export function HomeExperience({
             {
               clipPath: "inset(0% 0% 0% 0%)",
               y: 0,
-              duration: 2.6,
+              duration: 2.2,
               ease: "expo.out",
             },
             "-=0.3",
           );
-          master.to(
-            texts[index],
-            {
-              clipPath: "inset(0% 0% 100% 0%)",
-              y: 0,
-              duration: 2,
-              ease: "power2.inOut",
-            },
-            "+=0.8",
-          );
+          if (index < projects.length - 1) {
+            master.to(
+              texts[index],
+              {
+                clipPath: "inset(0% 0% 100% 0%)",
+                y: 0,
+                duration: 1.6,
+                ease: "power2.inOut",
+              },
+              "+=0.8",
+            );
+          }
         }
       });
+
+      master.to({}, { duration: 1.2 });
 
       ScrollTrigger.create({
         trigger: stage,
@@ -152,6 +180,9 @@ export function HomeExperience({
         end: "bottom bottom",
         scrub: 0.3,
         onUpdate: ({ progress }) => {
+          setActiveSlide(
+            Math.min(projects.length - 1, Math.floor(progress * projects.length)),
+          );
           fills.forEach((fill, index) => {
             const segmentProgress = gsap.utils.clamp(
               0,
@@ -190,9 +221,8 @@ export function HomeExperience({
   if (reducedMotion) {
     return (
       <div className="home-reduced">
-        <HomeIntro copy={copy} />
         <section className="home-reduced__projects" aria-label={copy.featuredLabel}>
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <article key={project.id} className="home-reduced__project">
               <Image
                 src={project.images[0].src}
@@ -202,7 +232,7 @@ export function HomeExperience({
               />
               <div>
                 <p className="eyebrow">{project.statusLabel}</p>
-                <h2>{project.title}</h2>
+                {index === 0 ? <h1>{project.title}</h1> : <h2>{project.title}</h2>}
                 <Link className="text-link" href={getProjectRoute(locale, project)}>
                   {locale === "pt" ? "Ver estudo" : "View study"}
                 </Link>
@@ -210,15 +240,12 @@ export function HomeExperience({
             </article>
           ))}
         </section>
-        <HomeOutro copy={copy} />
       </div>
     );
   }
 
   return (
     <div ref={rootRef}>
-      <HomeIntro copy={copy} />
-
       <section ref={stageRef} className="home-stage" aria-label={copy.featuredLabel}>
         <div className="home-layers">
           {projects.map((project, index) => {
@@ -247,7 +274,7 @@ export function HomeExperience({
                           width={cell.width}
                           height={cell.height}
                           fill="white"
-                          opacity="0"
+                          opacity={index === 0 ? 1 : 0}
                           shapeRendering="crispEdges"
                         />
                       ))}
@@ -267,10 +294,17 @@ export function HomeExperience({
 
           <div className="home-layer__shade" aria-hidden="true" />
           <div className="home-texts">
-            {projects.map((project) => (
-              <article key={project.id} className="home-slide-copy" data-home-text>
+            {projects.map((project, index) => (
+              <article
+                key={project.id}
+                className="home-slide-copy"
+                data-home-text
+                data-initial={index === 0}
+                aria-hidden={activeSlide !== index}
+                inert={activeSlide !== index}
+              >
                 <Link href={getProjectRoute(locale, project)}>
-                  <h2>{project.title}</h2>
+                  {index === 0 ? <h1>{project.title}</h1> : <h2>{project.title}</h2>}
                 </Link>
                 <div className="home-slide-copy__aside">
                   <p className="eyebrow">{project.statusLabel}</p>
@@ -292,46 +326,6 @@ export function HomeExperience({
           </div>
         </div>
       </section>
-
-      <HomeOutro copy={copy} />
     </div>
-  );
-}
-
-function HomeIntro({ copy }: { copy: LocalizedSiteContent["home"] }) {
-  return (
-    <section className="home-intro">
-      <h1 className="home-intro__title">
-        {copy.title.split(" ").slice(0, -1).join(" ")} {" "}
-        <em>{copy.title.split(" ").at(-1)}</em>
-      </h1>
-      <div className="home-intro__meta">
-        <p className="eyebrow">{copy.eyebrow}</p>
-        <p>{copy.intro}</p>
-        <span className="scroll-cue">{copy.scrollCue}</span>
-      </div>
-    </section>
-  );
-}
-
-function HomeOutro({ copy }: { copy: LocalizedSiteContent["home"] }) {
-  return (
-    <section className="home-outro">
-      <div className="home-outro__grid">
-        <div>
-          <p className="eyebrow">{copy.serviceCta.eyebrow}</p>
-          <h2>
-            {copy.serviceCta.title.split(" ").slice(0, -3).join(" ")} {" "}
-            <em>{copy.serviceCta.title.split(" ").slice(-3).join(" ")}</em>
-          </h2>
-        </div>
-        <div className="home-outro__copy">
-          <p>{copy.serviceCta.body}</p>
-          <Link className="text-link" href={copy.serviceCta.href}>
-            {copy.serviceCta.action}
-          </Link>
-        </div>
-      </div>
-    </section>
   );
 }

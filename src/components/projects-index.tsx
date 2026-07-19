@@ -17,24 +17,8 @@ export function ProjectsIndex({
   copy: LocalizedSiteContent["projectsIndex"];
 }) {
   return (
-    <div className="page-shell">
-      <header className="page-heading">
-        <div>
-          <p className="eyebrow">{copy.eyebrow}</p>
-          <p className="eyebrow" style={{ marginTop: "0.7rem", opacity: 0.72 }}>
-            {copy.countLabel(projects.length)}
-          </p>
-        </div>
-        <div>
-          <h1>{copy.title}</h1>
-          <div className="page-heading__copy" style={{ marginTop: "3rem" }}>
-            <p>{copy.intro}</p>
-            <p className="eyebrow" style={{ marginTop: "2rem", opacity: 0.72 }}>
-              {copy.disclosure}
-            </p>
-          </div>
-        </div>
-      </header>
+    <div className="page-shell projects-page">
+      <h1 className="visually-hidden">{copy.title}</h1>
 
       <section className="projects-list" aria-label={copy.eyebrow}>
         {projects.map((project, index) => (
@@ -51,6 +35,10 @@ export function ProjectsIndex({
                 alt={project.images[0].alt}
                 fill
                 sizes="(max-width: 640px) 90vw, 28vw"
+                priority={index === 0}
+                loading={index === 0 ? "eager" : undefined}
+                fetchPriority={index === 0 ? "high" : undefined}
+                unoptimized={index === 0}
               />
             </figure>
             <span className="project-row__meta">{project.statusLabel}</span>

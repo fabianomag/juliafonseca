@@ -16,16 +16,24 @@ and frontend enquiries to Fabiano, not for architectural commissions.
 - English is canonical at `/`; Brazilian Portuguese lives under `/pt`.
 - Three conceptual projects have localized names, slugs, copy and image text.
 - Project detail routes are statically generated from one typed content source.
-- The homepage uses a responsive SVG Random Grid transition with GSAP and
-  ScrollTrigger, with a reduced-motion fallback.
-- Navigation includes keyboard focus management, a skip link, localized route
-  mapping and a non-blocking Portuguese suggestion for Brazilian visitors.
+- The homepage uses the responsive SVG Column Grid (`index4`) transition with
+  GSAP and ScrollTrigger, without the discarded triangular mask, plus a
+  reduced-motion fallback.
+- Desktop navigation begins with the wordmark, centered routes and a contact
+  pill, then yields to a Menu pill on scroll; mobile starts with Menu. The full
+  overlay includes keyboard focus management and exact localized route mapping.
+- Project stories keep one 175svh image behind title, copy and metadata, then
+  use the restored asymmetric `feature-left`, `feature-right`, `triptych`
+  gallery cycle.
+- Studio is a one-viewport 50/50 experience on desktop and a full-viewport
+  media field with an inset 50svh copy card on mobile. Its image loop can be
+  paused and every internal scroll region remains keyboard-operable.
 - Metadata includes canonical URLs, `hreflang`, Open Graph, Twitter cards,
   sitemap, robots and truthful `WebSite`, `CollectionPage` and `CreativeWork`
   structured data.
-- The contact form sends digital-project enquiries through a validated,
-  abuse-aware Resend endpoint and does not write leads to an application
-  database.
+- The contact page restores the Montes Claros road-map/card/dock interaction;
+  its form sends digital-project enquiries through a validated, abuse-aware
+  Resend endpoint and does not write leads to an application database.
 - Vercel Analytics records the non-PII `lead_submitted` conversion event;
   Speed Insights is mounted at the locale root.
 - Playwright covers the public route contract, responsive shells, locale
@@ -77,28 +85,29 @@ delivery disabled.
 
 ## Verified production-build baseline
 
-On 18 July 2026, the local `next start` build passed 71 Playwright checks across
+On 18 July 2026, the local `next start` build passed 85 Playwright checks across
 desktop, mobile and tablet Chromium. The suite includes ten Axe scans with no
 serious or critical violations and direct `/api/leads` responses for origin,
 content type, payload size, honeypot, timing, expiry and missing provider config.
 
-Lighthouse 12.8.2 mobile results against that build:
+Lighthouse 12.8.2 mobile results against that build are the median of three
+controlled runs per route, after warming the CLI harness so its first install
+does not compete with Chrome for CPU:
 
-| Route | Performance | Accessibility | Best Practices | SEO |
-| --- | ---: | ---: | ---: | ---: |
-| `/` | 94 | 100 | 100 | 100 |
-| `/projects` | 98 | 100 | 100 | 100 |
-| `/projects/horizon-pavilion` | 98 | 100 | 100 | 100 |
-| `/studio` | 98 | 100 | 100 | 100 |
-| `/contact` | 99 | 100 | 100 | 100 |
+| Route | Performance | LCP | TBT | CLS | Accessibility | Best Practices | SEO |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `/` | 99 | 2.20 s | 33 ms | 0 | 100 | 100 | 100 |
+| `/projects` | 99 | 2.18 s | 44 ms | 0 | 100 | 100 | 100 |
+| `/projects/horizon-pavilion` | 100 | 1.88 s | 30 ms | 0 | 100 | 100 | 100 |
+| `/studio` | 100 | 1.81 s | 29 ms | 0 | 100 | 100 | 100 |
+| `/contact` | 99 | 1.81 s | 77 ms | 0 | 100 | 100 | 100 |
 
 These are controlled local lab results, not field data. Vercel Speed Insights is
 the source of truth after deployment.
 
-`npm audit --omit=dev` reports zero high or critical findings. Four moderate
-entries currently trace to the PostCSS copy bundled by Next.js 16.2.10; npm's
-suggested “fix” is an invalid downgrade to Next.js 9.3.3, so the exception is
-documented and should be rechecked with the next stable Next.js release.
+Both `npm audit` and `npm audit --omit=dev` report zero vulnerabilities. The
+root npm override keeps Next.js 16.2.10 on the patched PostCSS 8.5.19 release;
+the production build and all 85 browser/API checks pass with that override.
 
 ## Environment variables
 
@@ -152,13 +161,21 @@ preference and technical analytics used by the case.
 
 ## Source and reference transparency
 
-The homepage's SVG grid-mask transition is adapted from Hiroki/Codrops'
+The homepage's Column Grid SVG transition is adapted from Hiroki/Codrops'
 [SVG Mask Transitions on Scroll](https://github.com/Hiro-kiii/Scroll-Transition/)
-demo. The ten architectural WebP images used by this case are redistributed from
-the same repository at the pinned revision documented in
+demo. Ten architectural WebP images are redistributed from the same repository
+at the pinned revision documented in
 [`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md). The upstream repository is
 MIT-licensed; its complete license notice is preserved in
 [`public/licenses/codrops-scroll-transition-MIT.txt`](./public/licenses/codrops-scroll-transition-MIT.txt).
+
+Fourteen additional fictional visualizations were generated specifically for
+the three concept studies, so the restored gallery does not borrow photographs
+or authorship from a real building. Their prompts, source IDs, dimensions and
+hashes are recorded in [`GENERATED_ASSETS.md`](./GENERATED_ASSETS.md). The
+artistic wordmark is an original outlined SVG derived from the OFL-licensed
+Anybody typeface; Monolog informed the category only and no Monolog asset is
+included.
 
 The following websites informed composition and interaction research only:
 
@@ -178,8 +195,9 @@ the referenced studios, Hiroki or Codrops. See
 
 Production images live in `public/images/projects/`. They were resized only when
 wider than 2400 px, never enlarged, re-encoded as WebP and stripped of
-nonessential metadata. Source and output dimensions, byte counts and SHA-256
-hashes are recorded in [`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md).
+nonessential metadata. The ten upstream assets are audited in
+[`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md); generated complements are
+audited in [`GENERATED_ASSETS.md`](./GENERATED_ASSETS.md).
 
 The complete MIT notice and third-party attribution must remain with any
 redistribution of the adapted demo or its images.

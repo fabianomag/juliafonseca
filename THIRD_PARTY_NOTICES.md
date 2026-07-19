@@ -15,7 +15,8 @@
 
 The pinned upstream repository distributes the demo source and the ten WebP
 assets below under its root MIT license; no separate asset license or exclusion
-is present at that revision. Studio Flamboyant adapts the Random Grid transition
+is present at that revision. Studio Flamboyant adapts the Column Grid (`index4`)
+transition
 and redistributes optimized copies of those images. The copyright and permission
 notice are preserved in full as required by the license.
 
@@ -60,6 +61,29 @@ revision before optimization.
 | `img/9.webp` | `f1680eb2a3227f855cbd65875129e8e98ffba050c9d003fa12824ee903d84ee7` |
 | `img/10.webp` | `41e134e56492515793711e22a134b4a3abd0c5521b755016c3c9a288c68bf6f1` |
 
+## Anybody-derived wordmark outlines
+
+- Upstream: https://github.com/Etcetera-Type-Co/Anybody
+- Pinned revision: `fe7b55cf9d1563348ad95ac8e05f43b81a420c31`
+- License: SIL Open Font License 1.1
+- Complete license copy:
+  [`public/licenses/anybody-OFL-1.1.txt`](./public/licenses/anybody-OFL-1.1.txt)
+
+`src/components/brand-wordmark.tsx` contains outlined, compressed and manually
+modified glyph geometry derived from Anybody. The `A` counters were redrawn as
+flame forms to create an original `FLAMBOYANT` signature. The runtime does not
+redistribute or load a font binary. The Monolog website was a visual reference
+for the category of studio wordmark only; none of its proprietary SVG geometry
+is included.
+
+## OpenAI-generated complementary visualizations
+
+Fourteen original visualizations were generated for the fictional studies and
+are not third-party architecture photographs. The applicable OpenAI terms,
+source IDs, prompts, dimensions, byte counts and source/output hashes are
+recorded in [`GENERATED_ASSETS.md`](./GENERATED_ASSETS.md). They were encoded as
+WebP quality 84 with Sharp, without resizing, cropping or upscale.
+
 ## Visual references not redistributed
 
 Studio Arthur Casas, OH Architecture, and Mana Hotel by Guilherme Torres were
@@ -67,3 +91,21 @@ used as design research references only. No code, copy, logos, photographs, or
 other media from those websites is included. Their names and links are retained
 solely to document provenance of visual research; there is no affiliation,
 endorsement, or shared authorship.
+
+## Montes Claros road map
+
+- Renderer: [Leaflet 1.9.4](https://leafletjs.com/)
+- Renderer license: BSD 2-Clause
+- Complete renderer license copy:
+  [`public/licenses/leaflet-BSD-2-Clause.txt`](./public/licenses/leaflet-BSD-2-Clause.txt)
+- Road data: © OpenStreetMap contributors, available under the
+  [Open Database License](https://www.openstreetmap.org/copyright)
+- Local dataset: `public/data/montes-claros-roads.json`
+- Dataset SHA-256:
+  `69d770363ccb807842392684b1fd75ec44e2b3f0ed8c917d1917160dff4fb58b`
+
+The local dataset was recovered from the pre-rebuild baseline. It contains 3,348
+road segments and 8,157 coordinate points around Montes Claros, Minas Gerais.
+The original extraction script and extraction date were not preserved; the
+public contact page therefore keeps the OpenStreetMap contributor credit and
+license link visible next to the rendered map.

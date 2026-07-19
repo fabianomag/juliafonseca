@@ -94,9 +94,8 @@ export type NavigationItem = Readonly<{
 
 export type ProjectImage = Readonly<{
   src: string;
-  sourceAsset: `${number}.webp`;
+  sourceAsset: string;
   alt: string;
-  presentation: "hero" | "wide" | "paired-left" | "paired-right";
 }>;
 
 export type LocalizedProject = Readonly<{
@@ -128,14 +127,6 @@ export type LocaleSuggestionContent = Readonly<{
   dismiss: string;
 }>;
 
-export type CtaContent = Readonly<{
-  eyebrow: string;
-  title: string;
-  body: string;
-  action: string;
-  href: string;
-}>;
-
 export type PrivacySection = Readonly<{
   title: string;
   paragraphs: readonly string[];
@@ -145,7 +136,6 @@ export type LocalizedSiteContent = Readonly<{
   brand: Readonly<{
     name: "Studio Flamboyant";
     tagline: string;
-    caseLabel: string;
     disclosure: string;
   }>;
   global: Readonly<{
@@ -168,23 +158,12 @@ export type LocalizedSiteContent = Readonly<{
   }>;
   home: Readonly<{
     seo: Readonly<{ title: string; description: string }>;
-    eyebrow: string;
-    title: string;
-    intro: string;
-    scrollCue: string;
     featuredLabel: string;
-    projectsAction: string;
-    projectsHref: string;
-    serviceCta: CtaContent;
   }>;
   projectsIndex: Readonly<{
     seo: Readonly<{ title: string; description: string }>;
     eyebrow: string;
     title: string;
-    intro: string;
-    countLabel: (count: number) => string;
-    disclosure: string;
-    serviceCta: CtaContent;
   }>;
   studio: Readonly<{
     seo: Readonly<{ title: string; description: string }>;
@@ -202,7 +181,6 @@ export type LocalizedSiteContent = Readonly<{
       alt: string;
       caption: string;
     }>[];
-    serviceCta: CtaContent;
   }>;
   contact: Readonly<{
     seo: Readonly<{ title: string; description: string }>;
@@ -262,7 +240,6 @@ export type LocalizedSiteContent = Readonly<{
   }>;
   footer: Readonly<{
     caseCredit: string;
-    disclosure: string;
     privacyLabel: string;
     privacyHref: string;
   }>;
@@ -273,56 +250,102 @@ const projectAssets = {
     {
       src: "/images/projects/horizon-pavilion/01.webp",
       sourceAsset: "1.webp",
-      presentation: "hero",
     },
     {
       src: "/images/projects/horizon-pavilion/02.webp",
       sourceAsset: "2.webp",
-      presentation: "paired-left",
     },
     {
       src: "/images/projects/horizon-pavilion/03.webp",
       sourceAsset: "10.webp",
-      presentation: "wide",
+    },
+    {
+      src: "/images/projects/horizon-pavilion/04.webp",
+      sourceAsset: "generated:exec-fe6e66aa-8713-4816-af51-71d42268bce5.png",
+    },
+    {
+      src: "/images/projects/horizon-pavilion/05.webp",
+      sourceAsset: "generated:exec-78d6904d-a11d-44a0-97b9-5210712ef745.png",
+    },
+    {
+      src: "/images/projects/horizon-pavilion/06.webp",
+      sourceAsset: "generated:exec-c31fedcf-262c-4141-8ece-8cbc62809126.png",
+    },
+    {
+      src: "/images/projects/horizon-pavilion/07.webp",
+      sourceAsset: "generated:exec-fdd4adb0-6754-48ff-8d1a-0d0bd4eea680.png",
+    },
+    {
+      src: "/images/projects/horizon-pavilion/08.webp",
+      sourceAsset: "generated:exec-639662ca-e107-42bf-92e7-27b290cdeb63.png",
     },
   ],
   "mist-house": [
     {
       src: "/images/projects/mist-house/01.webp",
       sourceAsset: "3.webp",
-      presentation: "hero",
     },
     {
       src: "/images/projects/mist-house/02.webp",
       sourceAsset: "6.webp",
-      presentation: "paired-left",
     },
     {
       src: "/images/projects/mist-house/03.webp",
       sourceAsset: "7.webp",
-      presentation: "wide",
     },
     {
       src: "/images/projects/mist-house/04.webp",
       sourceAsset: "9.webp",
-      presentation: "paired-right",
+    },
+    {
+      src: "/images/projects/mist-house/05.webp",
+      sourceAsset: "generated:exec-f866592b-9d3b-4949-84dd-1e5400f4d4da.png",
+    },
+    {
+      src: "/images/projects/mist-house/06.webp",
+      sourceAsset: "generated:exec-48eeedb5-0da5-4bc1-8dcc-6ae4bbb3ef7b.png",
+    },
+    {
+      src: "/images/projects/mist-house/07.webp",
+      sourceAsset: "generated:exec-ff6e2859-d025-4895-a79b-d5bfab3f2770.png",
+    },
+    {
+      src: "/images/projects/mist-house/08.webp",
+      sourceAsset: "generated:exec-2841689c-c4d9-4ea1-8a26-f0c37d7cc99f.png",
     },
   ],
   "courtyard-house": [
     {
       src: "/images/projects/courtyard-house/01.webp",
       sourceAsset: "4.webp",
-      presentation: "hero",
     },
     {
       src: "/images/projects/courtyard-house/02.webp",
       sourceAsset: "5.webp",
-      presentation: "paired-left",
     },
     {
       src: "/images/projects/courtyard-house/03.webp",
       sourceAsset: "8.webp",
-      presentation: "wide",
+    },
+    {
+      src: "/images/projects/courtyard-house/04.webp",
+      sourceAsset: "generated:exec-b875391a-8596-4a6e-b353-5beac0527ad1.png",
+    },
+    {
+      src: "/images/projects/courtyard-house/05.webp",
+      sourceAsset: "generated:exec-4b17fcb7-1094-4e16-b160-a4d3af1d85e7.png",
+    },
+    {
+      src: "/images/projects/courtyard-house/06.webp",
+      sourceAsset: "generated:exec-8a1ccf53-0849-4377-9a53-877a67013479.png",
+    },
+    {
+      src: "/images/projects/courtyard-house/07.webp",
+      sourceAsset: "generated:exec-46af33cf-cf3a-4ae1-8465-8b76fd14bc2e.png",
+    },
+    {
+      src: "/images/projects/courtyard-house/08.webp",
+      sourceAsset: "generated:exec-e7792812-3cef-4d46-834f-218ea513dddb.png",
     },
   ],
 } as const satisfies Record<
@@ -331,9 +354,9 @@ const projectAssets = {
 >;
 
 type ProjectImageAltMap = Readonly<{
-  "horizon-pavilion": readonly [string, string, string];
-  "mist-house": readonly [string, string, string, string];
-  "courtyard-house": readonly [string, string, string];
+  "horizon-pavilion": readonly [string, string, string, string, string, string, string, string];
+  "mist-house": readonly [string, string, string, string, string, string, string, string];
+  "courtyard-house": readonly [string, string, string, string, string, string, string, string];
 }>;
 
 const imageAlts = {
@@ -342,17 +365,31 @@ const imageAlts = {
       "Monolithic concrete pavilion with a tall glazed opening reflected in still water at dusk.",
       "Low white pavilion with a broad cantilevered roof, warm interior light and a reflection on water.",
       "Symmetrical glass pavilion beneath a thin dark roof, illuminated at its centre and mirrored in water at blue hour.",
+      "Tall concrete portal and glazed corner meeting a reflecting pool in a vertical blue-hour view.",
+      "Double-height pavilion interior framed by concrete and glass, looking across still water at blue hour.",
+      "Elevated oblique view of the concrete-and-glass pavilion, pale platform and reflecting pool at dusk.",
+      "Close view of a board-formed concrete pier, thin roof edge and glass seam above reflective water.",
+      "Long glazed pavilion glowing amber across a dark reflecting pool at nightfall.",
     ],
     "mist-house": [
       "Dark timber-and-glass house beside a still lake, with mist crossing snow-covered mountains.",
       "Small tree in a ceramic vessel lit by a roof opening against a dark concrete interior.",
       "Glass-and-timber house extending over a lake in a snowy mountain landscape.",
       "Small tree and timber bench beneath a roof opening in a shadowed concrete room.",
+      "Sheltered timber threshold beside a misty alpine lake, seen in a vertical winter view.",
+      "Dark timber living room with a concrete hearth and full-height view of a fog-covered snowy lake.",
+      "Low timber-and-concrete house revealed between bare trees at the end of a snow-dusted path.",
+      "Lakeside house glowing softly beneath a blue winter sky, reflected in dark water.",
     ],
     "courtyard-house": [
       "Minimal living room with timber screens, low seating and two potted trees in angled sunlight.",
       "Wooden dining table below a roof light in a pale room, with a potted tree at the edge.",
       "Calm living room framed by timber screens, with low seating, circular wall art and a potted tree.",
+      "Slender courtyard tree rising through a roof opening between oak screens and pale stone surfaces.",
+      "Low house wrapping a planted courtyard with oak screens, pale stone and broad garden openings.",
+      "Vertical threshold detail of oak slats, pale stone and filtered foliage beside the courtyard.",
+      "Long dining room opening directly onto the planted courtyard through full-height glass.",
+      "Courtyard tree and adjoining rooms glowing softly through oak screens at night.",
     ],
   },
   pt: {
@@ -360,17 +397,31 @@ const imageAlts = {
       "Pavilhão monolítico de concreto com uma abertura alta envidraçada, refletido em água parada ao entardecer.",
       "Pavilhão branco e baixo com ampla cobertura em balanço, luz interna quente e reflexo sobre a água.",
       "Pavilhão simétrico de vidro sob uma cobertura escura e fina, iluminado ao centro e espelhado na água durante a hora azul.",
+      "Portal alto de concreto e canto envidraçado junto a um espelho d'água em um enquadramento vertical na hora azul.",
+      "Interior de pé-direito duplo emoldurado por concreto e vidro, voltado para a água parada na hora azul.",
+      "Vista elevada e oblíqua do pavilhão de concreto e vidro, da plataforma clara e do espelho d'água ao entardecer.",
+      "Detalhe de pilar em concreto aparente, cobertura fina e encontro do vidro acima da água refletiva.",
+      "Pavilhão longitudinal envidraçado aceso em âmbar diante de um espelho d'água escuro ao anoitecer.",
     ],
     "mist-house": [
       "Casa de madeira escura e vidro junto a um lago calmo, com névoa atravessando montanhas cobertas de neve.",
       "Pequena árvore em vaso de cerâmica iluminada por uma abertura zenital diante de um interior de concreto escuro.",
       "Casa de vidro e madeira avançando sobre um lago em uma paisagem montanhosa coberta de neve.",
       "Pequena árvore e banco de madeira sob uma abertura zenital em um ambiente de concreto sombreado.",
+      "Passagem protegida em madeira junto a um lago alpino coberto de névoa, em um enquadramento vertical de inverno.",
+      "Sala de madeira escura com lareira de concreto e vista ampla para um lago nevado coberto de neblina.",
+      "Casa baixa de madeira e concreto revelada entre árvores nuas ao fim de um caminho coberto de neve.",
+      "Casa à margem do lago iluminada com discrição sob o céu azul de inverno e refletida na água escura.",
     ],
     "courtyard-house": [
       "Sala minimalista com painéis de madeira, assentos baixos e duas árvores em vasos sob luz inclinada.",
       "Mesa de jantar de madeira sob uma abertura zenital em um ambiente claro, com uma árvore em vaso na lateral.",
       "Sala serena emoldurada por painéis de madeira, com assentos baixos, arte circular na parede e uma árvore em vaso.",
+      "Árvore esguia de pátio atravessando uma abertura na cobertura entre planos de carvalho e pedra clara.",
+      "Casa baixa envolvendo um pátio plantado, com painéis de carvalho, pedra clara e grandes aberturas para o jardim.",
+      "Detalhe vertical de passagem com ripas de carvalho, pedra clara e folhagem filtrada junto ao pátio.",
+      "Sala de jantar longitudinal aberta diretamente para o pátio plantado através de vidro de piso a teto.",
+      "Árvore do pátio e ambientes adjacentes iluminados com suavidade através de ripas de carvalho à noite.",
     ],
   },
 } as const satisfies Record<Locale, ProjectImageAltMap>;
@@ -518,29 +569,11 @@ export const projectsByLocale = {
   ],
 } as const satisfies Record<Locale, LocalizedProjectCollection>;
 
-const serviceCtas = {
-  en: {
-    eyebrow: "The work behind the case",
-    title: "Need a digital presence with the same level of care?",
-    body: "Fabiano Frank designs and engineers high-craft websites and frontend experiences for real businesses, studios and products.",
-    action: "Start a digital project",
-    href: routeMaps.en.contact,
-  },
-  pt: {
-    eyebrow: "O trabalho por trás do case",
-    title: "Precisa de uma presença digital com este nível de cuidado?",
-    body: "Fabiano Frank projeta e desenvolve sites e experiências frontend de alto nível para negócios, estúdios e produtos reais.",
-    action: "Iniciar um projeto digital",
-    href: routeMaps.pt.contact,
-  },
-} as const satisfies Record<Locale, CtaContent>;
-
 export const siteContent = {
   en: {
     brand: {
       name: "Studio Flamboyant",
-      tagline: "Architecture imagined. Digital craft made real.",
-      caseLabel: "Conceptual architecture · Frontend case",
+      tagline: "Light, landscape and measured form.",
       disclosure:
         "Studio Flamboyant is a fictional architecture practice created as a design and frontend case by Fabiano Frank.",
     },
@@ -581,17 +614,9 @@ export const siteContent = {
       seo: {
         title: "Studio Flamboyant — Conceptual Architecture",
         description:
-          "Three unbuilt studies in light, landscape and stillness—presented as a senior frontend case by Fabiano Frank.",
+          "Three conceptual architecture studies shaped by horizon, shelter, courtyards and measured natural light.",
       },
-      eyebrow: "Conceptual architecture · Frontend case",
-      title: "Structures for stillness.",
-      intro:
-        "Three unbuilt studies test how light, proportion and landscape can turn restraint into atmosphere.",
-      scrollCue: "Scroll to enter",
       featuredLabel: "Selected studies",
-      projectsAction: "Explore all projects",
-      projectsHref: routeMaps.en.projects,
-      serviceCta: serviceCtas.en,
     },
     projectsIndex: {
       seo: {
@@ -601,25 +626,18 @@ export const siteContent = {
       },
       eyebrow: "Selected work",
       title: "Three studies. One pursuit: space with less noise.",
-      intro:
-        "Each project is a conceptual, unbuilt visual study. Together they form an editorial exploration of threshold, shelter and filtered light.",
-      countLabel: (count) => `${count} conceptual studies`,
-      disclosure:
-        "These projects are fictional and unbuilt. No location, client, area, team or photographer is being claimed.",
-      serviceCta: serviceCtas.en,
     },
     studio: {
       seo: {
         title: "Studio — Studio Flamboyant",
         description:
-          "Meet Studio Flamboyant, a fictional architecture practice and a real design-engineering case by Fabiano Frank.",
+          "Studio Flamboyant explores light, landscape and measured form through three conceptual architecture studies.",
       },
-      eyebrow: "A practice imagined for the screen",
-      title: "A studio built as a point of view.",
+      eyebrow: "Studio Flamboyant",
+      title: "Restraint, lit from within.",
       manifesto: [
-        "Studio Flamboyant is a fictional architecture practice shaped around one premise: restraint can be vivid. Its studies use broad planes, deep shade and carefully placed openings to give stillness a physical edge.",
+        "We work with broad planes, deep shade and carefully placed openings. Each study begins with what can be removed, then asks light and proportion to carry the atmosphere.",
         "The name comes from the flamboyant tree—familiar across Brazil and northern Minas Gerais, generous in shade and suddenly flame-coloured. That tension between calm structure and vivid presence guides the visual language.",
-        "The architecture is conceptual and unbuilt. The digital work is real: Fabiano Frank created this case to demonstrate art direction, frontend engineering, motion, accessibility and performance as one coherent system.",
       ],
       principlesLabel: "Working principles",
       principles: [
@@ -656,7 +674,6 @@ export const siteContent = {
           caption: "Courtyard House · Study in measured light",
         },
       ],
-      serviceCta: serviceCtas.en,
     },
     contact: {
       seo: {
@@ -773,8 +790,6 @@ export const siteContent = {
     },
     footer: {
       caseCredit: "Concept, design and frontend by Fabiano Frank.",
-      disclosure:
-        "Studio Flamboyant is a fictional architecture practice. All projects shown are conceptual and unbuilt.",
       privacyLabel: "Privacy",
       privacyHref: routeMaps.en.privacy,
     },
@@ -782,8 +797,7 @@ export const siteContent = {
   pt: {
     brand: {
       name: "Studio Flamboyant",
-      tagline: "Arquitetura imaginada. Engenharia digital real.",
-      caseLabel: "Arquitetura conceitual · Case frontend",
+      tagline: "Luz, paisagem e forma medida.",
       disclosure:
         "Studio Flamboyant é um escritório de arquitetura fictício criado como case de design e frontend por Fabiano Frank.",
     },
@@ -828,17 +842,9 @@ export const siteContent = {
       seo: {
         title: "Studio Flamboyant — Arquitetura conceitual",
         description:
-          "Três estudos não construídos sobre luz, paisagem e pausa — apresentados como case frontend sênior por Fabiano Frank.",
+          "Três estudos de arquitetura conceitual moldados por horizonte, abrigo, pátios e luz natural medida.",
       },
-      eyebrow: "Arquitetura conceitual · Case frontend",
-      title: "Estruturas para a pausa.",
-      intro:
-        "Três estudos não construídos investigam como luz, proporção e paisagem transformam contenção em atmosfera.",
-      scrollCue: "Role para entrar",
       featuredLabel: "Estudos selecionados",
-      projectsAction: "Explorar todos os projetos",
-      projectsHref: routeMaps.pt.projects,
-      serviceCta: serviceCtas.pt,
     },
     projectsIndex: {
       seo: {
@@ -848,25 +854,18 @@ export const siteContent = {
       },
       eyebrow: "Trabalhos selecionados",
       title: "Três estudos. Uma busca: espaço com menos ruído.",
-      intro:
-        "Cada projeto é um estudo visual conceitual e não construído. Juntos, formam uma investigação editorial sobre passagem, abrigo e luz filtrada.",
-      countLabel: (count) => `${count} estudos conceituais`,
-      disclosure:
-        "Estes projetos são fictícios e não construídos. Não reivindicamos localização, cliente, área, equipe ou fotógrafo.",
-      serviceCta: serviceCtas.pt,
     },
     studio: {
       seo: {
         title: "Escritório — Studio Flamboyant",
         description:
-          "Conheça o Studio Flamboyant, um escritório de arquitetura fictício e um case real de design e engenharia por Fabiano Frank.",
+          "O Studio Flamboyant explora luz, paisagem e forma medida por meio de três estudos de arquitetura conceitual.",
       },
-      eyebrow: "Uma prática imaginada para a tela",
-      title: "Um escritório construído como ponto de vista.",
+      eyebrow: "Studio Flamboyant",
+      title: "Contenção, acesa por dentro.",
       manifesto: [
-        "Studio Flamboyant é um escritório de arquitetura fictício guiado por uma premissa: contenção também pode ser vibrante. Seus estudos usam planos amplos, sombra profunda e aberturas precisas para dar presença física à pausa.",
+        "Trabalhamos com planos amplos, sombra profunda e aberturas precisas. Cada estudo começa pelo que pode ser removido e deixa que luz e proporção sustentem a atmosfera.",
         "O nome vem do flamboyant — árvore familiar no Brasil e no Norte de Minas, generosa em sombra e subitamente acesa como chama. Essa tensão entre estrutura calma e presença viva conduz a linguagem visual.",
-        "A arquitetura é conceitual e não construída. O trabalho digital é real: Fabiano Frank criou este case para demonstrar direção de arte, engenharia frontend, motion, acessibilidade e performance como um único sistema coerente.",
       ],
       principlesLabel: "Princípios de trabalho",
       principles: [
@@ -903,7 +902,6 @@ export const siteContent = {
           caption: "Casa Pátio · Estudo de luz medida",
         },
       ],
-      serviceCta: serviceCtas.pt,
     },
     contact: {
       seo: {
@@ -1020,8 +1018,6 @@ export const siteContent = {
     },
     footer: {
       caseCredit: "Conceito, design e frontend por Fabiano Frank.",
-      disclosure:
-        "Studio Flamboyant é um escritório de arquitetura fictício. Todos os projetos exibidos são conceituais e não construídos.",
       privacyLabel: "Privacidade",
       privacyHref: routeMaps.pt.privacy,
     },

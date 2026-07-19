@@ -6,5 +6,5 @@ import { createStaticPageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = createStaticPageMetadata("en", "studio");
 
 export default function StudioPage() {
-  return <StudioView copy={getSiteContent("en").studio} />;
+  return <StudioView copy={getSiteContent("en").studio} locale="en" />;
 }

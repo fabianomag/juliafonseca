@@ -18,8 +18,9 @@ formulário para sites, sistemas frontend e produtos digitais.
 - conteúdo localizado e contratos de rota centralizados em
   `src/content/site.ts`;
 - estilos responsivos e tokens do sistema em `src/app/globals.css`;
-- tipografia baseada em fontes de sistema (`Helvetica Neue`/Helvetica/Arial e
-  Georgia), sem payload ou repintura tardia de webfont;
+- tipografia editorial baseada em fontes de sistema (`Helvetica Neue`/Helvetica/
+  Arial e Georgia) e wordmark inline em SVG próprio, sem payload ou repintura
+  tardia de webfont;
 - assets locais processados por `next/image`;
 - páginas de projeto pré-geradas por `generateStaticParams`, com
   `dynamicParams = false`;
@@ -44,21 +45,32 @@ O inglês é canônico e não recebe prefixo. O português brasileiro ocupa a á
 ## Composição da interface
 
 `LocaleRoot` monta o documento de cada idioma: `html[lang]`, skip link,
-navegação, conteúdo principal, rodapé, sugestão de idioma, dados estruturados,
-Analytics e Speed Insights.
+navegação, conteúdo principal, rodapé sensível à rota, sugestão de idioma,
+dados estruturados, Analytics e Speed Insights. Home, Studio e detalhes de
+projeto são superfícies imersivas sem rodapé; índice, contato e privacidade
+mantêm o fechamento institucional.
 
-- A home usa a variante Random Grid do demo MIT de Hiroki/Codrops. A máscara é
-  formada por retângulos SVG embaralhados, com grades de 14, 10 ou 6 colunas
-  conforme a largura da viewport, e é conduzida por GSAP/ScrollTrigger.
+- A home usa a variante Column Grid (`index4`) do demo MIT de Hiroki/Codrops,
+  sem polígonos ou máscara triangular. Cada coluna da máscara SVG é revelada de
+  cima/baixo em ordem embaralhada internamente, da esquerda para a direita, com
+  grades responsivas de 14, 10 ou 6 colunas e a timeline original conduzida por
+  GSAP/ScrollTrigger.
 - `prefers-reduced-motion` remove a timeline de scroll e mantém uma leitura
   estática. Lenis também é desativado para movimento reduzido e ponteiro coarse.
-- O índice apresenta os três estudos em uma hierarquia numerada.
-- O detalhe alterna hero, pares e imagens amplas conforme o campo
-  `presentation` de cada asset.
-- A página de escritório usa trilho de mídia e manifesto/princípios em composição
-  dual no desktop, reorganizada linearmente em telas menores.
-- A navegação tem estado de rota, menu com ciclo de foco, fechamento por Escape e
-  troca de idioma para a contraparte exata da página ou projeto atual.
+- O índice entra diretamente nos três estudos, sem abertura editorial visível.
+- O detalhe usa um hero contínuo de 175svh: título/metadados nos primeiros
+  100svh e texto/fatos sobre a mesma imagem nos 75svh seguintes. A galeria
+  percorre `feature-left`, `feature-right` e `triptych`, com razões 1.72/0.88 e
+  o espaçamento assimétrico preservado.
+- A página de escritório ocupa uma única viewport. No desktop, trilho de mídia e
+  texto formam um 50/50 com rolagens internas; no mobile, a mídia preenche o
+  fundo e o texto ocupa um cartão branco inset de 50svh. O loop visual tem pausa
+  persistente, pausa durante interação, região rolável por teclado e fallback de
+  movimento reduzido.
+- No desktop, a navegação começa com wordmark, links centrais e pílula Contato;
+  ao rolar, esses elementos cedem lugar à pílula Menu no canto direito. No
+  mobile, Menu já é o estado inicial. O overlay preserva ciclo de foco,
+  fechamento por Escape e troca de idioma para a contraparte exata da rota.
 
 ## Conteúdo e mídia
 
@@ -70,11 +82,13 @@ Os projetos são:
 - Courtyard House / Casa Pátio.
 
 Nenhum projeto declara localização, área, cliente, equipe, fotógrafo ou autoria
-arquitetônica inexistente. As dez imagens vieram do repositório
-`Hiro-kiii/Scroll-Transition` na revisão fixada em `REFERENCES.md`, foram
-otimizadas sem upscale e têm dimensões e hashes registrados em
-`THIRD_PARTY_NOTICES.md`. A cópia integral da licença MIT permanece em
-`public/licenses/`.
+arquitetônica inexistente. Dez imagens-base vieram do repositório
+`Hiro-kiii/Scroll-Transition` na revisão fixada em `REFERENCES.md`; outras
+quatorze visualizações ficcionais foram geradas especificamente para completar
+os três ciclos de galeria. Todos os arquivos foram processados sem upscale;
+`THIRD_PARTY_NOTICES.md` registra a base MIT e `GENERATED_ASSETS.md` registra
+origem, prompts, dimensões e hashes dos complementos. A cópia integral da
+licença MIT permanece em `public/licenses/`.
 
 Arthur Casas, OH Architecture e Mana Hotel são referências de composição e
 interação; nenhum asset, texto, marca ou código desses sites foi incorporado.
@@ -91,6 +105,11 @@ O endpoint não devolve o país ou IP, usa cache privado curto e marca a respost
 como `noindex`.
 
 ## Captação de leads
+
+`ContactView` restaura a composição full-bleed com mapa viário de Montes Claros,
+card de formulário e dock animado. Leaflet renderiza localmente um recorte
+GeoJSON do OpenStreetMap; a página exibe atribuição ODbL e não envia posição,
+endereço ou dado cartográfico do visitante.
 
 `POST /api/leads` é um Route Handler Node.js. O fluxo é:
 
@@ -138,6 +157,12 @@ fallback para movimento reduzido. Imagens têm dimensões estáveis por
 O Next configura compressão, formatos AVIF/WebP e headers de segurança para
 MIME sniffing, referrer, framing e permissões de câmera, microfone e
 geolocalização.
+
+O `package.json` aplica um override transitivo de PostCSS 8.5.19 ao Next.js
+16.2.10. Isso remove a versão vulnerável empacotada pelo framework sem aceitar o
+downgrade destrutivo sugerido pelo audit; build, typecheck, lint e a suíte de
+produção validam a compatibilidade. O override deve ser reavaliado quando o
+Next incorporar uma versão corrigida diretamente.
 
 O harness de qualidade contém:
 

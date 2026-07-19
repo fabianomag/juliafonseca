@@ -8,7 +8,7 @@ import {
 } from "@/content/site";
 import { LocaleSuggestion } from "@/components/locale-suggestion";
 import { Navigation } from "@/components/navigation";
-import { SiteFooter } from "@/components/site-footer";
+import { RouteFooter } from "@/components/route-footer";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { StructuredData } from "@/components/structured-data";
 import { absoluteUrl } from "@/lib/site-url";
@@ -45,7 +45,7 @@ export function LocaleRoot({
         <SmoothScroll />
         <Navigation locale={locale} />
         <main id="main-content">{children}</main>
-        <SiteFooter locale={locale} />
+        <RouteFooter locale={locale} />
         <LocaleSuggestion locale={locale} />
         {isVercelDeployment ? <Analytics /> : null}
         {isVercelDeployment ? <SpeedInsights /> : null}

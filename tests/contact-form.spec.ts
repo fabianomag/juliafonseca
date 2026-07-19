@@ -5,6 +5,68 @@ test.beforeEach(async ({ page }) => {
   await expect(page.locator("form")).toBeVisible();
 });
 
+test("restored showcase renders the Montes Claros map and complete lead form", async ({
+  page,
+}) => {
+  await expect(page.getByText("Montes Claros · Minas Gerais · Brazil")).toBeVisible();
+  await expect(page.getByText("Map data © OpenStreetMap contributors")).toBeVisible();
+  await expect(page.locator(".leaflet-container canvas")).toBeVisible();
+
+  const form = page.locator("form");
+  await expect(form.locator('[name="name"]')).toBeVisible();
+  await expect(form.locator('[name="email"]')).toBeVisible();
+  await expect(form.locator('[name="company"]')).toBeVisible();
+  await expect(form.locator('[name="projectType"]')).toBeVisible();
+  await expect(form.locator('[name="budget"]')).toBeVisible();
+  await expect(form.locator('[name="message"]')).toBeVisible();
+  await expect(form.locator('[name="website"]')).toBeAttached();
+  await expect(form.locator('[name="consent"]')).toBeVisible();
+  await expect(form.getByRole("button", { name: "Send enquiry" })).toBeVisible();
+});
+
+test("complete form posts to the secure lead endpoint and announces success", async ({
+  page,
+}) => {
+  const submittedPayloads: Record<string, unknown>[] = [];
+
+  await page.route("**/api/leads", async (route) => {
+    submittedPayloads.push(route.request().postDataJSON() as Record<string, unknown>);
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ message: "Accepted safely." }),
+    });
+  });
+
+  const form = page.locator("form");
+  await form.locator('[name="name"]').fill("Test User");
+  await form.locator('[name="email"]').fill("test@example.com");
+  await form.locator('[name="company"]').fill("Test Studio");
+  await form.locator('[name="projectType"]').selectOption("product-frontend");
+  await form.locator('[name="budget"]').fill("Defined after discovery");
+  await form.locator('[name="message"]').fill(
+    "This is a complete project context submitted through the restored contact showcase.",
+  );
+  await form.locator('[name="consent"]').check();
+  await form.getByRole("button", { name: "Send enquiry" }).click();
+
+  await expect(form.getByText("Accepted safely.")).toBeVisible();
+  expect(submittedPayloads).toHaveLength(1);
+  const submittedPayload = submittedPayloads[0];
+  expect(submittedPayload).toMatchObject({
+    name: "Test User",
+    email: "test@example.com",
+    company: "Test Studio",
+    projectType: "product-frontend",
+    budget: "Defined after discovery",
+    consent: true,
+    locale: "en",
+    website: "",
+  });
+  expect(typeof submittedPayload.startedAt).toBe("number");
+  expect(typeof submittedPayload.submissionId).toBe("string");
+});
+
 test("empty contact form is rejected before a network submission", async ({
   page,
 }) => {
