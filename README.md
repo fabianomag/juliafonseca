@@ -16,6 +16,15 @@ accessibility, crawlability, performance or operational safety.
 > The studio and architecture are fictional and unbuilt. The product design,
 > frontend implementation and verification are real.
 
+> **Source available for portfolio review. This is not open-source software.**
+> Commercial or non-commercial reuse, in whole or in part, requires a separate
+> written license. See [LICENSE.md](./LICENSE.md).
+
+Standard commercial terms are available for one final product: R$ 1,000 in
+Brazil or USD 1,000 internationally, each as a one-time fee under a signed
+agreement. See the [Brazilian](./COMMERCIAL-LICENSE-TEMPLATE.pt-BR.md) and
+[international](./COMMERCIAL-LICENSE-TEMPLATE.en.md) public templates.
+
 ## Why this project matters
 
 - **Design engineering:** a distinctive editorial direction became a reusable

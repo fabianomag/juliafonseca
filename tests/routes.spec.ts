@@ -80,6 +80,7 @@ test("agent-readable case artifacts form a recoverable public chain", async ({
   const llms = await request.get("/llms.txt");
   const readableSitemap = await request.get("/sitemap.md");
   const caseStudy = await request.get("/case-study.md");
+  const licensing = await request.get("/licensing.txt");
   const xmlSitemap = await request.get("/sitemap.xml");
 
   expect(llms.status()).toBe(200);
@@ -92,6 +93,8 @@ test("agent-readable case artifacts form a recoverable public chain", async ({
   );
   expect(caseStudy.status()).toBe(200);
   expect(await caseStudy.text()).toContain("Fabiano Magalhães");
+  expect(licensing.status()).toBe(200);
+  expect(await licensing.text()).toContain("not open source");
   expect(xmlSitemap.status()).toBe(200);
   expect(await xmlSitemap.text()).toContain("/case-study.md");
 });

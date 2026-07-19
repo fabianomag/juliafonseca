@@ -6,6 +6,7 @@ Canonical origin: https://flamboyant-studio.vercel.app
 
 - [Case study](https://flamboyant-studio.vercel.app/case-study.md) — scope, decisions, measurements and authorship boundary
 - [Machine-readable overview](https://flamboyant-studio.vercel.app/llms.txt) — compact retrieval entry point
+- [Licensing](https://flamboyant-studio.vercel.app/licensing.txt) — proprietary reuse boundary and third-party carve-out
 - [Source repository](https://github.com/fabianomag/studio-flamboyant) — implementation, tests and provenance
 
 ## English

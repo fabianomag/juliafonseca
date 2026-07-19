@@ -49,4 +49,10 @@ The home transition and ten images are adapted from Hiroki/Codrops' MIT-licensed
 
 Visual references informed composition only; the case does not redistribute their code, copy, branding or media.
 
+## Licensing
+
+The project's original materials are source-available for portfolio review and are not open source. Commercial or non-commercial reuse requires a separate written license. Third-party materials remain governed by their respective licenses.
+
+Licensing summary: https://flamboyant-studio.vercel.app/licensing.txt
+
 Last reviewed: 19 July 2026.

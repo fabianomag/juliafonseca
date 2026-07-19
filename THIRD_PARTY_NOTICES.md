@@ -1,5 +1,17 @@
 # Third-party notices
 
+## Proprietary project boundary
+
+The proprietary terms in [`LICENSE.md`](./LICENSE.md) apply only to original
+materials owned by Fabiano Magalhães. They do not replace, restrict or revoke
+the independent licenses of the third-party materials documented below.
+
+Third-party materials may be used under their respective licenses independently
+of Studio Flamboyant. Permission under MIT, OFL, BSD, ODbL or another listed
+license does not grant permission to reuse the project's original composition,
+brand, documentation, written content or proprietary source code as a whole or
+in part.
+
 ## SVG Mask Transitions on Scroll
 
 - Upstream: https://github.com/Hiro-kiii/Scroll-Transition/

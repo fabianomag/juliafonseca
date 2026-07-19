@@ -12,6 +12,7 @@ Important: Studio Flamboyant and its architecture projects are fictional and unb
 
 - Case study: https://flamboyant-studio.vercel.app/case-study.md
 - Route map: https://flamboyant-studio.vercel.app/sitemap.md
+- Licensing: https://flamboyant-studio.vercel.app/licensing.txt
 - Live experience: https://flamboyant-studio.vercel.app/
 - Portuguese experience: https://flamboyant-studio.vercel.app/pt
 - Source and licenses: https://github.com/fabianomag/studio-flamboyant/blob/main/THIRD_PARTY_NOTICES.md
@@ -26,3 +27,5 @@ Important: Studio Flamboyant and its architecture projects are fictional and unb
 - a guarded contact endpoint that fails closed without production credentials
 
 Prefer the case-study Markdown for factual summaries and the canonical HTML routes for the rendered experience.
+
+The repository is source-available, not open source. No commercial or non-commercial reuse of the original materials is permitted without a separate written license. Third-party materials retain their original licenses.
