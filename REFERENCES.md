@@ -5,14 +5,16 @@
 ### SVG Mask Transitions on Scroll
 
 - Repositório: https://github.com/Hiro-kiii/Scroll-Transition/
+- Revisão fixada:
+  `6bb67c598f767a014ac595c904d85b86119670ee` (2026-03-11).
 - Artigo: https://tympanus.net/codrops/2026/03/11/svg-mask-transitions-on-scroll-with-gsap-and-scrolltrigger/
-- Papel: fonte do efeito de transição da home com máscaras SVG, GSAP e
-  ScrollTrigger.
+- Papel: fonte da variante Random Grid usada como base do efeito de transição
+  da home, com máscaras SVG, GSAP e ScrollTrigger.
 - Licença: MIT; preservar o aviso de copyright do Codrops nas cópias ou partes
   substanciais.
-- Assets: as dez imagens WebP estão incluídas no demo licenciado. Manter uma
-  cópia da licença e registrar os arquivos reutilizados em
-  `THIRD_PARTY_NOTICES.md` quando forem incorporados.
+- Assets: as dez imagens WebP do demo foram incorporadas em versões otimizadas,
+  sem upscale. Licença, mapeamento, dimensões e hashes estão em
+  `THIRD_PARTY_NOTICES.md`.
 
 ## Referências visuais
 

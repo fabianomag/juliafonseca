@@ -1,32 +1,38 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 import Lenis from "lenis";
-import "lenis/dist/lenis.css";
 
-export function SmoothScroll({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
-
+export function SmoothScroll() {
   useEffect(() => {
-    if (pathname === "/escritorio" || pathname === "/galeria-trefle") return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const coarsePointer = window.matchMedia("(pointer: coarse)");
+
+    if (reducedMotion.matches || coarsePointer.matches) return;
 
     const lenis = new Lenis({
-      autoRaf: true,
-      duration: 1.05,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      gestureOrientation: "vertical",
+      lerp: 0.15,
       smoothWheel: true,
-      wheelMultiplier: 1,
+      syncTouch: false,
       anchors: true,
-      autoResize: true,
     });
+    let frame = 0;
+
+    const onScroll = () => window.dispatchEvent(new Event("studio:scroll"));
+    const raf = (time: number) => {
+      lenis.raf(time);
+      frame = window.requestAnimationFrame(raf);
+    };
+
+    lenis.on("scroll", onScroll);
+    frame = window.requestAnimationFrame(raf);
 
     return () => {
+      window.cancelAnimationFrame(frame);
+      lenis.off("scroll", onScroll);
       lenis.destroy();
     };
-  }, [pathname]);
+  }, []);
 
-  return <>{children}</>;
+  return null;
 }

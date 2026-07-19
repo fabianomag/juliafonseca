@@ -1,39 +1,26 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 301 Redirects — Webador migration
-  // Maps old Webador URLs to new Next.js routes to preserve SEO juice
-  async redirects() {
-    return [
-      // Webador used hash-based or flat navigation — redirect known patterns
-      { source: "/residencial.html", destination: "/residencial", permanent: true },
-      { source: "/comercial.html", destination: "/comercial", permanent: true },
-      { source: "/interiores.html", destination: "/interiores", permanent: true },
-      { source: "/sobre.html", destination: "/escritorio", permanent: true },
-      { source: "/sobre", destination: "/escritorio", permanent: true },
-      { source: "/escritorio.html", destination: "/escritorio", permanent: true },
-      { source: "/produtos.html", destination: "/", permanent: true },
-      { source: "/produtos", destination: "/", permanent: true },
-      { source: "/contato.html", destination: "/contato", permanent: true },
-      // Common Webador patterns with trailing slash or index
-      { source: "/index.html", destination: "/", permanent: true },
-      { source: "/home", destination: "/", permanent: true },
-    ];
+  poweredByHeader: false,
+  compress: true,
+  experimental: {
+    globalNotFound: true,
   },
   images: {
-    remotePatterns: [
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 31_536_000,
+  },
+  async headers() {
+    return [
       {
-        protocol: "https",
-        hostname: "images.unsplash.com",
+        source: "/(.*)",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+        ],
       },
-      {
-        protocol: "https",
-        hostname: "drive.google.com",
-      },
-      {
-        protocol: "https",
-        hostname: "lh3.googleusercontent.com",
-      },
-    ],
+    ];
   },
 };
 

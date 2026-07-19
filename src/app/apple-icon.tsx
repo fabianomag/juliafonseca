@@ -1,11 +1,6 @@
 import { ImageResponse } from "next/og";
-import { ppNeueMontreal } from "@/lib/fonts";
 
-export const size = {
-  width: 180,
-  height: 180,
-};
-
+export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
 export default function AppleIcon() {
@@ -18,25 +13,15 @@ export default function AppleIcon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#d9ff4f",
-          borderRadius: 44,
+          background: "#171713",
+          borderRadius: 38,
+          color: "#ef4a24",
+          fontSize: 78,
+          fontWeight: 650,
+          letterSpacing: "-0.08em",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "#071007",
-            fontSize: 102,
-            fontWeight: 650,
-            letterSpacing: "-0.08em",
-            fontFamily: ppNeueMontreal.style.fontFamily,
-            lineHeight: 0.8,
-          }}
-        >
-          JF
-        </div>
+        SF
       </div>
     ),
     size,

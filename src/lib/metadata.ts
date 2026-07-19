@@ -1,71 +1,110 @@
 import type { Metadata } from "next";
+import {
+  getPageAlternates,
+  getSiteContent,
+  localeDetails,
+  type Locale,
+  type RouteAlternates,
+  type StaticRouteKey,
+} from "@/content/site";
+import { absoluteUrl, getSiteUrl } from "@/lib/site-url";
 
-const siteConfig = {
-  name: "Julia Fonseca Arquitetura",
-  description:
-    "Arquitetura residencial, comercial e interiores de alto padr\u00e3o. Projetos que contam hist\u00f3rias atrav\u00e9s de espa\u00e7os.",
-  url: "https://www.juliafonsecaarq.com",
-  email: "juliafonseca.arquiteta@gmail.com",
-  phone: "+553899266-5556",
-  whatsapp: "5538992665556",
-  instagram: "https://www.instagram.com/juliafonseca.arq",
-  instagramDm: "https://ig.me/m/juliafonseca.arq",
-  locale: "pt_BR",
-  location: {
-    city: "Montes Claros",
-    state: "MG",
-    country: "BR",
-  },
+const socialImages: Record<Locale, string> = {
+  en: absoluteUrl("/social-card.png"),
+  pt: absoluteUrl("/social-card-pt.png"),
 };
 
-export default siteConfig;
+export function createRootMetadata(locale: Locale): Metadata {
+  const content = getSiteContent(locale);
+  const alternates = getPageAlternates(locale, "home");
+  const socialImage = socialImages[locale];
 
-function getMetadataBase(): URL {
-  const vercelUrl = process.env.VERCEL_URL;
-  if (vercelUrl) {
-    return new URL(`https://${vercelUrl}`);
-  }
-
-  return new URL(siteConfig.url);
-}
-
-export function createMetadata(overrides: Partial<Metadata> = {}): Metadata {
   return {
-    title: {
-      default: siteConfig.name,
-      template: `%s \u2014 ${siteConfig.name}`,
-    },
-    description: siteConfig.description,
-    metadataBase: getMetadataBase(),
-    icons: {
-      icon: "/icon.svg",
-      apple: "/apple-icon",
-    },
+    metadataBase: getSiteUrl(),
+    title: content.home.seo.title,
+    description: content.home.seo.description,
+    applicationName: content.brand.name,
+    authors: [{ name: "Fabiano Frank" }],
+    creator: "Fabiano Frank",
+    publisher: "Fabiano Frank",
+    category: "Design and frontend engineering",
+    alternates,
     openGraph: {
       type: "website",
-      locale: siteConfig.locale,
-      siteName: siteConfig.name,
-      title: siteConfig.name,
-      description: siteConfig.description,
-      images: [
-        {
-          url: "/opengraph-image",
-          width: 1200,
-          height: 630,
-          alt: siteConfig.name,
-        },
-      ],
+      siteName: content.brand.name,
+      title: content.home.seo.title,
+      description: content.home.seo.description,
+      url: alternates.canonical,
+      locale: localeDetails[locale].htmlLang.replace("-", "_"),
+      images: [{ url: socialImage, width: 1200, height: 630, alt: content.brand.name }],
     },
     twitter: {
       card: "summary_large_image",
-      title: siteConfig.name,
-      description: siteConfig.description,
-      images: ["/opengraph-image"],
+      title: content.home.seo.title,
+      description: content.home.seo.description,
+      images: [socialImage],
     },
     robots: {
       index: true,
       follow: true,
+      googleBot: { index: true, follow: true, "max-image-preview": "large" },
     },
-    ...overrides,
   };
+}
+
+export function createPageMetadata({
+  locale,
+  title,
+  description,
+  alternates,
+  image,
+}: {
+  locale: Locale;
+  title: string;
+  description: string;
+  alternates: RouteAlternates;
+  image?: string;
+}): Metadata {
+  const content = getSiteContent(locale);
+  const social = image ? absoluteUrl(image) : socialImages[locale];
+
+  return {
+    metadataBase: getSiteUrl(),
+    title,
+    description,
+    alternates,
+    openGraph: {
+      type: "website",
+      siteName: content.brand.name,
+      title,
+      description,
+      url: alternates.canonical,
+      locale: localeDetails[locale].htmlLang.replace("-", "_"),
+      images: [{ url: social, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [social],
+    },
+  };
+}
+
+export function createStaticPageMetadata(locale: Locale, route: StaticRouteKey): Metadata {
+  const content = getSiteContent(locale);
+  const seoByRoute = {
+    home: content.home.seo,
+    projects: content.projectsIndex.seo,
+    studio: content.studio.seo,
+    contact: content.contact.seo,
+    privacy: content.privacy.seo,
+  } as const;
+  const seo = seoByRoute[route];
+  return createPageMetadata({
+    locale,
+    title: seo.title,
+    description: seo.description,
+    alternates: getPageAlternates(locale, route),
+  });
 }
