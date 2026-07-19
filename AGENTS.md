@@ -1,108 +1,41 @@
-# Julia Fonseca Arquitetura - Agent Map
+# Architecture Reference Site — Agent Map
 
-Leia este arquivo antes de alterar layout, copy, componentes, rotas, ingestao de
-conteudo ou dados de projetos neste repositorio.
+Leia antes de alterar identidade, rotas, conteúdo, motion, imagens ou SEO.
 
 ## Leitura inicial
 
-1. `ARCHITECTURE.md`
-2. o menor arquivo diretamente ligado a tarefa
-3. so depois abrir arquivos legados de Drive, servidor ou briefings antigos
+1. `DECISIONS.md`
+2. `ARCHITECTURE.md`
+3. `REFERENCES.md`
+4. `NEXT.md`
+5. somente então o menor arquivo ligado à tarefa
 
-`ARCHITECTURE.md` e o mapa atual do projeto. Este arquivo e o mapa operacional
-para futuras janelas do Codex.
+## Tese ativa
 
-## Direcao atual
+Este repositório está sendo convertido de um site de cliente em um case público
+de frontend sênior para um estúdio de arquitetura conceitual.
 
-Este e um site ja implementado em Next.js para Julia Fonseca Arquitetura.
+- `julia` preserva o site anterior.
+- `dev` é a linha de reconstrução.
+- `main` recebe o novo site somente depois da validação final.
 
-A fase atual e refinamento, nao reconstrucao. Preserve a arquitetura ja
-implementada e faca alteracoes precisas.
+## Regras
 
-## Preservar
+- Não restaurar nome, marca, contatos, textos ou projetos de Julia em `dev`.
+- Remover `publicacoes` de rotas, navegação, sitemap e metadata.
+- Preservar e elevar os melhores sistemas atuais; não reconstruir por esporte.
+- Tratar referências como direção, nunca como autorização para copiar conteúdo.
+- Usar imagens somente quando a licença estiver registrada.
+- Manter o efeito de máscara da home baseado no demo MIT do Codrops/Hiroki.
+- Priorizar acessibilidade, responsividade, SEO técnico, performance e motion com
+  fallback para `prefers-reduced-motion`.
+- Não publicar nem fazer merge em `main` sem build, revisão visual e auditoria
+  do conteúdo residual da cliente.
 
-- linguagem visual bold, limpa e high-profile
-- estrutura branco/preto/cinza escuro com acentos azul eletrico e ciano
-- `font-display` como voz tipografica principal
-- sistema modular de marca em `src/components/brand-mark.tsx`
-- vitrine unificada em `/projetos`
-- footer global diferente do footer de detalhe
-- estrutura atual do menu fullscreen
-- intro atual em lockup horizontal unico
+## Fonte da verdade
 
-## Arquivos por tarefa
-
-Shell global:
-
-- `src/app/layout.tsx`
-- `src/app/globals.css`
-- `tailwind.config.ts`
-
-Navegacao e identidade:
-
-- `src/components/navigation.tsx`
-- `src/components/ui/flip-links.tsx`
-- `src/components/brand-mark.tsx`
-
-Home:
-
-- `src/app/page.tsx`
-- `src/components/featured-project-showcase.tsx`
-
-Projetos:
-
-- `src/app/projetos/page.tsx`
-- `src/components/projects-filter.tsx`
-- `src/components/project-card.tsx`
-- `src/components/project-page.tsx`
-- `src/components/parallax-gallery.tsx`
-- `src/components/project-strip-carousel.tsx`
-
-Conteudo e imagens:
-
-- `content/projects/projects.json`
-- `src/lib/projects.ts`
-- `scripts/optimize-images.ts`
-- `public/images/projetos/`
-
-SEO e idioma:
-
-- `src/lib/metadata.ts`
-- `src/components/json-ld.tsx`
-- `src/lib/i18n.ts`
-- `src/app/sitemap.ts`
-
-## Nao reabrir sem pedido claro
-
-- nao reconstruir o site do zero
-- nao voltar para uma direcao quente/serifada como eixo principal
-- nao duplicar dados de projeto fora dos arquivos estabelecidos
-- nao expandir automacao antiga de Drive a menos que a tarefa mencione Drive,
-  VPN, servidor, migracao ou compatibilidade
-- nao remover arquivos legados apenas porque nao sao o caminho atual
-- nao mudar intro, menu ou footers sem pedido especifico
-
-## Fluxo de imagens
-
-Imagens brutas entram em `_originals/[slug]/` e ficam ignoradas pelo git.
-
-Imagens otimizadas entram em:
-
-```text
-public/images/projetos/[slug]/
-```
-
-Use:
-
-```bash
-npm run optimize _originals/[slug] [slug]
-```
-
-Depois atualize `content/projects/projects.json`.
-
-## Regra de trabalho
-
-Faca a menor mudanca que preserve o sistema atual.
-
-Se uma nota antiga conflitar com o codigo atual, confie no codigo e atualize o
-harness apenas quando a nova direcao for duravel.
+- estrutura e limites: `ARCHITECTURE.md`
+- decisões: `DECISIONS.md`
+- referências e licenças: `REFERENCES.md`
+- sequência de execução: `NEXT.md`
+- comportamento atual: código em `src/`
