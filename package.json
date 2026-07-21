@@ -16,7 +16,8 @@
     "test:e2e": "playwright test",
     "test:e2e:production": "PLAYWRIGHT_PRODUCTION=1 PLAYWRIGHT_API_TESTS=1 playwright test",
     "test:a11y": "playwright test tests/accessibility.spec.ts",
-    "optimize": "tsx scripts/optimize-images.ts"
+    "optimize": "tsx scripts/optimize-images.ts",
+    "generate:social": "tsx scripts/generate-social-cards.ts"
   },
   "dependencies": {
     "@react-email/render": "^2.1.0",

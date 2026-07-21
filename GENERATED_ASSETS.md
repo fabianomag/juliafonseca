@@ -25,6 +25,24 @@ fictional study.
 - Original PNGs remain in Codex local generated-image storage; stable source IDs
   and hashes below allow them to be identified without publishing a machine path.
 
+## Social-card background
+
+One original, text-free background was generated on 21 July 2026 specifically
+for the Open Graph cards. It uses the project palette—near-black, leaf green
+and flame orange—without depicting a real building, person, brand or logo.
+`scripts/generate-social-cards.ts` composites the exact, editable English and
+Portuguese licensing copy over this source and produces
+`public/social-card.png` and `public/social-card-pt.png` at 1200 × 630. The
+source is kept at `scripts/assets/social-card-background.png` so the public
+cards remain reproducible.
+
+- Source ID: `exec-235c849f-e6e2-4008-845a-b3ed67e6f95d.png`
+- Source SHA-256: `54853bcf99607a5dd9e7ea8a66fa33ed867b7652e84eb1b2e0ee311516945e03`
+- Prompt constraint: no words, letters, logos, people or real architecture;
+  generous left-side negative space for typography.
+- English card SHA-256: `e994d8f47cb92f87317e0a1f66b29821c1d9caf19757f5c8020ed009ae6f77e4`
+- Portuguese card SHA-256: `c0816bb96ae74809a4d2caeb3a6a0a4841993c848015b7b426ee0925d519170c`
+
 ## Integrity manifest
 
 | Output | Source ID | Source dimensions | Source SHA-256 | Output dimensions | Bytes | Output SHA-256 |

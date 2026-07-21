@@ -597,9 +597,9 @@ export const siteContent = {
     },
     home: {
       seo: {
-        title: "Studio Flamboyant — Conceptual Architecture",
+        title: "Studio Flamboyant — Architecture Portfolio Template",
         description:
-          "Three conceptual architecture studies shaped by horizon, shelter, courtyards and measured natural light.",
+          "A licensable, production-ready Next.js architecture portfolio template: bilingual, accessible, SEO-ready and performance-conscious.",
       },
       featuredLabel: "Selected studies",
     },
@@ -800,9 +800,9 @@ export const siteContent = {
     },
     home: {
       seo: {
-        title: "Studio Flamboyant — Arquitetura conceitual",
+        title: "Studio Flamboyant — Template de portfólio para arquitetura",
         description:
-          "Três estudos de arquitetura conceitual moldados por horizonte, abrigo, pátios e luz natural medida.",
+          "Template licenciado de portfólio de arquitetura em Next.js: bilíngue, acessível, preparado para SEO e atento à performance.",
       },
       featuredLabel: "Estudos selecionados",
     },

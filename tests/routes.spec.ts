@@ -74,6 +74,33 @@ test("creator credit links verified profiles and keeps identity data on the Pers
   });
 });
 
+test("home social metadata presents the licensable template without misattribution", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+
+  await expect(page).toHaveTitle(
+    "Studio Flamboyant — Architecture Portfolio Template",
+  );
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+    "content",
+    "Studio Flamboyant — Architecture Portfolio Template",
+  );
+  await expect(page.locator('meta[property="og:description"]')).toHaveAttribute(
+    "content",
+    /licensable, production-ready Next\.js architecture portfolio template/i,
+  );
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+    "content",
+    /\/social-card\.png$/,
+  );
+
+  const socialCard = await request.get("/social-card.png");
+  expect(socialCard.status()).toBe(200);
+  expect(socialCard.headers()["content-type"]).toContain("image/png");
+});
+
 test("agent-readable case artifacts form a recoverable public chain", async ({
   request,
 }) => {
