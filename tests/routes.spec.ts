@@ -93,7 +93,7 @@ test("home social metadata presents the licensable template without misattributi
   );
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
     "content",
-    /\/social-card\.png$/,
+    /\/social-card\.png\?v=20260721-license$/,
   );
 
   const socialCard = await request.get("/social-card.png");

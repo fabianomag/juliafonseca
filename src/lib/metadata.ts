@@ -11,8 +11,8 @@ import { absoluteUrl, getSiteUrl } from "@/lib/site-url";
 import { creator } from "@/content/creator";
 
 const socialImages: Record<Locale, string> = {
-  en: absoluteUrl("/social-card.png"),
-  pt: absoluteUrl("/social-card-pt.png"),
+  en: absoluteUrl("/social-card.png?v=20260721-license"),
+  pt: absoluteUrl("/social-card-pt.png?v=20260721-license"),
 };
 
 export function createRootMetadata(locale: Locale): Metadata {

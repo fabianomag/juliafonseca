@@ -34,7 +34,9 @@ and flame orange—without depicting a real building, person, brand or logo.
 Portuguese licensing copy over this source and produces
 `public/social-card.png` and `public/social-card-pt.png` at 1200 × 630. The
 source is kept at `scripts/assets/social-card-background.png` so the public
-cards remain reproducible.
+cards remain reproducible. Metadata publishes a versioned query string for
+these cards so social crawlers request the licensing revision rather than a
+previously cached preview.
 
 - Source ID: `exec-235c849f-e6e2-4008-845a-b3ed67e6f95d.png`
 - Source SHA-256: `54853bcf99607a5dd9e7ea8a66fa33ed867b7652e84eb1b2e0ee311516945e03`
